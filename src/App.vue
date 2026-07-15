@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import AboutView from './components/AboutView.vue';
 import ActivityPanel from './components/ActivityPanel.vue';
 import AppRail from './components/AppRail.vue';
 import ChatTimeline from './components/ChatTimeline.vue';
@@ -28,7 +29,7 @@ const snapshot = ref<ServerSnapshot>({
   apiCalls: [],
   activity: [],
 });
-const activeView = ref<'workbench' | 'api' | 'activity' | 'settings'>('workbench');
+const activeView = ref<'workbench' | 'api' | 'activity' | 'settings' | 'about'>('workbench');
 let draft = reactive<MessageEventDraft>({
   scene: 'group',
   peerId: 123456,
@@ -78,6 +79,7 @@ const title = computed(() => {
   if (activeView.value === 'settings') return 'Milky 模拟服务';
   if (activeView.value === 'api') return 'API 调用记录';
   if (activeView.value === 'activity') return '活动日志';
+  if (activeView.value === 'about') return '关于';
   return draft.scene === 'group' ? '群聊测试' : draft.scene === 'friend' ? '好友测试' : '临时会话';
 });
 
@@ -85,6 +87,7 @@ const subtitle = computed(() => {
   if (activeView.value === 'settings') return `http://${config.host}:${config.port}`;
   if (activeView.value === 'api') return `${snapshot.value.apiCalls.length} 条请求`;
   if (activeView.value === 'activity') return `${snapshot.value.activity.length} 条记录`;
+  if (activeView.value === 'about') return 'Fraq Debug v0.1.0';
   return `${draft.scene} · ${draft.peerId}`;
 });
 
@@ -128,6 +131,7 @@ onUnmounted(() => window.clearInterval(refreshTimer));
         <ServerConfigPanel v-model="config" :disabled="snapshot.running || busy" />
         <OverviewStrip :snapshot="snapshot" />
       </section>
+      <AboutView v-else-if="activeView === 'about'" />
       <ActivityPanel
         v-else
         :mode="activeView"

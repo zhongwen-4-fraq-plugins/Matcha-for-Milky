@@ -10,6 +10,11 @@ test('operates the browser preview and keeps the desktop layout stable', async (
   await expect(page.getByRole('heading', { name: 'Milky 模拟服务' })).toBeVisible();
   await expect(page.locator('.endpoint-preview')).toContainText('http://127.0.0.1:30001');
   await page.getByRole('button', { name: /群聊测试/ }).click();
+  await page.getByTitle('关于').click();
+  await expect(page.getByRole('heading', { name: 'Fraq Debug' })).toBeVisible();
+  await expect(page.getByText('Milky 1.2.2')).toBeVisible();
+  await page.screenshot({ path: 'test-results/about-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: /群聊测试/ }).click();
   await page.getByRole('button', { name: '启动', exact: true }).click();
   await expect(page.getByRole('button', { name: '停止', exact: true })).toBeVisible();
   await page.getByRole('button', { name: '发送', exact: true }).click();

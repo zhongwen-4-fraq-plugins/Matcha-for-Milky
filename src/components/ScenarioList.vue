@@ -5,7 +5,7 @@ import type { MessageEventDraft, ServerSnapshot } from '../types';
 
 const props = defineProps<{
   snapshot: ServerSnapshot;
-  activeView: 'workbench' | 'api' | 'activity' | 'settings';
+  activeView: 'workbench' | 'api' | 'activity' | 'settings' | 'about';
   selectedScene: MessageEventDraft['scene'];
 }>();
 

@@ -2,11 +2,11 @@
 import { Braces, Menu, MessageCircleMore, ServerCog, TerminalSquare } from '@lucide/vue';
 
 defineProps<{
-  activeView: 'workbench' | 'api' | 'activity' | 'settings';
+  activeView: 'workbench' | 'api' | 'activity' | 'settings' | 'about';
 }>();
 
 defineEmits<{
-  select: [view: 'workbench' | 'api' | 'activity' | 'settings'];
+  select: [view: 'workbench' | 'api' | 'activity' | 'settings' | 'about'];
 }>();
 </script>
 
@@ -27,6 +27,8 @@ defineEmits<{
         <TerminalSquare :size="22" />
       </button>
     </nav>
-    <button class="rail-menu" type="button" title="服务配置" @click="$emit('select', 'settings')"><Menu :size="21" /></button>
+    <button class="rail-menu" type="button" title="关于" :class="{ active: activeView === 'about' }" @click="$emit('select', 'about')">
+      <Menu :size="21" />
+    </button>
   </aside>
 </template>
