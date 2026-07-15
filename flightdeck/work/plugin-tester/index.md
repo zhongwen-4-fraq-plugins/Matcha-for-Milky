@@ -1,0 +1,32 @@
+# Fraq plugin tester
+
+State: The first runnable framework is implemented; native Rust verification is blocked by missing Windows C++ build tools.
+
+## Next
+
+- Install Visual Studio Build Tools with the Desktop development with C++ workload and a Windows SDK.
+- Run `cargo test --manifest-path src-tauri/Cargo.toml` and `pnpm tauri dev`.
+- Choose the first plugin-specific API stubs and test scenarios.
+
+## Progress
+
+- Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
+- Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
+- Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
+- `pnpm build`, Rust formatting, and two Playwright desktop/mobile tests pass.
+- `cargo test` cannot start because this machine has no MSVC linker or Windows SDK.
+
+## Read now
+
+- flightdeck/knowledge/milky/protocol.md
+- flightdeck/knowledge/fraq/framework.md
+- flightdeck/knowledge/tooling/windows-tauri-build.md
+
+## Read if
+
+- Read `flightdeck/knowledge/fraq/timer-argument-order.md` when adding Fraq Context timers to fixtures or examples.
+- Read `flightdeck/knowledge/rust/axum-shared-event-route.md` when changing the `/event` transport handler.
+
+## Open questions
+
+- Which plugin-specific scenarios should be added after the general test framework is usable?
