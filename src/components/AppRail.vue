@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Braces, Menu, MessageCircleMore, ServerCog, TerminalSquare } from '@lucide/vue';
+import { Menu, MessageCircleMore, Puzzle, TerminalSquare } from '@lucide/vue';
 
 defineProps<{
-  activeView: 'workbench' | 'api' | 'activity' | 'settings' | 'about';
+  activeView: 'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about';
 }>();
 
 defineEmits<{
-  select: [view: 'workbench' | 'api' | 'activity' | 'settings' | 'about'];
+  select: [view: 'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about'];
 }>();
 </script>
 
@@ -17,11 +17,8 @@ defineEmits<{
       <button type="button" title="消息测试" :class="{ active: activeView === 'workbench' }" @click="$emit('select', 'workbench')">
         <MessageCircleMore :size="23" />
       </button>
-      <button type="button" title="模拟服务" :class="{ active: activeView === 'settings' }" @click="$emit('select', 'settings')">
-        <ServerCog :size="22" />
-      </button>
-      <button type="button" title="API 调用" :class="{ active: activeView === 'api' }" @click="$emit('select', 'api')">
-        <Braces :size="22" />
+      <button type="button" title="插件管理" :class="{ active: activeView === 'plugins' }" @click="$emit('select', 'plugins')">
+        <Puzzle :size="22" />
       </button>
       <button type="button" title="活动日志" :class="{ active: activeView === 'activity' }" @click="$emit('select', 'activity')">
         <TerminalSquare :size="22" />

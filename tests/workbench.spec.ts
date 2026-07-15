@@ -6,6 +6,17 @@ test('operates the browser preview and keeps the desktop layout stable', async (
 
   await expect(page.getByPlaceholder('搜索')).toBeVisible();
   await expect(page.getByRole('heading', { name: '群聊测试' })).toBeVisible();
+  await expect(page.locator('.app-rail nav button').evaluateAll((buttons) => buttons.map((button) => button.title))).resolves.toEqual([
+    '消息测试',
+    '插件管理',
+    '活动日志',
+  ]);
+  await page.getByTitle('插件管理').click();
+  await expect(page.getByRole('heading', { name: '插件管理' })).toBeVisible();
+  await page.getByPlaceholder('插件目录或入口文件').fill('D:\\bot\\sample-plugin');
+  await page.getByRole('button', { name: '添加', exact: true }).click();
+  await expect(page.getByText('sample-plugin', { exact: true })).toBeVisible();
+  await page.screenshot({ path: 'test-results/plugin-manager-desktop.png', fullPage: true });
   await page.getByRole('button', { name: /Milky 模拟服务/ }).click();
   await expect(page.getByRole('heading', { name: 'Milky 模拟服务' })).toBeVisible();
   await expect(page.locator('.endpoint-preview')).toContainText('http://127.0.0.1:30001');

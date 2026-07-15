@@ -7,6 +7,7 @@ import ChatTimeline from './components/ChatTimeline.vue';
 import EventComposer from './components/EventComposer.vue';
 import MainHeader from './components/MainHeader.vue';
 import OverviewStrip from './components/OverviewStrip.vue';
+import PluginManagerView from './components/PluginManagerView.vue';
 import ScenarioList from './components/ScenarioList.vue';
 import ServerConfigPanel from './components/ServerConfigPanel.vue';
 import { clearHistory, emitMessageEvent, getServerSnapshot, startServer, stopServer } from './services/backend';
@@ -29,7 +30,7 @@ const snapshot = ref<ServerSnapshot>({
   apiCalls: [],
   activity: [],
 });
-const activeView = ref<'workbench' | 'api' | 'activity' | 'settings' | 'about'>('workbench');
+const activeView = ref<'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about'>('workbench');
 let draft = reactive<MessageEventDraft>({
   scene: 'group',
   peerId: 123456,
@@ -77,6 +78,7 @@ function selectScene(scene: MessageEventDraft['scene']) {
 
 const title = computed(() => {
   if (activeView.value === 'settings') return 'Milky 模拟服务';
+  if (activeView.value === 'plugins') return '插件管理';
   if (activeView.value === 'api') return 'API 调用记录';
   if (activeView.value === 'activity') return '活动日志';
   if (activeView.value === 'about') return '关于';
@@ -85,6 +87,7 @@ const title = computed(() => {
 
 const subtitle = computed(() => {
   if (activeView.value === 'settings') return `http://${config.host}:${config.port}`;
+  if (activeView.value === 'plugins') return 'Fraq plugin targets';
   if (activeView.value === 'api') return `${snapshot.value.apiCalls.length} 条请求`;
   if (activeView.value === 'activity') return `${snapshot.value.activity.length} 条记录`;
   if (activeView.value === 'about') return 'Fraq Debug v0.1.0';
@@ -131,6 +134,7 @@ onUnmounted(() => window.clearInterval(refreshTimer));
         <ServerConfigPanel v-model="config" :disabled="snapshot.running || busy" />
         <OverviewStrip :snapshot="snapshot" />
       </section>
+      <PluginManagerView v-else-if="activeView === 'plugins'" />
       <AboutView v-else-if="activeView === 'about'" />
       <ActivityPanel
         v-else

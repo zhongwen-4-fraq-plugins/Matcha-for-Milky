@@ -16,6 +16,8 @@ State: The first runnable framework is implemented; native Rust verification is 
 - Redesigned the full UI around the supplied desktop-chat reference: icon rail, searchable scenario list, chat timeline, and bottom event composer.
 - API calls now appear as plugin replies in the chat timeline; service settings and logs remain separate selectable views.
 - Added an About view behind the bottom rail menu with application, stack, protocol, and framework version information.
+- Simplified the primary rail to message testing, plugin management, and activity logs in that order.
+- Added a frontend plugin target manager with path entry, enable toggles, and removal controls; native plugin loading remains future Rust work.
 - `pnpm build`, Rust formatting, and two Playwright desktop/mobile tests pass.
 - `cargo test` cannot start because this machine has no MSVC linker or Windows SDK.
 
