@@ -13,6 +13,8 @@ State: The first runnable framework is implemented; native Rust verification is 
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
+- Redesigned the full UI around the supplied desktop-chat reference: icon rail, searchable scenario list, chat timeline, and bottom event composer.
+- API calls now appear as plugin replies in the chat timeline; service settings and logs remain separate selectable views.
 - `pnpm build`, Rust formatting, and two Playwright desktop/mobile tests pass.
 - `cargo test` cannot start because this machine has no MSVC linker or Windows SDK.
 

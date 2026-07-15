@@ -37,3 +37,8 @@ export interface MessageEventDraft {
   senderId: number;
   text: string;
 }
+
+export interface ChatMessage extends MessageEventDraft {
+  id: number;
+  time: number;
+}
