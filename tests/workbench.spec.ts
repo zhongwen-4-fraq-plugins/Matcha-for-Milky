@@ -9,6 +9,7 @@ test('operates the browser preview and keeps the desktop layout stable', async (
   await expect(page.locator('.app-rail nav button').evaluateAll((buttons) => buttons.map((button) => button.title))).resolves.toEqual([
     '消息测试',
     '插件管理',
+    '群聊列表',
     '活动日志',
   ]);
   await page.getByTitle('插件管理').click();
@@ -17,6 +18,13 @@ test('operates the browser preview and keeps the desktop layout stable', async (
   await page.getByRole('button', { name: '添加', exact: true }).click();
   await expect(page.getByText('sample-plugin', { exact: true })).toBeVisible();
   await page.screenshot({ path: 'test-results/plugin-manager-desktop.png', fullPage: true });
+  await page.getByTitle('群聊列表').click();
+  await expect(page.getByRole('heading', { name: 'Fraq 测试群', level: 1 })).toBeVisible();
+  await page.getByRole('button', { name: /Milky 协议交流群/ }).click();
+  await expect(page.getByRole('heading', { name: 'Milky 协议交流群', level: 1 })).toBeVisible();
+  await page.screenshot({ path: 'test-results/group-list-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: '开始消息测试', exact: true }).click();
+  await expect(page.getByText('group · 654321')).toBeVisible();
   await page.getByRole('button', { name: /Milky 模拟服务/ }).click();
   await expect(page.getByRole('heading', { name: 'Milky 模拟服务' })).toBeVisible();
   await expect(page.locator('.endpoint-preview')).toContainText('http://127.0.0.1:30001');

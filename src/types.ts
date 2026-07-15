@@ -42,3 +42,13 @@ export interface ChatMessage extends MessageEventDraft {
   id: number;
   time: number;
 }
+
+export interface TestGroup {
+  groupId: number;
+  groupName: string;
+  memberCount: number;
+  maxMemberCount: number;
+  role: 'owner' | 'admin' | 'member';
+  remark: string;
+  lastActive: string;
+}

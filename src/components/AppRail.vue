@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Menu, MessageCircleMore, Puzzle, TerminalSquare } from '@lucide/vue';
+import { Menu, MessageCircleMore, Puzzle, TerminalSquare, UsersRound } from '@lucide/vue';
 
 defineProps<{
-  activeView: 'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about';
+  activeView: 'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about';
 }>();
 
 defineEmits<{
-  select: [view: 'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about'];
+  select: [view: 'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about'];
 }>();
 </script>
 
@@ -19,6 +19,9 @@ defineEmits<{
       </button>
       <button type="button" title="插件管理" :class="{ active: activeView === 'plugins' }" @click="$emit('select', 'plugins')">
         <Puzzle :size="22" />
+      </button>
+      <button type="button" title="群聊列表" :class="{ active: activeView === 'groups' }" @click="$emit('select', 'groups')">
+        <UsersRound :size="22" />
       </button>
       <button type="button" title="活动日志" :class="{ active: activeView === 'activity' }" @click="$emit('select', 'activity')">
         <TerminalSquare :size="22" />

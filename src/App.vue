@@ -5,13 +5,14 @@ import ActivityPanel from './components/ActivityPanel.vue';
 import AppRail from './components/AppRail.vue';
 import ChatTimeline from './components/ChatTimeline.vue';
 import EventComposer from './components/EventComposer.vue';
+import GroupDetailView from './components/GroupDetailView.vue';
 import MainHeader from './components/MainHeader.vue';
 import OverviewStrip from './components/OverviewStrip.vue';
 import PluginManagerView from './components/PluginManagerView.vue';
 import ScenarioList from './components/ScenarioList.vue';
 import ServerConfigPanel from './components/ServerConfigPanel.vue';
 import { clearHistory, emitMessageEvent, getServerSnapshot, startServer, stopServer } from './services/backend';
-import type { ChatMessage, MessageEventDraft, ServerConfig, ServerSnapshot } from './types';
+import type { ChatMessage, MessageEventDraft, ServerConfig, ServerSnapshot, TestGroup } from './types';
 
 let config = reactive<ServerConfig>({
   host: '127.0.0.1',
@@ -30,7 +31,13 @@ const snapshot = ref<ServerSnapshot>({
   apiCalls: [],
   activity: [],
 });
-const activeView = ref<'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about'>('workbench');
+const activeView = ref<'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about'>('workbench');
+const groups = ref<TestGroup[]>([
+  { groupId: 123456, groupName: 'Fraq 测试群', memberCount: 128, maxMemberCount: 500, role: 'owner', remark: '插件联调', lastActive: '07:46' },
+  { groupId: 654321, groupName: 'Milky 协议交流群', memberCount: 386, maxMemberCount: 500, role: 'admin', remark: '协议事件测试', lastActive: '07:31' },
+  { groupId: 100001, groupName: '机器人沙盒', memberCount: 24, maxMemberCount: 200, role: 'member', remark: '隔离测试环境', lastActive: '昨天' },
+]);
+const selectedGroupId = ref(123456);
 let draft = reactive<MessageEventDraft>({
   scene: 'group',
   peerId: 123456,
@@ -76,9 +83,18 @@ function selectScene(scene: MessageEventDraft['scene']) {
   activeView.value = 'workbench';
 }
 
+function testGroup(groupId: number) {
+  draft.scene = 'group';
+  draft.peerId = groupId;
+  activeView.value = 'workbench';
+}
+
+const selectedGroup = computed(() => groups.value.find((group) => group.groupId === selectedGroupId.value));
+
 const title = computed(() => {
   if (activeView.value === 'settings') return 'Milky 模拟服务';
   if (activeView.value === 'plugins') return '插件管理';
+  if (activeView.value === 'groups') return selectedGroup.value?.groupName || '群列表';
   if (activeView.value === 'api') return 'API 调用记录';
   if (activeView.value === 'activity') return '活动日志';
   if (activeView.value === 'about') return '关于';
@@ -88,6 +104,7 @@ const title = computed(() => {
 const subtitle = computed(() => {
   if (activeView.value === 'settings') return `http://${config.host}:${config.port}`;
   if (activeView.value === 'plugins') return 'Fraq plugin targets';
+  if (activeView.value === 'groups') return selectedGroup.value ? `group · ${selectedGroup.value.groupId}` : '0 个群';
   if (activeView.value === 'api') return `${snapshot.value.apiCalls.length} 条请求`;
   if (activeView.value === 'activity') return `${snapshot.value.activity.length} 条记录`;
   if (activeView.value === 'about') return 'Fraq Debug v0.1.0';
@@ -109,8 +126,11 @@ onUnmounted(() => window.clearInterval(refreshTimer));
       :snapshot="snapshot"
       :active-view="activeView"
       :selected-scene="draft.scene"
+      :groups="groups"
+      :selected-group-id="selectedGroupId"
       @select-view="activeView = $event"
       @select-scene="selectScene"
+      @select-group="selectedGroupId = $event"
     />
 
     <main class="main-pane">
@@ -135,6 +155,7 @@ onUnmounted(() => window.clearInterval(refreshTimer));
         <OverviewStrip :snapshot="snapshot" />
       </section>
       <PluginManagerView v-else-if="activeView === 'plugins'" />
+      <GroupDetailView v-else-if="activeView === 'groups'" :group="selectedGroup" @test="testGroup" />
       <AboutView v-else-if="activeView === 'about'" />
       <ActivityPanel
         v-else

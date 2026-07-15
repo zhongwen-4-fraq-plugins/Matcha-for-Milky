@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Braces, Clock3, Plus, Search, ServerCog, TerminalSquare, UserRound, UsersRound } from '@lucide/vue';
-import type { MessageEventDraft, ServerSnapshot } from '../types';
+import type { MessageEventDraft, ServerSnapshot, TestGroup } from '../types';
 
 const props = defineProps<{
   snapshot: ServerSnapshot;
-  activeView: 'workbench' | 'plugins' | 'api' | 'activity' | 'settings' | 'about';
+  activeView: 'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about';
   selectedScene: MessageEventDraft['scene'];
+  groups: TestGroup[];
+  selectedGroupId: number;
 }>();
 
 const emit = defineEmits<{
   selectView: [view: 'api' | 'activity' | 'settings'];
   selectScene: [scene: MessageEventDraft['scene']];
+  selectGroup: [groupId: number];
 }>();
 
 const search = ref('');
@@ -27,12 +30,32 @@ function formatTime(time: number | undefined) {
 
 <template>
   <aside class="scenario-pane">
-    <div class="scenario-search">
+    <div class="scenario-search" :class="{ 'without-action': activeView === 'groups' }">
       <label><Search :size="17" /><input v-model="search" placeholder="搜索" /></label>
-      <button type="button" title="服务配置" @click="emit('selectView', 'settings')"><Plus :size="20" /></button>
+      <button v-if="activeView !== 'groups'" type="button" title="服务配置" @click="emit('selectView', 'settings')"><Plus :size="20" /></button>
     </div>
 
     <div class="scenario-list">
+      <template v-if="activeView === 'groups'">
+        <button
+          v-for="group in groups.filter((item) => matches(`${item.groupName} ${item.groupId}`))"
+          :key="group.groupId"
+          type="button"
+          class="scenario-item"
+          :class="{ selected: group.groupId === selectedGroupId }"
+          @click="emit('selectGroup', group.groupId)"
+        >
+          <span class="scenario-avatar group"><UsersRound :size="23" /></span>
+          <span class="scenario-copy">
+            <span class="scenario-title">{{ group.groupName }}</span>
+            <span class="scenario-preview">{{ group.groupId }} · {{ group.memberCount }} 名成员</span>
+          </span>
+          <span class="scenario-meta"><time>{{ group.lastActive }}</time><b>{{ group.role === 'owner' ? '群主' : group.role === 'admin' ? '管理' : '成员' }}</b></span>
+        </button>
+        <div v-if="!groups.some((group) => matches(`${group.groupName} ${group.groupId}`))" class="scenario-empty">没有匹配的群</div>
+      </template>
+
+      <template v-else>
       <button
         v-if="matches('Milky 模拟服务')"
         type="button"
@@ -109,6 +132,7 @@ function formatTime(time: number | undefined) {
         <span class="scenario-copy"><span class="scenario-title">活动日志</span><span class="scenario-preview">连接、事件与运行状态</span></span>
         <span class="scenario-meta"><time>{{ formatTime(snapshot.activity[0]?.time) }}</time></span>
       </button>
+      </template>
     </div>
   </aside>
 </template>
