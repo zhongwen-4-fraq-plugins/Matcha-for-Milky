@@ -46,23 +46,7 @@ function formatTime(time: number) {
 }
 
 function getLevelLabel(logLevel: LogEntry['level']) {
-  switch (logLevel) {
-    case 'trace': {
-      return '跟踪'
-    }
-    case 'debug': {
-      return '调试'
-    }
-    case 'warn': {
-      return '警告'
-    }
-    case 'error': {
-      return '错误'
-    }
-    default: {
-      return '信息'
-    }
-  }
+  return logLevel.toUpperCase()
 }
 </script>
 
@@ -136,11 +120,12 @@ function getLevelLabel(logLevel: LogEntry['level']) {
         <li
           v-for="entry in filteredEntries"
           :key="entry.id"
-          class="grid grid-cols-[5.5rem_3.5rem_minmax(0,1fr)] gap-3 px-5 py-2 hover:bg-muted/40"
+          class="grid grid-cols-[5.5rem_auto_4rem_auto_minmax(0,1fr)] gap-2 px-5 py-2 hover:bg-muted/40"
         >
           <time class="text-muted-foreground tabular-nums">
             {{ formatTime(entry.time) }}
           </time>
+          <span class="text-muted-foreground">|</span>
           <span
             class="font-semibold"
             :class="{
@@ -153,6 +138,7 @@ function getLevelLabel(logLevel: LogEntry['level']) {
           >
             {{ getLevelLabel(entry.level) }}
           </span>
+          <span class="text-muted-foreground">|</span>
           <span class="min-w-0 whitespace-pre-wrap break-words text-foreground/85">{{ entry.message }}</span>
         </li>
       </ul>
