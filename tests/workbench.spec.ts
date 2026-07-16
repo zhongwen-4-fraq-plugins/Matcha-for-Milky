@@ -10,6 +10,7 @@ test('operates the browser preview and keeps the desktop layout stable', async (
     '消息测试',
     '插件管理',
     '群聊列表',
+    '好友列表',
     '活动日志',
   ]);
   await page.getByTitle('插件管理').click();
@@ -25,6 +26,13 @@ test('operates the browser preview and keeps the desktop layout stable', async (
   await page.screenshot({ path: 'test-results/group-list-desktop.png', fullPage: true });
   await page.getByRole('button', { name: '开始消息测试', exact: true }).click();
   await expect(page.getByText('group · 654321')).toBeVisible();
+  await page.getByTitle('好友列表').click();
+  await expect(page.getByRole('heading', { name: '测试用户', level: 1 })).toBeVisible();
+  await page.getByRole('button', { name: /图像插件作者/ }).click();
+  await expect(page.getByRole('heading', { name: '图像插件作者', level: 1 })).toBeVisible();
+  await page.screenshot({ path: 'test-results/friend-list-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: '开始消息测试', exact: true }).click();
+  await expect(page.getByText('friend · 10003')).toBeVisible();
   await page.getByRole('button', { name: /Milky 模拟服务/ }).click();
   await expect(page.getByRole('heading', { name: 'Milky 模拟服务' })).toBeVisible();
   await expect(page.locator('.endpoint-preview')).toContainText('http://127.0.0.1:30001');

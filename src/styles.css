@@ -286,6 +286,10 @@ button:disabled {
   background: #34bc85;
 }
 
+.scenario-meta i.away {
+  background: #e4a43e;
+}
+
 .scenario-divider {
   height: 1px;
   margin: 0 14px;
@@ -866,12 +870,14 @@ button:disabled {
   transform: translateX(14px);
 }
 
-.group-detail {
+.group-detail,
+.friend-detail {
   min-height: 0;
   overflow-y: auto;
 }
 
-.group-identity {
+.group-identity,
+.friend-identity {
   display: grid;
   grid-template-columns: 72px minmax(0, 1fr) auto;
   align-items: center;
@@ -882,7 +888,8 @@ button:disabled {
   border-bottom: 1px solid #d3e7ef;
 }
 
-.group-identity > span {
+.group-identity > span,
+.friend-identity > span {
   display: grid;
   place-items: center;
   width: 68px;
@@ -893,19 +900,26 @@ button:disabled {
   border-radius: 50%;
 }
 
-.group-identity h2 {
+.friend-identity > span {
+  background: #4bb99a;
+}
+
+.group-identity h2,
+.friend-identity h2 {
   margin: 0;
   color: #173441;
   font-size: 21px;
 }
 
-.group-identity p {
+.group-identity p,
+.friend-identity p {
   margin: 7px 0 0;
   color: #6d8995;
   font-size: 12px;
 }
 
-.group-identity button {
+.group-identity button,
+.friend-identity button {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -919,11 +933,13 @@ button:disabled {
   font-weight: 650;
 }
 
-.group-details {
+.group-details,
+.friend-details {
   margin: 0;
 }
 
-.group-details > div {
+.group-details > div,
+.friend-details > div {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
   gap: 20px;
@@ -933,18 +949,22 @@ button:disabled {
 }
 
 .group-details dt,
-.group-details dd {
+.group-details dd,
+.friend-details dt,
+.friend-details dd {
   display: flex;
   align-items: center;
   margin: 0;
   font-size: 12px;
 }
 
-.group-details dt {
+.group-details dt,
+.friend-details dt {
   color: #718d99;
 }
 
-.group-details dd {
+.group-details dd,
+.friend-details dd {
   color: #274754;
   font-weight: 600;
 }
@@ -952,6 +972,35 @@ button:disabled {
 .group-role {
   gap: 6px;
   color: #16855f !important;
+}
+
+.friend-status {
+  position: relative;
+  gap: 7px;
+}
+
+.friend-status::before {
+  width: 7px;
+  height: 7px;
+  background: #9baeb7;
+  border-radius: 50%;
+  content: "";
+}
+
+.friend-status.online {
+  color: #16855f;
+}
+
+.friend-status.online::before {
+  background: #34bc85;
+}
+
+.friend-status.away {
+  color: #9c671d;
+}
+
+.friend-status.away::before {
+  background: #e4a43e;
 }
 
 .server-config {
@@ -1392,27 +1441,32 @@ button:disabled {
     padding-inline: 12px;
   }
 
-  .group-identity {
+  .group-identity,
+  .friend-identity {
     grid-template-columns: 54px minmax(0, 1fr);
     gap: 12px;
     padding: 20px 16px;
   }
 
-  .group-identity > span {
+  .group-identity > span,
+  .friend-identity > span {
     width: 52px;
     height: 52px;
   }
 
-  .group-identity h2 {
+  .group-identity h2,
+  .friend-identity h2 {
     font-size: 17px;
   }
 
-  .group-identity button {
+  .group-identity button,
+  .friend-identity button {
     grid-column: 1 / -1;
     justify-content: center;
   }
 
-  .group-details > div {
+  .group-details > div,
+  .friend-details > div {
     grid-template-columns: 88px minmax(0, 1fr);
     gap: 10px;
     padding: 0 16px;

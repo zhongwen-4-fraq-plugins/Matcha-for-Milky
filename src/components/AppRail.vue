@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Menu, MessageCircleMore, Puzzle, TerminalSquare, UsersRound } from '@lucide/vue';
+import { Menu, MessageCircleMore, Puzzle, TerminalSquare, UserRound, UsersRound } from '@lucide/vue';
 
 defineProps<{
-  activeView: 'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about';
+  activeView: 'workbench' | 'plugins' | 'groups' | 'friends' | 'api' | 'activity' | 'settings' | 'about';
 }>();
 
 defineEmits<{
-  select: [view: 'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about'];
+  select: [view: 'workbench' | 'plugins' | 'groups' | 'friends' | 'api' | 'activity' | 'settings' | 'about'];
 }>();
 </script>
 
@@ -22,6 +22,9 @@ defineEmits<{
       </button>
       <button type="button" title="群聊列表" :class="{ active: activeView === 'groups' }" @click="$emit('select', 'groups')">
         <UsersRound :size="22" />
+      </button>
+      <button type="button" title="好友列表" :class="{ active: activeView === 'friends' }" @click="$emit('select', 'friends')">
+        <UserRound :size="22" />
       </button>
       <button type="button" title="活动日志" :class="{ active: activeView === 'activity' }" @click="$emit('select', 'activity')">
         <TerminalSquare :size="22" />

@@ -19,6 +19,7 @@ State: The first runnable framework is implemented; native Rust verification is 
 - Simplified the primary rail to message testing, plugin management, and activity logs in that order.
 - Added a frontend plugin target manager with path entry, enable toggles, and removal controls; native plugin loading remains future Rust work.
 - Added a group-list rail entry whose middle pane follows the conversation-list layout, plus group details and a direct handoff into group message testing.
+- Added a friend-list rail entry with conversation-style rows, presence indicators, friend details, and a direct handoff into private-message testing.
 - `pnpm build`, Rust formatting, and two Playwright desktop/mobile tests pass.
 - `cargo test` cannot start because this machine has no MSVC linker or Windows SDK.
 

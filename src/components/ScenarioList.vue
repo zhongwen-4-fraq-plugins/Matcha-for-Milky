@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Braces, Clock3, Plus, Search, ServerCog, TerminalSquare, UserRound, UsersRound } from '@lucide/vue';
-import type { MessageEventDraft, ServerSnapshot, TestGroup } from '../types';
+import type { MessageEventDraft, ServerSnapshot, TestFriend, TestGroup } from '../types';
 
 const props = defineProps<{
   snapshot: ServerSnapshot;
-  activeView: 'workbench' | 'plugins' | 'groups' | 'api' | 'activity' | 'settings' | 'about';
+  activeView: 'workbench' | 'plugins' | 'groups' | 'friends' | 'api' | 'activity' | 'settings' | 'about';
   selectedScene: MessageEventDraft['scene'];
   groups: TestGroup[];
   selectedGroupId: number;
+  friends: TestFriend[];
+  selectedFriendId: number;
 }>();
 
 const emit = defineEmits<{
   selectView: [view: 'api' | 'activity' | 'settings'];
   selectScene: [scene: MessageEventDraft['scene']];
   selectGroup: [groupId: number];
+  selectFriend: [userId: number];
 }>();
 
 const search = ref('');
@@ -30,9 +33,9 @@ function formatTime(time: number | undefined) {
 
 <template>
   <aside class="scenario-pane">
-    <div class="scenario-search" :class="{ 'without-action': activeView === 'groups' }">
+    <div class="scenario-search" :class="{ 'without-action': activeView === 'groups' || activeView === 'friends' }">
       <label><Search :size="17" /><input v-model="search" placeholder="搜索" /></label>
-      <button v-if="activeView !== 'groups'" type="button" title="服务配置" @click="emit('selectView', 'settings')"><Plus :size="20" /></button>
+      <button v-if="activeView !== 'groups' && activeView !== 'friends'" type="button" title="服务配置" @click="emit('selectView', 'settings')"><Plus :size="20" /></button>
     </div>
 
     <div class="scenario-list">
@@ -53,6 +56,25 @@ function formatTime(time: number | undefined) {
           <span class="scenario-meta"><time>{{ group.lastActive }}</time><b>{{ group.role === 'owner' ? '群主' : group.role === 'admin' ? '管理' : '成员' }}</b></span>
         </button>
         <div v-if="!groups.some((group) => matches(`${group.groupName} ${group.groupId}`))" class="scenario-empty">没有匹配的群</div>
+      </template>
+
+      <template v-else-if="activeView === 'friends'">
+        <button
+          v-for="friend in friends.filter((item) => matches(`${item.nickname} ${item.remark} ${item.userId}`))"
+          :key="friend.userId"
+          type="button"
+          class="scenario-item"
+          :class="{ selected: friend.userId === selectedFriendId }"
+          @click="emit('selectFriend', friend.userId)"
+        >
+          <span class="scenario-avatar friend"><UserRound :size="23" /></span>
+          <span class="scenario-copy">
+            <span class="scenario-title">{{ friend.remark || friend.nickname }}</span>
+            <span class="scenario-preview">{{ friend.nickname }} · {{ friend.userId }}</span>
+          </span>
+          <span class="scenario-meta"><time>{{ friend.lastActive }}</time><i :class="{ online: friend.status === 'online', away: friend.status === 'away' }" /></span>
+        </button>
+        <div v-if="!friends.some((friend) => matches(`${friend.nickname} ${friend.remark} ${friend.userId}`))" class="scenario-empty">没有匹配的好友</div>
       </template>
 
       <template v-else>

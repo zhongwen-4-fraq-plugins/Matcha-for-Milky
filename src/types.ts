@@ -52,3 +52,13 @@ export interface TestGroup {
   remark: string;
   lastActive: string;
 }
+
+export interface TestFriend {
+  userId: number;
+  nickname: string;
+  remark: string;
+  category: string;
+  qid: string;
+  status: 'online' | 'away' | 'offline';
+  lastActive: string;
+}
