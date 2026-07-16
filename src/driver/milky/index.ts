@@ -15,6 +15,7 @@ interface MilkyActionRequest extends ActionRequest {
 
 export class MilkyDriver extends Driver {
   private unlisten: UnlistenFn[] = []
+  private clientCount = 0
 
   constructor(public adapter: Adapter) {
     super(adapter)
@@ -45,6 +46,12 @@ export class MilkyDriver extends Driver {
         })
       }),
       listen<number>('milky-client-count', ({ payload }) => {
+        if (payload > this.clientCount) {
+          void logger.info(`[连接] Milky 客户端已连接，当前 ${payload} 个连接`)
+        } else if (payload < this.clientCount) {
+          void logger.info(`[连接] Milky 客户端已断开，当前 ${payload} 个连接`)
+        }
+        this.clientCount = payload
         this.adapter.state.isConnected = payload > 0
       }),
     ])
@@ -56,7 +63,9 @@ export class MilkyDriver extends Driver {
         timeout: this.adapter.config.timeout,
       })
       this.adapter.state.isConnected = false
-      void logger.info(`Milky 服务已监听 http://${this.adapter.config.host}:${this.adapter.config.port}`)
+      void logger.info(
+        `[连接] Milky 服务已监听 http://${this.adapter.config.host}:${this.adapter.config.port}`,
+      )
       toast.success('Milky 服务已启动', {
         description: `${this.adapter.config.host}:${this.adapter.config.port}`,
       })
@@ -70,17 +79,23 @@ export class MilkyDriver extends Driver {
   }
 
   async stop(): Promise<void> {
+    const wasRunning = this.unlisten.length > 0
     for (const unlisten of this.unlisten) {
       unlisten()
     }
     this.unlisten = []
     if (!isTauri()) {
+      this.clientCount = 0
       this.adapter.state.isConnected = false
       return
     }
     await invoke('stop_milky_server').catch((error) => {
       void logger.debug(`Milky 服务无需停止: ${String(error)}`)
     })
+    if (wasRunning) {
+      void logger.info('[连接] Milky 服务已停止')
+    }
+    this.clientCount = 0
     this.adapter.state.isConnected = false
   }
 
@@ -88,11 +103,13 @@ export class MilkyDriver extends Driver {
     if (!isTauri()) {
       return false
     }
+    void logger.info(`[事件] 接收 ${String(event.event_type)}: ${JSON.stringify(event)}`)
     try {
       await invoke('emit_milky_event', { event })
+      void logger.info(`[事件] 已推送 ${String(event.event_type)}`)
       return true
     } catch (error) {
-      void logger.error(`Milky 事件发送失败: ${String(error)}`)
+      void logger.error(`[事件] 推送 ${String(event.event_type)} 失败: ${String(error)}`)
       return false
     }
   }

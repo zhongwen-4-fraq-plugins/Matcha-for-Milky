@@ -8,7 +8,7 @@ Focus: 构建 Meow Fraq 插件测试器。
 
 ## Next
 
-- 使用真实 Fraq `Context.fromUrl()` 验证 Meow 的 Milky 协议适配。
+- 使用真实 Fraq `Context.fromUrl()` 验证 Meow 的 Milky 协议适配和运行日志。
 - GitHub 下载稳定后重试可选的 NSIS 安装程序打包。
 
 ## Open questions
