@@ -1,7 +1,5 @@
 import { invoke } from '@tauri-apps/api/core'
 
-import type { FileURL, FilePath, FileData } from '~/adapter/onebot/v12/typed'
-
 export interface FileSource {
   str?: string
   binary?: number[]
@@ -43,36 +41,6 @@ export const Commands = {
    */
   async startAssetsServer(host: string, port: number) {
     return await invoke<void>('start_assets_server', { host, port })
-  },
-
-  /**
-   * 上传文件
-   * @param file 文件信息
-   * @returns 上传结果
-   */
-  async uploadFile(file: FileURL<'url'> | FilePath<'path'> | FileData<'data'>) {
-    return await invoke<{ size: number, sha256: string }>('upload_file', { file })
-  },
-
-  /**
-   * 创建文件片段
-   * @param fileId 文件ID
-   * @param offset 偏移量
-   * @param data 片段数据
-   */
-  async createFileFragment(fileId: string, offset: number, data: string | Uint8Array) {
-    return await invoke<void>('create_file_fragment', { fileId, offset, data })
-  },
-
-  /**
-   * 合并文件片段
-   * @param fileId 文件ID
-   * @param totalSize 总大小
-   * @param sha256 SHA256哈希值
-   * @returns 合并结果
-   */
-  async mergeFileFragment(fileId: string, totalSize: number, sha256: string) {
-    return await invoke<string>('merge_file_fragment', { fileId, totalSize, sha256 })
   },
 
   /**

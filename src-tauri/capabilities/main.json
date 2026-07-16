@@ -13,7 +13,6 @@
     "core:window:allow-set-effects",
     "core:webview:allow-create-webview-window",
     "log:default",
-    "websocket:default",
     "os:allow-arch",
     "os:allow-platform",
     "os:allow-os-type",

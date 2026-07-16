@@ -13,7 +13,7 @@ interface MilkyActionRequest extends ActionRequest {
   requestId: number
 }
 
-export class milky extends Driver {
+export class MilkyDriver extends Driver {
   private unlisten: UnlistenFn[] = []
 
   constructor(public adapter: Adapter) {

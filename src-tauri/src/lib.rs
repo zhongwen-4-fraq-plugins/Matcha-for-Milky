@@ -42,7 +42,6 @@ pub fn run() {
     builder
         .plugin(tauri_plugin_os::init(),)
         .plugin(tauri_plugin_fs::init(),)
-        .plugin(tauri_plugin_websocket::init(),)
         .plugin(tauri_plugin_http::init(),)
         .plugin(tauri_plugin_dialog::init(),)
         .plugin(tauri_plugin_shell::init(),)
@@ -70,9 +69,6 @@ pub fn run() {
             commands::read_file,
             commands::get_file_type,
             commands::create_cache_file,
-            commands::upload_file,
-            commands::create_file_fragment,
-            commands::merge_file_fragment,
             commands::write_file,
             commands::copy_file,
             commands::start_assets_server,

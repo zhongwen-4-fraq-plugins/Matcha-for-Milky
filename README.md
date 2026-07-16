@@ -37,7 +37,7 @@
   </picture>
 </p>
 
-Meow 是一个面向 Fraq 插件开发的桌面测试工具，能够模拟好友、群聊、消息、文件和通知，并通过 Milky、OneBot 11 或 OneBot 12 与插件交互。
+Meow 是一个面向 Fraq 插件开发的桌面测试工具，能够模拟好友、群聊、消息、文件和通知，并通过 Milky 与插件交互。
 
 它旨在降低开发者的调试与测试的负担，从而更有效率的专注于功能开发。
 
@@ -202,99 +202,6 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
   - [x] 群全体禁言事件（group_whole_mute）
   - [x] 群戳一戳事件（group_nudge）
   - [x] 群文件上传事件（group_file_upload）
-  </details>
-
-- <details>
-  <summary>OneBot v11 标准</summary>
-
-  ### 动作
-
-  - [x] 发送私聊消息（send_private_msg）
-  - [x] 发送群消息（send_group_msg）
-  - [x] 发送消息（send_msg）
-  - [x] 撤回消息（delete_msg）
-  - [x] 获取消息（get_msg）
-  - [ ] 获取合并转发消息（get_forward_msg）
-  - [x] 群组踢人（set_group_kick）
-  - [x] 群组单人禁言（set_group_ban）
-  - [ ] 群组匿名用户禁言（set_group_anonymous_ban）
-  - [x] 群组全员禁言（set_group_whole_ban）
-  - [x] 群组设置管理员（set_group_admin）
-  - [ ] 群组匿名（set_group_anonymous）
-  - [x] 设置群名片（set_group_card）
-  - [x] 设置群名（set_group_name）
-  - [x] 退出群组（set_group_leave）
-  - [x] 设置群组专属头衔（set_group_special_title）
-  - [x] 处理加好友请求（set_friend_add_request）
-  - [x] 处理加群请求／邀请（set_group_add_request）
-  - [x] 获取登录号信息（get_login_info）
-  - [x] 获取陌生人信息（get_stranger_info）
-  - [x] 获取好友列表（get_friend_list）
-  - [x] 获取群信息（get_group_info）
-  - [x] 获取群列表（get_group_list）
-  - [x] 获取群成员信息（get_group_member_info）
-  - [x] 获取群成员列表（get_group_member_list）
-  - [ ] 获取群荣誉信息（get_group_honor_info）
-  - [ ] 获取语音（get_record）
-  - [ ] 获取图片（get_image）
-  - [x] 检查是否可以发送图片（can_send_image）
-  - [x] 检查是否可以发送语音（can_send_record）
-  - [x] 获取运行状态（get_status）
-  - [x] 获取版本信息（get_version_info）
-
-  ### 事件
-
-  - [x] 私聊消息
-  - [x] 群消息
-  - [ ] 群文件上传
-  - [x] 群管理员变动
-  - [x] 群成员减少
-  - [x] 群成员增加
-  - [x] 群禁言
-  - [x] 好友添加
-  - [x] 群消息撤回
-  - [x] 好友消息撤回
-  - [x] 群内戳一戳
-  - [ ] 群红包运气王
-  - [ ] 群成员荣誉变更
-  - [x] 加好友请求
-  - [x] 加群请求／邀请
-  </details>
-
-- <details>
-  <summary>OneBot v12 标准</summary>
-
-  ### 动作
-
-  - [x] 获取支持的动作列表（get_supported_actions）
-  - [x] 获取运行状态（get_status）
-  - [x] 获取版本信息（get_version）
-  - [x] 发送消息（send_message）
-  - [x] 撤回消息（delete_message）
-  - [x] 获取机器人自身信息（get_self_info）
-  - [x] 获取用户信息（get_user_info）
-  - [x] 获取好友列表（get_friend_list）
-  - [x] 获取群信息（get_group_info）
-  - [x] 获取群列表（get_group_list）
-  - [x] 获取群成员信息（get_group_member_info）
-  - [x] 获取群成员列表（get_group_member_list）
-  - [x] 设置群名称（set_group_name）
-  - [x] 退出群（leave_group）
-  - [x] 上传文件（upload_file）
-  - [x] 分片上传文件（upload_file_fragmented）
-  - [x] 获取文件（get_file）
-  - [x] 分片获取文件（get_file_fragmented）
-
-  ### 事件
-
-  - [x] 私聊消息（message.private）
-  - [x] 好友增加（notice.friend_increase）
-  - [x] 好友减少（notice.friend_decrease）
-  - [x] 私聊消息删除（notice.private_message_delete）
-  - [x] 群消息（message.group）
-  - [x] 群成员增加（notice.group_member_increase）
-  - [x] 群成员减少（notice.group_member_decrease）
-  - [x] 群消息删除（notice.group_message_delete）
   </details>
 
 ## 📋 路线图

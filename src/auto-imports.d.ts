@@ -380,9 +380,6 @@ declare global {
   export type { DefaultMap } from './utils/utils'
   import('./utils/utils')
   // @ts-ignore
-  export type { MilkyV12, OneBotV11StandardHTTP, OneBotV11StandardWebSocketServer, OneBotV11StandardWebSocketClient, OneBotV11Standard, OneBotV12StandardHTTP, OneBotV12StandardHTTPWebhook, OneBotV12StandardWebSocketServer, OneBotV12StandardWebSocketClient, OneBotV12Standard } from './types/connect'
-  import('./types/connect')
-  // @ts-ignore
   export type { Contact, UploadFile, FileType, ComponentProps } from './types/index'
   import('./types/index')
   // @ts-ignore
