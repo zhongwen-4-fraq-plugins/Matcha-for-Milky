@@ -27,7 +27,7 @@ State: Meow with Milky 1.2 builds as a native Windows release.
 - Implemented all 64 Milky 1.2.2 API routes, split missing handlers by system, friend, group, notification, and file responsibilities, with Dexie v5 persistence for new simulated entities.
 - Implemented all 20 Milky 1.2.2 events, split conversion by system, message, friend, and group responsibilities; related API and UI operations now emit their matching simulated events.
 - Removed the OneBot 11/12 adapters, their WebSocket client drivers, protocol settings, documentation matrices, and unused dependencies; Meow now exposes Milky only.
-- Added categorized runtime logs for Milky service and client connections, API calls and responses, and received event delivery.
+- Added categorized runtime logs for Milky service and client connections, debug-level API calls and responses, and received event delivery.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

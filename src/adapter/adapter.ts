@@ -53,12 +53,12 @@ export abstract class Adapter {
   }
 
   async actionHandle(request: ActionRequest): Promise<ActionResponse> {
-    void logger.info(
+    void logger.debug(
       `[API] 调用 ${this.protocolName} ${request.action}: ${JSON.stringify(request.params)}`,
     )
     try {
       const response = await this.actionHandler.handle(request)
-      void logger.info(
+      void logger.debug(
         `[API] 完成 ${this.protocolName} ${request.action}: ${JSON.stringify(response)}`,
       )
       return response
