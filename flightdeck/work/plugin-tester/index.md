@@ -1,12 +1,11 @@
 # Matcha-based Fraq plugin tester
 
-State: Matcha 0.4.8 now includes a Milky 1.2 server adapter for Fraq integration.
+State: Matcha 0.4.8 with Milky 1.2 builds and launches as a native Windows release.
 
 ## Next
 
-- Verify the native Milky server after installing Windows C++ Build Tools and a Windows SDK.
 - Exercise a real Fraq `Context.fromUrl()` connection against the desktop build.
-- Install Visual Studio Build Tools and a Windows SDK before native Tauri verification.
+- Retry the optional NSIS installer when GitHub binary downloads are stable.
 
 ## Progress
 
@@ -18,7 +17,10 @@ State: Matcha 0.4.8 now includes a Milky 1.2 server adapter for Fraq integration
 - Added Milky message, entity, event, and action modules plus connection settings for `127.0.0.1:30001`.
 - Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Matcha's minimum desktop width.
 - Implemented the second sidebar action as a runtime log viewer with Tauri log capture, search, level filtering, automatic scrolling, and clearing.
-- Frontend type checking and JavaScript linting pass; Rust dependency metadata resolves, while native compilation remains blocked before crate checking by the missing MSVC linker.
+- Frontend type checking, JavaScript linting, and the native Rust/Tauri release build pass.
+- Installed Visual Studio Build Tools 2022 with the C++ workload and Windows SDK 10.0.26100.0.
+- Copied the standalone release to `C:\Users\admin\Downloads\fraq-debug-matcha.exe` and verified that its `Matcha` window starts and remains responsive.
+- NSIS bundling reached the installer stage but its optional GitHub utility download timed out; the standalone EXE is unaffected.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -32,7 +34,7 @@ State: Matcha 0.4.8 now includes a Milky 1.2 server adapter for Fraq integration
 - Replaced the middle-pane plus action with an add menu for group chats and accounts, including validated forms and automatic list selection after creation.
 - Renamed the primary message rail entry from message testing to message list while keeping explicit test actions unchanged.
 - `pnpm build`, Rust formatting, and two Playwright desktop/mobile tests pass.
-- `cargo test` cannot start because this machine has no MSVC linker or Windows SDK.
+- Native Rust compilation is now available through the Visual Studio Developer PowerShell environment.
 
 ## Read now
 

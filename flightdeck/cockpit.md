@@ -9,7 +9,7 @@ Focus: 基于 Matcha 构建 Fraq 插件测试器。
 ## Next
 
 - 使用真实 Fraq `Context.fromUrl()` 验证 Matcha 的 Milky 协议适配。
-- 安装 Windows C++ Build Tools 与 SDK，完成 Tauri 原生验证。
+- GitHub 下载稳定后重试可选的 NSIS 安装程序打包。
 
 ## Open questions
 
