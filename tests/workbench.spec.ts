@@ -7,7 +7,7 @@ test('operates the browser preview and keeps the desktop layout stable', async (
   await expect(page.getByPlaceholder('搜索')).toBeVisible();
   await expect(page.getByRole('heading', { name: '群聊测试' })).toBeVisible();
   await expect(page.locator('.app-rail nav button').evaluateAll((buttons) => buttons.map((button) => button.title))).resolves.toEqual([
-    '消息测试',
+    '消息列表',
     '插件管理',
     '群聊列表',
     '好友列表',

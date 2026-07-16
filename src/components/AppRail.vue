@@ -14,7 +14,7 @@ defineEmits<{
   <aside class="app-rail">
     <div class="rail-logo">F</div>
     <nav aria-label="主导航">
-      <button type="button" title="消息测试" :class="{ active: activeView === 'workbench' }" @click="$emit('select', 'workbench')">
+      <button type="button" title="消息列表" :class="{ active: activeView === 'workbench' }" @click="$emit('select', 'workbench')">
         <MessageCircleMore :size="23" />
       </button>
       <button type="button" title="插件管理" :class="{ active: activeView === 'plugins' }" @click="$emit('select', 'plugins')">
