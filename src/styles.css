@@ -122,10 +122,6 @@ button:disabled {
   border-bottom: 1px solid #d1e6ee;
 }
 
-.scenario-search.without-action {
-  grid-template-columns: minmax(0, 1fr);
-}
-
 .scenario-search label {
   display: flex;
   align-items: center;
@@ -150,14 +146,52 @@ button:disabled {
   color: #67818e;
 }
 
-.scenario-search button {
+.scenario-add {
+  position: relative;
+}
+
+.scenario-add > button {
   display: grid;
   place-items: center;
+  width: 34px;
+  height: 38px;
   padding: 0;
   color: #345462;
   background: #d6eaf2;
   border: 0;
   border-radius: 9px;
+}
+
+.scenario-add-menu {
+  position: absolute;
+  z-index: 8;
+  top: 43px;
+  right: 0;
+  display: grid;
+  width: 138px;
+  padding: 5px;
+  background: #f5fbfd;
+  border: 1px solid #c9e1eb;
+  border-radius: 7px;
+  box-shadow: 0 8px 22px rgb(69 107 123 / 18%);
+}
+
+.scenario-add-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 9px;
+  color: #294957;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.scenario-add-menu button:hover {
+  background: #dceff6;
 }
 
 .scenario-list {
@@ -1003,6 +1037,102 @@ button:disabled {
   background: #e4a43e;
 }
 
+.contact-dialog-backdrop {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(32 63 78 / 24%);
+}
+
+.contact-dialog {
+  width: min(400px, 100%);
+  overflow: hidden;
+  background: #eef8fc;
+  border: 1px solid #c7dfe9;
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgb(42 76 91 / 24%);
+}
+
+.contact-dialog header {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 0 13px 0 16px;
+  border-bottom: 1px solid #d2e6ee;
+}
+
+.contact-dialog header > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: #ffffff;
+  background: #2aaed7;
+  border-radius: 50%;
+}
+
+.contact-dialog h2 {
+  margin: 0;
+  color: #173441;
+  font-size: 15px;
+}
+
+.contact-dialog header button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: #63808c;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+}
+
+.contact-dialog header button:hover {
+  background: #daeef5;
+}
+
+.contact-dialog-fields {
+  display: grid;
+  gap: 13px;
+  padding: 18px 20px;
+}
+
+.contact-dialog footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #e5f3f8;
+  border-top: 1px solid #d2e6ee;
+}
+
+.contact-dialog footer button {
+  height: 33px;
+  padding: 0 13px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.contact-dialog .cancel {
+  color: #4f6c79;
+  background: transparent;
+  border: 1px solid #c3dce6;
+}
+
+.contact-dialog .confirm {
+  color: #ffffff;
+  background: #1aa97f;
+  border: 1px solid #1aa97f;
+}
+
 .server-config {
   background: rgb(255 255 255 / 28%);
   border-bottom: 1px solid #d3e7ef;
@@ -1287,13 +1417,15 @@ button:disabled {
   }
 
   .scenario-search {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) 30px;
+    gap: 5px;
     height: 54px;
-    padding: 10px 8px;
+    padding: 8px 6px;
   }
 
-  .scenario-search button {
-    display: none;
+  .scenario-add > button {
+    width: 30px;
+    height: 38px;
   }
 
   .scenario-list {

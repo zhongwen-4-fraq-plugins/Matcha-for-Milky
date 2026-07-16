@@ -18,9 +18,11 @@ const emit = defineEmits<{
   selectScene: [scene: MessageEventDraft['scene']];
   selectGroup: [groupId: number];
   selectFriend: [userId: number];
+  add: [mode: 'group' | 'friend'];
 }>();
 
 const search = ref('');
+const addMenuOpen = ref(false);
 
 function matches(text: string) {
   return text.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase());
@@ -29,13 +31,24 @@ function matches(text: string) {
 function formatTime(time: number | undefined) {
   return time ? new Date(time * 1000).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false }) : '--:--';
 }
+
+function chooseAddMode(mode: 'group' | 'friend') {
+  addMenuOpen.value = false;
+  emit('add', mode);
+}
 </script>
 
 <template>
   <aside class="scenario-pane">
-    <div class="scenario-search" :class="{ 'without-action': activeView === 'groups' || activeView === 'friends' }">
+    <div class="scenario-search">
       <label><Search :size="17" /><input v-model="search" placeholder="搜索" /></label>
-      <button v-if="activeView !== 'groups' && activeView !== 'friends'" type="button" title="服务配置" @click="emit('selectView', 'settings')"><Plus :size="20" /></button>
+      <div class="scenario-add">
+        <button type="button" title="添加" :aria-expanded="addMenuOpen" @click="addMenuOpen = !addMenuOpen"><Plus :size="20" /></button>
+        <div v-if="addMenuOpen" class="scenario-add-menu">
+          <button type="button" @click="chooseAddMode('group')"><UsersRound :size="17" />添加群聊</button>
+          <button type="button" @click="chooseAddMode('friend')"><UserRound :size="17" />添加账号</button>
+        </div>
+      </div>
     </div>
 
     <div class="scenario-list">

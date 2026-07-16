@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
 import AboutView from './components/AboutView.vue';
+import AddContactDialog from './components/AddContactDialog.vue';
 import ActivityPanel from './components/ActivityPanel.vue';
 import AppRail from './components/AppRail.vue';
 import ChatTimeline from './components/ChatTimeline.vue';
@@ -45,6 +46,7 @@ const friends = ref<TestFriend[]>([
   { userId: 10004, nickname: 'Carol', remark: '', category: '默认分组', qid: '', status: 'offline', lastActive: '昨天' },
 ]);
 const selectedFriendId = ref(10002);
+const addMode = ref<'group' | 'friend'>();
 let draft = reactive<MessageEventDraft>({
   scene: 'group',
   peerId: 123456,
@@ -102,6 +104,24 @@ function testFriend(userId: number) {
   activeView.value = 'workbench';
 }
 
+function addGroup(groupId: number, groupName: string) {
+  if (!groups.value.some((group) => group.groupId === groupId)) {
+    groups.value.push({ groupId, groupName, memberCount: 1, maxMemberCount: 200, role: 'member', remark: '', lastActive: '刚刚' });
+  }
+  selectedGroupId.value = groupId;
+  activeView.value = 'groups';
+  addMode.value = undefined;
+}
+
+function addFriend(userId: number, nickname: string, remark: string) {
+  if (!friends.value.some((friend) => friend.userId === userId)) {
+    friends.value.push({ userId, nickname, remark, category: '默认分组', qid: '', status: 'offline', lastActive: '刚刚' });
+  }
+  selectedFriendId.value = userId;
+  activeView.value = 'friends';
+  addMode.value = undefined;
+}
+
 const selectedGroup = computed(() => groups.value.find((group) => group.groupId === selectedGroupId.value));
 const selectedFriend = computed(() => friends.value.find((friend) => friend.userId === selectedFriendId.value));
 
@@ -150,6 +170,7 @@ onUnmounted(() => window.clearInterval(refreshTimer));
       @select-scene="selectScene"
       @select-group="selectedGroupId = $event"
       @select-friend="selectedFriendId = $event"
+      @add="addMode = $event"
     />
 
     <main class="main-pane">
@@ -185,5 +206,12 @@ onUnmounted(() => window.clearInterval(refreshTimer));
         @clear="run(clearHistory)"
       />
     </main>
+    <AddContactDialog
+      v-if="addMode"
+      :mode="addMode"
+      @close="addMode = undefined"
+      @add-group="addGroup"
+      @add-friend="addFriend"
+    />
   </div>
 </template>
