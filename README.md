@@ -64,6 +64,18 @@ Matcha 是一个专为 [KiramiBot](https://github.com/A-kirami/KiramiBot) 设计
 
 > [KiramiBot](https://github.com/A-kirami/KiramiBot) 是一个简明轻快的聊天机器人应用，它与 [NoneBot2](https://github.com/nonebot/nonebot2) 完全兼容，同时提供了更多的功能与特性，欢迎体验！
 
+## Fraq 与 Milky
+
+本仓库基于 Matcha 0.4.8 开发，增加了 Milky 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
+
+在设置中选择 `Milky 1.2` 后，Matcha 默认监听 `127.0.0.1:30001`，提供以下接口：
+
+- `POST /api/:api`：调用 Matcha 中的好友、群聊与消息行为。
+- `GET /event`：通过 WebSocket 或 SSE 接收模拟事件。
+- `Authorization: Bearer <token>`：设置访问令牌后启用鉴权。
+
+Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端。
+
 ## ✨ 特性
 
 - 小而美，轻巧体积，简约 UI

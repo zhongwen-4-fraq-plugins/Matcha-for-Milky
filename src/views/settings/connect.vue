@@ -18,8 +18,14 @@ const connect = useConnectSettingsStore()
 
 const generalFormSchema = toTypedSchema(
   z.object({
-    protocol: z.enum(['OneBot.V11.Standard', 'OneBot.V12.Standard']),
-    comm: z.enum(['websocketServer', 'websocketClient', 'http']),
+    protocol: z.enum(['Milky.V1.2', 'OneBot.V11.Standard', 'OneBot.V12.Standard']),
+    comm: z.enum(['milky', 'websocketServer', 'websocketClient', 'http']),
+    host: z.string().min(1, '监听地址不能为空'),
+    port: z
+      .number()
+      .int()
+      .min(1, '端口必须大于 0')
+      .max(6_5535, '端口不能超过 65535'),
     url: z
       .string()
       .url('请输入有效的 URL')
@@ -43,12 +49,19 @@ const generalFormSchema = toTypedSchema(
   }),
 )
 
-const { handleSubmit, values, resetForm } = useForm({
+const { handleSubmit, values, resetForm, setFieldValue } = useForm({
   validationSchema: generalFormSchema,
   initialValues: connect.$state as unknown as Record<string, unknown>,
 })
 
 const adapter = useAdapterStore()
+
+watch(
+  () => values.protocol,
+  (protocol) => {
+    setFieldValue('comm', protocol === 'Milky.V1.2' ? 'milky' : 'websocketClient')
+  },
+)
 
 const rebootConnect = useDebounceFn(async () => {
   await adapter.bot.reboot()
@@ -86,6 +99,9 @@ defineExpose({ resetForm })
           </FormControl>
           <SelectContent>
             <SelectGroup>
+              <SelectItem value="Milky.V1.2">
+                Milky 1.2
+              </SelectItem>
               <SelectItem value="OneBot.V11.Standard">
                 OneBot v11 标准
               </SelectItem>
@@ -110,6 +126,9 @@ defineExpose({ resetForm })
           </FormControl>
           <SelectContent>
             <SelectGroup>
+              <SelectItem value="milky" :disabled="values.protocol !== 'Milky.V1.2'">
+                HTTP + WebSocket/SSE 服务端
+              </SelectItem>
               <SelectItem value="websocketServer" disabled>
                 WebSocket 服务器
               </SelectItem>
@@ -126,7 +145,29 @@ defineExpose({ resetForm })
         <FormMessage />
       </FormItem>
     </FormField>
-    <FormField v-slot="{ componentField }" name="url">
+    <div v-if="values.comm === 'milky'" class="max-w-100 flex gap-3">
+      <FormField v-slot="{ componentField }" name="host">
+        <FormItem class="min-w-0 flex-1">
+          <FormLabel>监听地址</FormLabel>
+          <FormControl>
+            <Input type="text" v-bind="componentField" class="h-9" />
+          </FormControl>
+          <FormDescription>Milky 服务监听的网络地址</FormDescription>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="port">
+        <FormItem class="w-32">
+          <FormLabel>端口</FormLabel>
+          <FormControl>
+            <Input type="number" v-bind="componentField" class="h-9" />
+          </FormControl>
+          <FormDescription>服务端口</FormDescription>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+    </div>
+    <FormField v-else v-slot="{ componentField }" name="url">
       <FormItem v-auto-animate>
         <FormLabel>连接地址</FormLabel>
         <FormControl>
@@ -146,7 +187,7 @@ defineExpose({ resetForm })
         <FormMessage />
       </FormItem>
     </FormField>
-    <FormField v-slot="{ value, handleChange }" name="autoReconnect">
+    <FormField v-if="values.comm !== 'milky'" v-slot="{ value, handleChange }" name="autoReconnect">
       <FormItem class="max-w-120 flex flex-row items-center justify-between rounded-lg">
         <div class="space-y-0.5">
           <FormLabel>自动重连</FormLabel>
@@ -157,7 +198,7 @@ defineExpose({ resetForm })
         </FormControl>
       </FormItem>
     </FormField>
-    <div v-show="values.autoReconnect">
+    <div v-show="values.autoReconnect && values.comm !== 'milky'">
       <FormField v-slot="{ componentField }" name="reconnectInterval">
         <FormItem v-auto-animate>
           <FormLabel>重连间隔</FormLabel>
@@ -169,7 +210,7 @@ defineExpose({ resetForm })
         </FormItem>
       </FormField>
     </div>
-    <FormField v-slot="{ componentField }" name="heartbeatInterval">
+    <FormField v-if="values.comm !== 'milky'" v-slot="{ componentField }" name="heartbeatInterval">
       <FormItem v-auto-animate>
         <FormLabel>心跳间隔</FormLabel>
         <FormControl>

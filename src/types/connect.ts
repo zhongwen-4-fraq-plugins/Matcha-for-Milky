@@ -1,3 +1,12 @@
+export interface MilkyV12 {
+  protocol: 'Milky.V1.2'
+  comm: 'milky'
+  host: string
+  port: number
+  accessToken: string
+  timeout: number
+}
+
 export interface OneBotV11StandardHTTP {
   protocol: 'OneBot.V11.Standard'
   comm: 'http'

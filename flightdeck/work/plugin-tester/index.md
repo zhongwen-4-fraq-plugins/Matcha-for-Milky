@@ -1,10 +1,11 @@
 # Matcha-based Fraq plugin tester
 
-State: Upstream Matcha 0.4.8 is the runnable simulation foundation; Milky adaptation is next.
+State: Matcha 0.4.8 now includes a Milky 1.2 server adapter for Fraq integration.
 
 ## Next
 
-- Add a Milky protocol adapter without mixing protocol-specific behavior into Matcha's shared chat model.
+- Verify the native Milky server after installing Windows C++ Build Tools and a Windows SDK.
+- Exercise a real Fraq `Context.fromUrl()` connection against the desktop build.
 - Install Visual Studio Build Tools and a Windows SDK before native Tauri verification.
 
 ## Progress
@@ -12,6 +13,11 @@ State: Upstream Matcha 0.4.8 is the runnable simulation foundation; Milky adapta
 - Chose upstream Matcha 0.4.8 as the maintained base instead of continuing the partial custom reimplementation.
 - Imported upstream commit `ce38c344fa1a715f3a8496d9b793c4c1f75e7a78` with its AGPL-3.0 license, attribution, documentation, and assets intact.
 - Verified the imported upstream application with `bun run build:web`.
+- Added a Rust Milky server for `POST /api/:api` and WebSocket/SSE `/event`, including Bearer authentication and request timeouts.
+- Added a Tauri request bridge so Milky APIs reuse Matcha's Vue/Dexie users, groups, messages, and behavior model.
+- Added Milky message, entity, event, and action modules plus connection settings for `127.0.0.1:30001`.
+- Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Matcha's minimum desktop width.
+- Frontend type checking and JavaScript linting pass; Rust dependency metadata resolves, while native compilation remains blocked before crate checking by the missing MSVC linker.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -30,6 +36,7 @@ State: Upstream Matcha 0.4.8 is the runnable simulation foundation; Milky adapta
 ## Read now
 
 - flightdeck/knowledge/milky/protocol.md
+- flightdeck/knowledge/milky/matcha-bridge.md
 - flightdeck/knowledge/fraq/framework.md
 - flightdeck/knowledge/tooling/windows-tauri-build.md
 
@@ -40,4 +47,4 @@ State: Upstream Matcha 0.4.8 is the runnable simulation foundation; Milky adapta
 
 ## Open questions
 
-- Which Fraq plugin-specific scenarios should be added after Milky transport is usable?
+- Which Fraq plugin-specific scenarios should be added after native Milky transport verification?

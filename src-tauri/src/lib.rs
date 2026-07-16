@@ -1,5 +1,6 @@
 use tauri::{Manager, WebviewUrl, WebviewWindowBuilder};
 mod commands;
+mod milky;
 mod state;
 mod utils;
 use tokio::sync::Mutex;
@@ -28,6 +29,7 @@ pub fn run() {
         _window.open_devtools();
 
         app.manage(Mutex::new(state::AppState::default(),),);
+        app.manage(milky::MilkyState::new(),);
 
         Ok((),)
     },);
@@ -74,6 +76,10 @@ pub fn run() {
             commands::write_file,
             commands::copy_file,
             commands::start_assets_server,
+            milky::start_milky_server,
+            milky::stop_milky_server,
+            milky::emit_milky_event,
+            milky::resolve_milky_action,
         ],)
         .run(tauri::generate_context!(),)
         .expect("error while running tauri application",);
