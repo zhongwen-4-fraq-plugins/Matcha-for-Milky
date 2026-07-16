@@ -1,19 +1,22 @@
+import { isTauri } from '@tauri-apps/api/core'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { ref } from 'vue'
 
-export const appWindow = getCurrentWebviewWindow()
+export const appWindow = isTauri() ? getCurrentWebviewWindow() : undefined
 export const isWindowMaximized = ref(false)
 
-appWindow.onResized(async () => {
-  isWindowMaximized.value = await appWindow.isMaximized()
-})
+if (appWindow) {
+  void appWindow.onResized(async () => {
+    isWindowMaximized.value = await appWindow.isMaximized()
+  })
+}
 
 export const minimizeWindow = async () => {
-  await appWindow.minimize()
+  await appWindow?.minimize()
 }
 
 export const maximizeWindow = async () => {
-  await appWindow.toggleMaximize()
+  await appWindow?.toggleMaximize()
 }
 
 export const fullscreenWindow = async () => {
@@ -24,5 +27,5 @@ export const fullscreenWindow = async () => {
 }
 
 export const closeWindow = async () => {
-  await appWindow.close()
+  await appWindow?.close()
 }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isTauri } from '@tauri-apps/api/core'
 import { type as getOsType } from '@tauri-apps/plugin-os'
 import { twMerge } from 'tailwind-merge'
 import { onMounted } from 'vue'
@@ -23,7 +24,7 @@ const props = withDefaults(defineProps<WindowControlsProps>(), {
 let platform = props.platform
 
 onMounted(() => {
-  const osType = getOsType()
+  const osType = isTauri() ? getOsType() : 'windows'
   if (!platform) {
     switch (osType) {
       case 'macos': {

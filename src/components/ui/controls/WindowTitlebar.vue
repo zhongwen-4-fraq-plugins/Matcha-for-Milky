@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isTauri } from '@tauri-apps/api/core'
 import { type as getOsType } from '@tauri-apps/plugin-os'
 import { twMerge } from 'tailwind-merge'
 import { onMounted, ref } from 'vue'
@@ -13,7 +14,7 @@ const { controlsOrder = 'system', windowControlsProps } = defineProps<WindowTitl
 const osType = ref<OsType>()
 
 onMounted(() => {
-  osType.value = getOsType()
+  osType.value = isTauri() ? getOsType() : 'windows'
 })
 
 const left

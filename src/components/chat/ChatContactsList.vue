@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useObservable, from } from '@vueuse/rxjs'
 import { liveQuery } from 'dexie'
+import { Bot } from 'lucide-vue-next'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 
 const { filter } = $defineProps<{
@@ -69,8 +70,38 @@ function openUserManage() {
         </RouterLink>
       </li>
     </ul>
-    <Button v-else class="h-8 w-full" @click="openUserManage">
-      管理机器人
-    </Button>
+    <TooltipProvider v-else>
+      <Tooltip>
+        <TooltipTrigger as-child>
+          <Button class="manage-bot h-8 w-full" @click="openUserManage">
+            <Bot class="manage-bot-icon size-4" />
+            <span class="manage-bot-label">管理机器人</span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="right">
+          管理机器人
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   </OverlayScrollbarsComponent>
 </template>
+
+<style scoped>
+.manage-bot-icon {
+  display: none;
+}
+
+@media (width <= 708px) {
+  .manage-bot {
+    padding-inline: 0;
+  }
+
+  .manage-bot-icon {
+    display: block;
+  }
+
+  .manage-bot-label {
+    display: none;
+  }
+}
+</style>

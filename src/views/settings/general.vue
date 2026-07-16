@@ -7,6 +7,7 @@ meta:
 </route>
 
 <script setup lang="ts">
+import { isTauri } from '@tauri-apps/api/core'
 import { type as getOsType } from '@tauri-apps/plugin-os'
 import { toTypedSchema } from '@vee-validate/zod'
 import { TriangleAlert } from 'lucide-vue-next'
@@ -59,7 +60,7 @@ let themeMode = inject('themeMode')
 
 defineExpose({ resetForm })
 
-const osType = getOsType()
+const osType = isTauri() ? getOsType() : 'windows'
 </script>
 
 <template>

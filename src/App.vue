@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isTauri } from '@tauri-apps/api/core'
 import { locale as dayjsLocale } from 'dayjs'
 
 import 'dayjs/locale/zh-cn'
@@ -17,6 +18,9 @@ const themeMode = useColorMode({
 provide('themeMode', themeMode)
 
 onBeforeMount(async () => {
+  if (!isTauri()) {
+    return
+  }
   await logger.attachConsole()
 
   await setWindowEffect()

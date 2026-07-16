@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { isTauri } from '@tauri-apps/api/core'
 import { type as getOsType } from '@tauri-apps/plugin-os'
 
-const osType = getOsType()
+const osType = isTauri() ? getOsType() : 'windows'
 </script>
 
 <template>

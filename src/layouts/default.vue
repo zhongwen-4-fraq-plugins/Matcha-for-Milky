@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isTauri } from '@tauri-apps/api/core'
 import { relaunch } from '@tauri-apps/plugin-process'
 import { check } from '@tauri-apps/plugin-updater'
 import { configure } from 'vee-validate'
@@ -12,9 +13,11 @@ configure({
 onMounted(async () => {
   const general = useGeneralSettingsStore()
 
-  await general.startAssetsServer(general.assetsServerAddress)
+  if (isTauri()) {
+    await general.startAssetsServer(general.assetsServerAddress)
+  }
 
-  if (isRelease && general.autoUpdate) {
+  if (isTauri() && isRelease && general.autoUpdate) {
     try {
       const update = await check()
       if (update) {
