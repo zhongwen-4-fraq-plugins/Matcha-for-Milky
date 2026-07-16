@@ -1,14 +1,14 @@
-# Cockpit — Meow
+# Cockpit — Matcha for Milky
 
-Focus: 构建 Meow Fraq 插件测试器。
+Focus: 构建 Matcha for Milky Fraq 插件测试器。
 
 ## In flight
 
-- `work/plugin-tester/`：Meow Vue/Tauri 模拟聊天工具与 Milky 协议适配。
+- `work/plugin-tester/`：Matcha for Milky Vue/Tauri 模拟聊天工具与 Milky 协议适配。
 
 ## Next
 
-- 使用真实 Fraq `Context.fromUrl()` 验证 Meow 的 Milky 协议适配和运行日志。
+- 使用真实 Fraq `Context.fromUrl()` 验证 Matcha for Milky 的 Milky 协议适配和运行日志。
 - GitHub 下载稳定后重试可选的 NSIS 安装程序打包。
 
 ## Open questions

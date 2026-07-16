@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Meow",
+  "productName": "Matcha for Milky",
   "version": "../package.json",
-  "identifier": "com.akirami.matcha",
+  "identifier": "com.akirami.mfm",
   "build": {
     "beforeDevCommand": "bun dev:web",
     "devUrl": "http://localhost:1420",
@@ -21,8 +21,8 @@
     "active": true,
     "category": "DeveloperTool",
     "copyright": "Copyright © 2023 Akirami",
-    "shortDescription": "Meow Fraq 插件测试工具",
-    "longDescription": "Meow 是一个支持 Milky 的 Fraq 插件测试工具",
+    "shortDescription": "Matcha for Milky Fraq 插件测试工具",
+    "longDescription": "Matcha for Milky 是一个支持 Milky 的 Fraq 插件测试工具",
     "targets": "all",
     "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
     "licenseFile": "../LICENSE",

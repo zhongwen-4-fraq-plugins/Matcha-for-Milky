@@ -18,7 +18,7 @@ async function importSettings() {
     title: '选择配置文件',
     filters: [
       {
-        name: 'Meow 配置文件',
+        name: 'Matcha for Milky 配置文件',
         extensions: ['mcs'],
       },
     ],
@@ -37,10 +37,10 @@ async function importSettings() {
 async function exportSettings() {
   const path = await save({
     title: '导出配置文件',
-    defaultPath: 'meow-settings.mcs',
+    defaultPath: 'mfm-settings.mcs',
     filters: [
       {
-        name: 'Meow 配置文件',
+        name: 'Matcha for Milky 配置文件',
         extensions: ['mcs'],
       },
     ],

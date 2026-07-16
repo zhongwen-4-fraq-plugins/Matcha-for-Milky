@@ -1,3 +1,3 @@
 <template>
-  <img src="/meow.webp" alt="Meow logo">
+  <img src="/mfm.webp" alt="Matcha for Milky logo">
 </template>

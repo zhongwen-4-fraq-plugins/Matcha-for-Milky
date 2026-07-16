@@ -1,6 +1,6 @@
-# Meow Fraq plugin tester
+# Matcha for Milky Fraq plugin tester
 
-State: Meow with Milky 1.2 builds as a native Windows release.
+State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
@@ -13,20 +13,20 @@ State: Meow with Milky 1.2 builds as a native Windows release.
 - Imported upstream commit `ce38c344fa1a715f3a8496d9b793c4c1f75e7a78` with its AGPL-3.0 license, attribution, documentation, and assets intact.
 - Verified the imported upstream application with `bun run build:web`.
 - Added a Rust Milky server for `POST /api/:api` and WebSocket/SSE `/event`, including Bearer authentication and request timeouts.
-- Added a Tauri request bridge so Milky APIs reuse Meow's Vue/Dexie users, groups, messages, and behavior model.
+- Added a Tauri request bridge so Milky APIs reuse Matcha for Milky's Vue/Dexie users, groups, messages, and behavior model.
 - Added Milky message, entity, event, and action modules plus connection settings for `127.0.0.1:30001`.
-- Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Meow's minimum desktop width.
+- Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Matcha for Milky's minimum desktop width.
 - Implemented the second sidebar action as a runtime log viewer with Tauri log capture, search, level filtering, automatic scrolling, and clearing.
 - Frontend type checking, JavaScript linting, and the native Rust/Tauri release build pass.
 - Installed Visual Studio Build Tools 2022 with the C++ workload and Windows SDK 10.0.26100.0.
-- Renamed the application, package, protocol implementation identity, and standalone release from Matcha to Meow.
+- Renamed the application to Matcha for Milky and standardized internal shorthand as `mfm`.
 - NSIS bundling reached the installer stage but its optional GitHub utility download timed out; the standalone EXE is unaffected.
 - Milky connection status is driven by active WebSocket/SSE client count instead of local server startup.
 - Milky outgoing `forward` segments are parsed recursively and displayed as expandable forwarded messages, so plugin help responses are no longer discarded.
 - Expanded the README protocol adapter matrix against Milky 1.2.2, covering all 64 APIs and 20 event types with implementation checkboxes.
 - Implemented all 64 Milky 1.2.2 API routes, split missing handlers by system, friend, group, notification, and file responsibilities, with Dexie v5 persistence for new simulated entities.
 - Implemented all 20 Milky 1.2.2 events, split conversion by system, message, friend, and group responsibilities; related API and UI operations now emit their matching simulated events.
-- Removed the OneBot 11/12 adapters, their WebSocket client drivers, protocol settings, documentation matrices, and unused dependencies; Meow now exposes Milky only.
+- Removed the OneBot 11/12 adapters, their WebSocket client drivers, protocol settings, documentation matrices, and unused dependencies; Matcha for Milky now exposes Milky only.
 - Added categorized runtime logs for Milky service and client connections, debug-level API calls and responses, and received event delivery.
 - Formatted runtime log rows as `time | LOG LEVEL | message` with aligned fields and standard uppercase level names.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
@@ -47,7 +47,7 @@ State: Meow with Milky 1.2 builds as a native Windows release.
 ## Read now
 
 - flightdeck/knowledge/milky/protocol.md
-- flightdeck/knowledge/milky/meow-bridge.md
+- flightdeck/knowledge/milky/mfm-bridge.md
 - flightdeck/knowledge/fraq/framework.md
 - flightdeck/knowledge/tooling/windows-tauri-build.md
 

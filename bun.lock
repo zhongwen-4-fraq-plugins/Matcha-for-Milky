@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "meow",
+      "name": "mfm",
       "dependencies": {
         "@formkit/auto-animate": "^0.8.2",
         "@highlightjs/vue-plugin": "^2.1.2",

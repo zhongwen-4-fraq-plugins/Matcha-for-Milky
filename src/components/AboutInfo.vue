@@ -10,7 +10,7 @@ const version = getVersion()
 <template>
   <div class="relative flex flex-col items-center justify-between bg-background py-6">
     <AppLogo class="size-24" />
-    <strong class="text-3xl text-foreground font-semibold">Meow</strong>
+    <strong class="text-3xl text-foreground font-semibold">Matcha for Milky</strong>
     <div
       class="text-sm text-foreground"
       :class="{ 'cursor-pointer': version.link }"

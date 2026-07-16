@@ -11,7 +11,7 @@ export class Milky extends Adapter {
 
   async onShutdown(): Promise<void> {
     if (this.state.bot) {
-      await this.send(createBotOfflineEvent(this.state.bot.id, 'Meow 协议端已停止'))
+      await this.send(createBotOfflineEvent(this.state.bot.id, 'Matcha for Milky 协议端已停止'))
     }
   }
 }

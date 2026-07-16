@@ -2412,7 +2412,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "meow"
+name = "mfm"
 version = "0.0.0"
 dependencies = [
  "anyhow",

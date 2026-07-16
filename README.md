@@ -1,9 +1,9 @@
 <p align="center">
   <a href="https://github.com/zhongwen-4-fraq-plugins/meow">
     <br />
-    <img src="./public/meow.webp" alt="Meow Logo" width="200" />
+    <img src="./public/mfm.webp" alt="Matcha for Milky Logo" width="200" />
     <br />
-    <strong>Meow</strong>
+    <strong>Matcha for Milky</strong>
   </a>
   <br />
   Fraq 插件测试工具
@@ -33,23 +33,23 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./docs/preview-dark.webp">
     <source media="(prefers-color-scheme: light)" srcset="./docs/preview-light.webp">
-    <img src="./docs/preview-light.webp" alt="Meow - Preview" width="100%" />
+    <img src="./docs/preview-light.webp" alt="Matcha for Milky - Preview" width="100%" />
   </picture>
 </p>
 
-Meow 是一个面向 Fraq 插件开发的桌面测试工具，能够模拟好友、群聊、消息、文件和通知，并通过 Milky 与插件交互。
+Matcha for Milky 是一个面向 Fraq 插件开发的桌面测试工具，能够模拟好友、群聊、消息、文件和通知，并通过 Milky 与插件交互。
 
 它旨在降低开发者的调试与测试的负担，从而更有效率的专注于功能开发。
 
-> Meow 基于 [Matcha 0.4.8](https://github.com/A-kirami/matcha) 开发，并保留其 AGPL-3.0 许可证和原作者归属。
+> Matcha for Milky 基于 [Matcha 0.4.8](https://github.com/A-kirami/matcha) 开发，并保留其 AGPL-3.0 许可证和原作者归属。
 
 ## Fraq 与 Milky
 
-Meow 内置 [Milky](https://milky.ntqqrev.org/) 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
+Matcha for Milky 内置 [Milky](https://milky.ntqqrev.org/) 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
 
-在设置中选择 `Milky 1.2` 后，Meow 默认监听 `127.0.0.1:30001`，提供以下接口：
+在设置中选择 `Milky 1.2` 后，Matcha for Milky 默认监听 `127.0.0.1:30001`，提供以下接口：
 
-- `POST /api/{endpoint}`：调用 Meow 中的好友、群聊与消息行为。
+- `POST /api/{endpoint}`：调用 Matcha for Milky 中的好友、群聊与消息行为。
 - `GET /event`：通过 WebSocket 或 SSE 接收模拟事件。
 - `Authorization: Bearer <token>`：设置访问令牌后启用鉴权。
 
@@ -111,7 +111,7 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 - <details>
   <summary>Milky 1.2 标准</summary>
 
-  当前支持情况基于 Milky 1.2.2。勾选表示 Meow 已提供对应的模拟行为。
+  当前支持情况基于 Milky 1.2.2。勾选表示 Matcha for Milky 已提供对应的模拟行为。
 
   ### 动作
 
@@ -214,7 +214,7 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 
 ### 🍻 鸣谢
 
-Meow 基于 Matcha 开发，感谢原项目的所有贡献者：
+Matcha for Milky 基于 Matcha 开发，感谢原项目的所有贡献者：
 
 <a href="https://github.com/A-kirami/matcha/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=A-kirami/matcha" />

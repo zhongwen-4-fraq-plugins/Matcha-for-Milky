@@ -1,4 +1,4 @@
-# Briefing — Meow
+# Briefing — Matcha for Milky
 
 ## Conventions
 
@@ -7,6 +7,7 @@
 - Commit message 使用 [gitmoji](https://gitmoji.js.org/) 表情开头，后接准确的改动说明。
 - 代码应尽量简洁、直观，方便新手理解。
 - 代码应按功能拆分到不同文件，保持各文件职责清晰。
+- 面向用户的项目名使用 `Matcha for Milky`；代码和文件中需要简写时使用 `mfm`。
 
 ## Subscriptions
 
