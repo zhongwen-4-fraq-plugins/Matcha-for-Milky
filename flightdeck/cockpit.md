@@ -1,15 +1,16 @@
 # Cockpit — fraq-debug
 
-Focus: 构建 Fraq 插件测试器。
+Focus: 基于 Matcha 构建 Fraq 插件测试器。
 
 ## In flight
 
-- `work/plugin-tester/`：Rust Milky 模拟服务与 Vue/Tauri 测试工作台。
+- `work/plugin-tester/`：Matcha Vue/Tauri 模拟聊天工具与 Milky 协议适配。
 
 ## Next
 
-- 安装 Windows C++ Build Tools 与 SDK，完成 Rust/Tauri 原生验证。
+- 为 Matcha 添加 Milky 协议适配。
+- 安装 Windows C++ Build Tools 与 SDK，完成 Tauri 原生验证。
 
 ## Open questions
 
-- 通用框架完成后，优先加入哪些插件专用测试场景？
+- Milky 接通后，优先加入哪些 Fraq 插件专用测试场景？

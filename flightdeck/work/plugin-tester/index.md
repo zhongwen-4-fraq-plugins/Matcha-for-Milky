@@ -1,15 +1,17 @@
-# Fraq plugin tester
+# Matcha-based Fraq plugin tester
 
-State: The first runnable framework is implemented; native Rust verification is blocked by missing Windows C++ build tools.
+State: Upstream Matcha 0.4.8 is the runnable simulation foundation; Milky adaptation is next.
 
 ## Next
 
-- Install Visual Studio Build Tools with the Desktop development with C++ workload and a Windows SDK.
-- Run `cargo test --manifest-path src-tauri/Cargo.toml` and `pnpm tauri dev`.
-- Choose the first plugin-specific API stubs and test scenarios.
+- Add a Milky protocol adapter without mixing protocol-specific behavior into Matcha's shared chat model.
+- Install Visual Studio Build Tools and a Windows SDK before native Tauri verification.
 
 ## Progress
 
+- Chose upstream Matcha 0.4.8 as the maintained base instead of continuing the partial custom reimplementation.
+- Imported upstream commit `ce38c344fa1a715f3a8496d9b793c4c1f75e7a78` with its AGPL-3.0 license, attribution, documentation, and assets intact.
+- Verified the imported upstream application with `bun run build:web`.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -38,4 +40,4 @@ State: The first runnable framework is implemented; native Rust verification is 
 
 ## Open questions
 
-- Which plugin-specific scenarios should be added after the general test framework is usable?
+- Which Fraq plugin-specific scenarios should be added after Milky transport is usable?
