@@ -163,8 +163,10 @@ async fn handle_event(State(state): State<ServerState>, request: Request) -> Res
             Err(error) => return error.into_response(),
         };
         let milky = state.milky.clone();
+        let app_handle = state.app_handle.clone();
         return websocket
             .on_upgrade(move |socket| async move {
+                let _client = milky.connect_client(app_handle);
                 let (mut sender, mut receiver) = socket.split();
                 let mut events = milky.subscribe();
                 loop {
@@ -187,8 +189,11 @@ async fn handle_event(State(state): State<ServerState>, request: Request) -> Res
             })
             .into_response();
     }
-    let mut receiver = state.milky.subscribe();
+    let milky = state.milky.clone();
+    let mut receiver = milky.subscribe();
+    let app_handle = state.app_handle.clone();
     let events = stream! {
+        let _client = milky.connect_client(app_handle);
         loop {
             match receiver.recv().await {
                 Ok(payload) => yield Ok::<Event, Infallible>(Event::default().data(payload)),

@@ -14,7 +14,7 @@ interface MilkyActionRequest extends ActionRequest {
 }
 
 export class milky extends Driver {
-  private unlisten?: UnlistenFn
+  private unlisten: UnlistenFn[] = []
 
   constructor(public adapter: Adapter) {
     super(adapter)
@@ -26,23 +26,28 @@ export class milky extends Driver {
     if (!isTauri()) {
       return
     }
-    this.unlisten = await listen<MilkyActionRequest>('milky-action', async ({ payload }) => {
-      let response: ActionResponse
-      try {
-        response = await this.adapter.actionHandle(payload)
-      } catch (error) {
-        response = {
-          status: 'failed',
-          retcode: -500,
-          // eslint-disable-next-line unicorn/no-null
-          data: null,
-          message: String(error),
-        } as ActionResponse
-      }
-      await invoke('resolve_milky_action', { requestId: payload.requestId, response }).catch((error) => {
-        void logger.debug(`Milky API 请求已结束: ${String(error)}`)
-      })
-    })
+    this.unlisten = await Promise.all([
+      listen<MilkyActionRequest>('milky-action', async ({ payload }) => {
+        let response: ActionResponse
+        try {
+          response = await this.adapter.actionHandle(payload)
+        } catch (error) {
+          response = {
+            status: 'failed',
+            retcode: -500,
+            // eslint-disable-next-line unicorn/no-null
+            data: null,
+            message: String(error),
+          } as ActionResponse
+        }
+        await invoke('resolve_milky_action', { requestId: payload.requestId, response }).catch((error) => {
+          void logger.debug(`Milky API 请求已结束: ${String(error)}`)
+        })
+      }),
+      listen<number>('milky-client-count', ({ payload }) => {
+        this.adapter.state.isConnected = payload > 0
+      }),
+    ])
     try {
       await invoke('start_milky_server', {
         host: this.adapter.config.host,
@@ -50,21 +55,25 @@ export class milky extends Driver {
         accessToken: this.adapter.config.accessToken ?? '',
         timeout: this.adapter.config.timeout,
       })
-      this.adapter.state.isConnected = true
+      this.adapter.state.isConnected = false
       void logger.info(`Milky 服务已监听 http://${this.adapter.config.host}:${this.adapter.config.port}`)
       toast.success('Milky 服务已启动', {
         description: `${this.adapter.config.host}:${this.adapter.config.port}`,
       })
     } catch (error) {
-      this.unlisten?.()
-      this.unlisten = undefined
+      for (const unlisten of this.unlisten) {
+        unlisten()
+      }
+      this.unlisten = []
       throw error
     }
   }
 
   async stop(): Promise<void> {
-    this.unlisten?.()
-    this.unlisten = undefined
+    for (const unlisten of this.unlisten) {
+      unlisten()
+    }
+    this.unlisten = []
     if (!isTauri()) {
       this.adapter.state.isConnected = false
       return

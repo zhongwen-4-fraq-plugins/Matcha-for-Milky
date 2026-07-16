@@ -2,11 +2,12 @@ use std::{
     collections::HashMap,
     sync::{
         atomic::{AtomicU64, Ordering},
-        Arc,
+        Arc, Mutex as StdMutex,
     },
 };
 
 use serde_json::Value;
+use tauri::Emitter;
 use tokio::{
     sync::{broadcast, oneshot, Mutex},
     task::JoinHandle,
@@ -17,12 +18,29 @@ pub struct RunningServer {
     pub task: JoinHandle<()>,
 }
 
+pub struct ClientGuard {
+    app_handle: tauri::AppHandle,
+    client_count: Arc<StdMutex<usize>>,
+}
+
+impl Drop for ClientGuard {
+    fn drop(&mut self) {
+        let mut client_count = self
+            .client_count
+            .lock()
+            .unwrap_or_else(|error| error.into_inner());
+        *client_count = client_count.saturating_sub(1);
+        let _ = self.app_handle.emit("milky-client-count", *client_count);
+    }
+}
+
 #[derive(Clone)]
 pub struct MilkyState {
     server: Arc<Mutex<Option<RunningServer>>>,
     events: broadcast::Sender<String>,
     pending_actions: Arc<Mutex<HashMap<u64, oneshot::Sender<Value>>>>,
     next_request_id: Arc<AtomicU64>,
+    client_count: Arc<StdMutex<usize>>,
 }
 
 impl MilkyState {
@@ -32,6 +50,7 @@ impl MilkyState {
             events: broadcast::channel(128).0,
             pending_actions: Arc::new(Mutex::new(HashMap::new())),
             next_request_id: Arc::new(AtomicU64::new(1)),
+            client_count: Arc::new(StdMutex::new(0)),
         }
     }
 
@@ -51,6 +70,20 @@ impl MilkyState {
         let payload = serde_json::to_string(&event).map_err(|error| error.to_string())?;
         let _ = self.events.send(payload);
         Ok(())
+    }
+
+    pub fn connect_client(&self, app_handle: tauri::AppHandle) -> ClientGuard {
+        let mut client_count = self
+            .client_count
+            .lock()
+            .unwrap_or_else(|error| error.into_inner());
+        *client_count += 1;
+        let _ = app_handle.emit("milky-client-count", *client_count);
+        drop(client_count);
+        ClientGuard {
+            app_handle,
+            client_count: Arc::clone(&self.client_count),
+        }
     }
 
     pub async fn create_action(&self) -> (u64, oneshot::Receiver<Value>) {

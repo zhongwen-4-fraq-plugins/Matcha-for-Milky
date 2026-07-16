@@ -21,6 +21,7 @@ State: Matcha 0.4.8 with Milky 1.2 builds and launches as a native Windows relea
 - Installed Visual Studio Build Tools 2022 with the C++ workload and Windows SDK 10.0.26100.0.
 - Copied the standalone release to `C:\Users\admin\Downloads\fraq-debug-matcha.exe` and verified that its `Matcha` window starts and remains responsive.
 - NSIS bundling reached the installer stage but its optional GitHub utility download timed out; the standalone EXE is unaffected.
+- Milky connection status is driven by active WebSocket/SSE client count instead of local server startup.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
