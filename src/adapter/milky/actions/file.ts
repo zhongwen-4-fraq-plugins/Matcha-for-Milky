@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { Behav } from '~/adapter/behav'
 import { createFileCache, getFile, GetType } from '~/utils/file'
 
 import { failure, response } from '../typed'
@@ -28,6 +29,12 @@ export const fileActions: ActionStrategy = {
     }
     const file = await createFileCache(file_uri, undefined, file_name)
     await db.privateFiles.put({ userId: user_id.toString(), fileId: file.id })
+    const cachedFile = await db.files.get(file.id)
+    await new Behav().uploadPrivateFile(user_id.toString(), {
+      id: file.id,
+      name: file_name,
+      size: cachedFile?.size ?? 0,
+    })
     return response({ file_id: file.id })
   },
   upload_group_file: async ({
@@ -56,6 +63,12 @@ export const fileActions: ActionStrategy = {
       uploadedTime: getTimestamp(),
       uploaderId: useStateStore().bot!.id,
       downloadedTimes: 0,
+    })
+    const cachedFile = await db.files.get(file.id)
+    await new Behav().uploadGroupFile(groupId, {
+      id: file.id,
+      name: file_name,
+      size: cachedFile?.size ?? 0,
     })
     return response({ file_id: file.id })
   },

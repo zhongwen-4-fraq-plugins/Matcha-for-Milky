@@ -144,7 +144,8 @@ export const actionStrategy: ActionStrategy = {
   mark_message_as_read: () => response(),
   send_friend_nudge: async ({ user_id, is_self }: { user_id: number, is_self: boolean }) => {
     const behav = new Behav()
-    await behav.pokeUser(behav.state.bot!.id, is_self ? behav.state.bot!.id : user_id.toString())
+    const userId = user_id.toString()
+    await behav.pokeUser(behav.state.bot!.id, is_self ? behav.state.bot!.id : userId, undefined, userId)
     return response()
   },
   send_group_nudge: async ({ group_id, user_id }: { group_id: number, user_id: number }) => {
@@ -212,5 +213,4 @@ export const actionStrategy: ActionStrategy = {
     return response()
   },
   send_profile_like: () => response(),
-  send_group_message_reaction: () => response(),
 }

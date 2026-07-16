@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { Behav } from '~/adapter/behav'
 import { createFileCache, getFile, GetType } from '~/utils/file'
 
 import { getFriend, getGroup } from '../entities'
@@ -23,12 +24,8 @@ export const systemActions: ActionStrategy = {
       groups: pins.filter(pin => pin?.type === 'group').map(pin => pin.value),
     })
   },
-  set_peer_pin: ({ peer_id, is_pinned = true }: { peer_id: number, is_pinned?: boolean }) => {
-    const state = useStateStore()
-    const peerId = peer_id.toString()
-    state.pinnedOrder = is_pinned
-      ? [...new Set([...state.pinnedOrder, peerId])]
-      : state.pinnedOrder.filter(id => id !== peerId)
+  set_peer_pin: async ({ peer_id, is_pinned = true }: { peer_id: number, is_pinned?: boolean }) => {
+    await new Behav().setPeerPin(peer_id.toString(), is_pinned)
     return response()
   },
   set_avatar: async ({ uri }: { uri: string }) => {

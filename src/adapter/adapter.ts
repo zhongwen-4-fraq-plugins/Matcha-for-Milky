@@ -47,7 +47,11 @@ export abstract class Adapter {
   }
 
   async shutdown(): Promise<void> {
-    await this.driver?.stop()
+    if (!this.driver) {
+      return
+    }
+    await this.onShutdown()
+    await this.driver.stop()
     this.driver = undefined
   }
 

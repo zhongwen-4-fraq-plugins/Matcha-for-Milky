@@ -11,8 +11,10 @@ RECHECK WHEN: when Tauri event semantics, Milky transport requirements, or Match
 2. Rust accepts `POST /api/:api`, verifies authentication and JSON content, then emits the request with a numeric request ID.
 3. `src/adapter/milky/action.ts` aggregates domain handlers from `src/adapter/milky/actions/`, which execute APIs against Matcha's Dexie data and `Behav` operations.
 4. Vue resolves the pending Rust request through `resolve_milky_action`.
-5. Matcha scenes become Milky events in `src/adapter/milky/event.ts`; the driver broadcasts them to WebSocket and SSE clients.
+5. Matcha scenes become Milky events through the strategies in `src/adapter/milky/events/`; `src/adapter/milky/event.ts` combines them and the driver broadcasts the result to WebSocket and SSE clients.
 
 Rust owns sockets and pending request channels. Vue owns users, groups, messages, API behavior, and protocol conversion. Keep this ownership split when adding APIs.
 
 Milky 1.2.2 API state that is not part of upstream Matcha uses Dexie v5 tables for announcements, essence messages, private files, group files, and group folders. Forwarded-message contents remain process-local because their `forward_id` only needs to live for the active simulated session.
+
+Actions that have a matching Milky event must create a scene through `Behav` after their state change. This keeps the chat timeline, event preview, and WebSocket/SSE payload consistent. `bot_offline` is emitted directly before the Milky driver stops because the transport must still be available for delivery.

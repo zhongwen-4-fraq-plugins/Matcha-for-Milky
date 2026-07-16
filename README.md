@@ -203,26 +203,26 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 
   ### 事件
 
-  - [ ] 机器人离线事件（bot_offline）
+  - [x] 机器人离线事件（bot_offline）
   - [x] 消息接收事件（message_receive）
   - [x] 消息撤回事件（message_recall）
-  - [ ] 会话置顶变更事件（peer_pin_change）
+  - [x] 会话置顶变更事件（peer_pin_change）
   - [x] 好友请求事件（friend_request）
   - [x] 入群请求事件（group_join_request）
-  - [ ] 群成员邀请他人入群请求事件（group_invited_join_request）
+  - [x] 群成员邀请他人入群请求事件（group_invited_join_request）
   - [x] 他人邀请自身入群事件（group_invitation）
   - [x] 好友戳一戳事件（friend_nudge）
-  - [ ] 好友文件上传事件（friend_file_upload）
+  - [x] 好友文件上传事件（friend_file_upload）
   - [x] 群管理员变更事件（group_admin_change）
-  - [ ] 群精华消息变更事件（group_essence_message_change）
+  - [x] 群精华消息变更事件（group_essence_message_change）
   - [x] 群成员增加事件（group_member_increase）
   - [x] 群成员减少事件（group_member_decrease）
   - [x] 群名称变更事件（group_name_change）
-  - [ ] 群消息表情回应事件（group_message_reaction）
+  - [x] 群消息表情回应事件（group_message_reaction）
   - [x] 群禁言事件（group_mute）
   - [x] 群全体禁言事件（group_whole_mute）
   - [x] 群戳一戳事件（group_nudge）
-  - [ ] 群文件上传事件（group_file_upload）
+  - [x] 群文件上传事件（group_file_upload）
   </details>
 
 - <details>

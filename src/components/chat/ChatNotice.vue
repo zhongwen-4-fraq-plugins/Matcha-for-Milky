@@ -15,6 +15,9 @@ import type {
   GroupEssenceNoticeScene,
   GroupHongbaoLuckyNoticeScene,
   GroupWholeBanNoticeScene,
+  BotOfflineNoticeScene,
+  PeerPinChangeNoticeScene,
+  GroupMessageReactionNoticeScene,
 } from '~/adapter/scene'
 import type { Notice } from '~/stores/chat'
 
@@ -33,6 +36,8 @@ interface Context {
 }
 
 const noticeStrategy = {
+  bot_offline: (scene: BotOfflineNoticeScene) => `机器人已离线：${scene.reason}`,
+  peer_pin_change: (scene: PeerPinChangeNoticeScene) => scene.is_pinned ? '已置顶会话' : '已取消置顶会话',
   friend_increase: () => '{sender}已经和{target}成为好友，现在可以开始聊天了',
   friend_decrease: () => '{sender}和{target}不再是好友了，友谊的小船说翻就翻',
   private_message_delete: () => '{sender}撤回了一条消息',
@@ -84,7 +89,11 @@ const noticeStrategy = {
   },
   group_essence: (scene: GroupEssenceNoticeScene, context: Context) => {
     context.target = scene.user_id
-    return '{target}的消息被设为了精华消息'
+    return `{target}的消息被${scene.sub_type === 'add' ? '设为' : '移出'}了精华消息`
+  },
+  group_message_reaction: (scene: GroupMessageReactionNoticeScene, context: Context) => {
+    context.target = scene.user_id
+    return `{target}${scene.is_add ? '添加' : '取消'}了消息回应 ${scene.face_id}`
   },
   group_hongbao_lucky: (scene: GroupHongbaoLuckyNoticeScene, context: Context) => {
     context.target = scene.user_id

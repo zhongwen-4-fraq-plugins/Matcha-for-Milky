@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { Behav } from '~/adapter/behav'
 import { createFileCache } from '~/utils/file'
 
 import { MessageHandler } from '../message'
@@ -134,6 +135,28 @@ export const groupActions: ActionStrategy = {
           operationTime: getTimestamp(),
         })
       : db.groupEssences.delete([groupId, messageId]))
+    await new Behav().setGroupEssence(groupId, message_seq, chat.scene.user_id, is_set)
+    return response()
+  },
+  send_group_message_reaction: async ({
+    group_id,
+    message_seq,
+    reaction,
+    reaction_type,
+    is_add,
+  }: {
+    group_id: number
+    message_seq: number
+    reaction: string
+    reaction_type: 'face' | 'emoji'
+    is_add: boolean
+  }) => {
+    const groupId = group_id.toString()
+    const chat = useChatStore().getMessage(message_seq.toString())
+    if (!chat || chat.scene.detail_type !== 'group' || chat.scene.group_id !== groupId) {
+      return failure(-404, `群消息 ${message_seq} 不存在`)
+    }
+    await new Behav().reactGroupMessage(groupId, message_seq, reaction, reaction_type, is_add)
     return response()
   },
 }

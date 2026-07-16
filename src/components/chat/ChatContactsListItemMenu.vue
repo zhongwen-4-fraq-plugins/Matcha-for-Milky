@@ -2,6 +2,8 @@
 import { Pin, PinOff, Pencil, Trash2 } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
+import { Behav } from '~/adapter/behav'
+
 const { contact, isPinned } = $defineProps<{
   contact: Contact
   isPinned: boolean
@@ -9,8 +11,8 @@ const { contact, isPinned } = $defineProps<{
 
 const state = useStateStore()
 
-function handlePin() {
-  state.pinnedOrder = isPinned ? state.pinnedOrder.filter(id => id !== contact.id) : [...state.pinnedOrder, contact.id]
+async function handlePin() {
+  await new Behav().setPeerPin(contact.id, !isPinned)
 }
 
 const deleteOpen = $ref(false)

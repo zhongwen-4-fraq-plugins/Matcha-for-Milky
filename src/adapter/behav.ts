@@ -22,6 +22,12 @@ import type {
   PrivateMessageDeleteNoticeScene,
   GroupPokeNoticeScene,
   FriendPokeNoticeScene,
+  PeerPinChangeNoticeScene,
+  OfflineFileNoticeScene,
+  GroupEssenceNoticeScene,
+  GroupMessageReactionNoticeScene,
+  GroupFileUploadNoticeScene,
+  SceneFile,
 } from './scene'
 
 export class Behav {
@@ -52,6 +58,96 @@ export class Behav {
       self_id: this.state.bot!.id,
       type,
     }
+  }
+
+  /** 设置会话置顶 */
+  async setPeerPin(peerId: string, isPinned: boolean): Promise<PeerPinChangeNoticeScene> {
+    const messageScene = await db.groups.get(peerId)
+      ? 'group'
+      : (await db.friends.get([this.state.bot!.id, peerId]) ? 'friend' : 'temp')
+    this.state.pinnedOrder = isPinned
+      ? [...new Set([...this.state.pinnedOrder, peerId])]
+      : this.state.pinnedOrder.filter(id => id !== peerId)
+    return await this.chat.appendScene({
+      ...this.createScene('notice'),
+      detail_type: 'peer_pin_change',
+      message_scene: messageScene,
+      peer_id: peerId,
+      is_pinned: isPinned,
+      chat_type: messageScene === 'group' ? 'group' : 'private',
+      sender_id: this.state.bot!.id,
+      receiver_id: peerId,
+    })
+  }
+
+  /** 上传好友文件 */
+  async uploadPrivateFile(userId: string, file: SceneFile): Promise<OfflineFileNoticeScene> {
+    return await this.chat.appendScene({
+      ...this.createScene('notice'),
+      detail_type: 'offline_file',
+      user_id: userId,
+      file,
+      chat_type: 'private',
+      sender_id: this.state.bot!.id,
+      receiver_id: userId,
+    })
+  }
+
+  /** 上传群文件 */
+  async uploadGroupFile(groupId: string, file: SceneFile): Promise<GroupFileUploadNoticeScene> {
+    return await this.chat.appendScene({
+      ...this.createScene('notice'),
+      detail_type: 'group_file_upload',
+      group_id: groupId,
+      user_id: this.state.bot!.id,
+      file,
+      chat_type: 'group',
+      sender_id: this.state.bot!.id,
+      receiver_id: groupId,
+    })
+  }
+
+  /** 设置群精华消息 */
+  async setGroupEssence(
+    groupId: string,
+    messageId: number,
+    userId: string,
+    isSet: boolean,
+  ): Promise<GroupEssenceNoticeScene> {
+    return await this.chat.appendScene({
+      ...this.createScene('notice'),
+      detail_type: 'group_essence',
+      sub_type: isSet ? 'add' : 'remove',
+      group_id: groupId,
+      message_id: messageId,
+      user_id: userId,
+      chat_type: 'group',
+      sender_id: this.state.bot!.id,
+      receiver_id: groupId,
+    })
+  }
+
+  /** 回应群消息 */
+  async reactGroupMessage(
+    groupId: string,
+    messageId: number,
+    faceId: string,
+    reactionType: 'face' | 'emoji',
+    isAdd: boolean,
+  ): Promise<GroupMessageReactionNoticeScene> {
+    return await this.chat.appendScene({
+      ...this.createScene('notice'),
+      detail_type: 'group_message_reaction',
+      group_id: groupId,
+      user_id: this.state.bot!.id,
+      message_id: messageId,
+      face_id: faceId,
+      reaction_type: reactionType,
+      is_add: isAdd,
+      chat_type: 'group',
+      sender_id: this.state.bot!.id,
+      receiver_id: groupId,
+    })
   }
 
   /** 发送私聊消息 */
@@ -143,6 +239,7 @@ export class Behav {
     messageChat.isRecall = true
     const { scene } = messageChat
     if (scene.detail_type === 'private') {
+      const peerId = scene.sender_id === scene.self_id ? scene.receiver_id : scene.sender_id
       return await this.chat.appendScene(
         {
           ...this.createScene('notice'),
@@ -151,7 +248,7 @@ export class Behav {
           user_id: scene.user_id,
           chat_type: 'private',
           sender_id: operatorId,
-          receiver_id: scene.user_id,
+          receiver_id: peerId,
         },
         messageChat.id,
       )
@@ -487,6 +584,7 @@ export class Behav {
     userId: string,
     targeId: string,
     groupId?: string,
+    peerId?: string,
   ): Promise<FriendPokeNoticeScene | GroupPokeNoticeScene> {
     const poke = {
       ...this.createScene('notice'),
@@ -506,7 +604,7 @@ export class Behav {
           ...poke,
           chat_type: 'private',
           sender_id: userId,
-          receiver_id: targeId,
+          receiver_id: peerId ?? targeId,
         } as FriendPokeNoticeScene))
   }
 

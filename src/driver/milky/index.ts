@@ -18,7 +18,7 @@ export class milky extends Driver {
 
   constructor(public adapter: Adapter) {
     super(adapter)
-    useEventListener('beforeunload', () => this.stop())
+    useEventListener('beforeunload', () => void this.adapter.shutdown())
   }
 
   async run(): Promise<void> {

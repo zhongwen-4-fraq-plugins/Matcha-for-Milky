@@ -79,6 +79,20 @@ interface NoticeScene extends Scene {
   type: 'notice'
 }
 
+/** 机器人离线 */
+export interface BotOfflineNoticeScene extends NoticeScene {
+  detail_type: 'bot_offline'
+  reason: string
+}
+
+/** 会话置顶变更 */
+export interface PeerPinChangeNoticeScene extends NoticeScene {
+  detail_type: 'peer_pin_change'
+  message_scene: 'friend' | 'group' | 'temp'
+  peer_id: string
+  is_pinned: boolean
+}
+
 interface PrivateNoticeScene extends NoticeScene {
   user_id: string
 }
@@ -108,14 +122,15 @@ export interface FriendPokeNoticeScene extends PrivateNoticeScene {
 /** 离线文件接收 */
 export interface OfflineFileNoticeScene extends PrivateNoticeScene {
   detail_type: 'offline_file'
-  file: File
+  file: SceneFile
 }
 
-interface File {
+export interface SceneFile {
   id: string
   name: string
   size: number
   url?: string
+  hash?: string
 }
 
 interface GroupNoticeScene extends NoticeScene {
@@ -217,6 +232,16 @@ export interface GroupEssenceNoticeScene extends GroupNoticeScene {
   user_id: string
 }
 
+/** 群消息表情回应 */
+export interface GroupMessageReactionNoticeScene extends GroupNoticeScene {
+  detail_type: 'group_message_reaction'
+  user_id: string
+  message_id: number
+  face_id: string
+  reaction_type: 'face' | 'emoji'
+  is_add: boolean
+}
+
 /** 群红包运气王 */
 export interface GroupHongbaoLuckyNoticeScene extends GroupNoticeScene {
   detail_type: 'group_hongbao_lucky'
@@ -227,11 +252,13 @@ export interface GroupHongbaoLuckyNoticeScene extends GroupNoticeScene {
 /** 群文件上传 */
 export interface GroupFileUploadNoticeScene extends GroupNoticeScene {
   detail_type: 'group_file_upload'
-  file: File
+  file: SceneFile
   user_id: string
 }
 
 export type NoticeScenes =
+  | BotOfflineNoticeScene
+  | PeerPinChangeNoticeScene
   | FriendIncreaseNoticeScene
   | FriendDecreaseNoticeScene
   | PrivateMessageDeleteNoticeScene
@@ -250,6 +277,7 @@ export type NoticeScenes =
   | GroupMemberTitleNoticeScene
   | GroupMemberHonorNoticeScene
   | GroupEssenceNoticeScene
+  | GroupMessageReactionNoticeScene
   | GroupHongbaoLuckyNoticeScene
   | GroupFileUploadNoticeScene
 
@@ -288,6 +316,8 @@ export type RequestScenes = AddFriendRequestScene | JoinGroupRequestScene | Grou
 export interface SceneMapping<T extends Message = Message> {
   'message.private': PrivateMessageScene<T>
   'message.group': GroupMessageScene<T>
+  'notice.bot_offline': BotOfflineNoticeScene
+  'notice.peer_pin_change': PeerPinChangeNoticeScene
   'notice.friend_increase': FriendIncreaseNoticeScene
   'notice.friend_decrease': FriendDecreaseNoticeScene
   'notice.private_message_delete': PrivateMessageDeleteNoticeScene
@@ -306,6 +336,7 @@ export interface SceneMapping<T extends Message = Message> {
   'notice.group_member_title': GroupMemberTitleNoticeScene
   'notice.group_member_honor': GroupMemberHonorNoticeScene
   'notice.group_essence': GroupEssenceNoticeScene
+  'notice.group_message_reaction': GroupMessageReactionNoticeScene
   'notice.group_hongbao_lucky': GroupHongbaoLuckyNoticeScene
   'notice.group_file_upload': GroupFileUploadNoticeScene
   'request.add_friend': AddFriendRequestScene
