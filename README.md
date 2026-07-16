@@ -145,61 +145,61 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
   - [x] 获取群信息（get_group_info）
   - [x] 获取群成员列表（get_group_member_list）
   - [x] 获取群成员信息（get_group_member_info）
-  - [ ] 获取置顶的好友和群列表（get_peer_pins）
-  - [x] 设置好友或群的置顶状态（set_peer_pin，仅返回成功）
-  - [ ] 设置 QQ 账号头像（set_avatar）
-  - [ ] 设置 QQ 账号昵称（set_nickname）
-  - [ ] 设置 QQ 账号个性签名（set_bio）
-  - [ ] 获取自定义表情 URL 列表（get_custom_face_url_list）
-  - [ ] 获取 Cookies（get_cookies）
-  - [ ] 获取 CSRF Token（get_csrf_token）
+  - [x] 获取置顶的好友和群列表（get_peer_pins）
+  - [x] 设置好友或群的置顶状态（set_peer_pin）
+  - [x] 设置 QQ 账号头像（set_avatar）
+  - [x] 设置 QQ 账号昵称（set_nickname）
+  - [x] 设置 QQ 账号个性签名（set_bio）
+  - [x] 获取自定义表情 URL 列表（get_custom_face_url_list）
+  - [x] 获取 Cookies（get_cookies）
+  - [x] 获取 CSRF Token（get_csrf_token）
   - [x] 发送私聊消息（send_private_message）
   - [x] 发送群聊消息（send_group_message）
   - [x] 撤回私聊消息（recall_private_message）
   - [x] 撤回群聊消息（recall_group_message）
   - [x] 获取消息（get_message）
   - [x] 获取历史消息列表（get_history_messages）
-  - [ ] 获取临时资源链接（get_resource_temp_url）
-  - [ ] 获取合并转发消息内容（get_forwarded_messages）
+  - [x] 获取临时资源链接（get_resource_temp_url）
+  - [x] 获取合并转发消息内容（get_forwarded_messages）
   - [x] 标记消息为已读（mark_message_as_read，仅返回成功）
   - [x] 发送好友戳一戳（send_friend_nudge）
   - [x] 发送名片点赞（send_profile_like，仅返回成功）
   - [x] 删除好友（delete_friend）
-  - [ ] 获取好友请求列表（get_friend_requests）
-  - [ ] 同意好友请求（accept_friend_request）
-  - [ ] 拒绝好友请求（reject_friend_request）
+  - [x] 获取好友请求列表（get_friend_requests）
+  - [x] 同意好友请求（accept_friend_request）
+  - [x] 拒绝好友请求（reject_friend_request）
   - [x] 设置群名称（set_group_name）
-  - [ ] 设置群头像（set_group_avatar）
+  - [x] 设置群头像（set_group_avatar）
   - [x] 设置群名片（set_group_member_card）
   - [x] 设置群成员专属头衔（set_group_member_special_title）
   - [x] 设置群管理员（set_group_member_admin）
   - [x] 设置群成员禁言（set_group_member_mute）
   - [x] 设置群全员禁言（set_group_whole_mute）
   - [x] 踢出群成员（kick_group_member）
-  - [ ] 获取群公告列表（get_group_announcements）
-  - [ ] 发送群公告（send_group_announcement）
-  - [ ] 删除群公告（delete_group_announcement）
-  - [ ] 获取群精华消息列表（get_group_essence_messages）
-  - [ ] 设置群精华消息（set_group_essence_message）
+  - [x] 获取群公告列表（get_group_announcements）
+  - [x] 发送群公告（send_group_announcement）
+  - [x] 删除群公告（delete_group_announcement）
+  - [x] 获取群精华消息列表（get_group_essence_messages）
+  - [x] 设置群精华消息（set_group_essence_message）
   - [x] 退出群（quit_group）
   - [x] 发送群消息表情回应（send_group_message_reaction，仅返回成功）
   - [x] 发送群戳一戳（send_group_nudge）
-  - [ ] 获取群通知列表（get_group_notifications）
-  - [ ] 同意入群或邀请他人入群请求（accept_group_request）
-  - [ ] 拒绝入群或邀请他人入群请求（reject_group_request）
-  - [ ] 同意他人邀请自身入群（accept_group_invitation）
-  - [ ] 拒绝他人邀请自身入群（reject_group_invitation）
-  - [ ] 上传私聊文件（upload_private_file）
-  - [ ] 上传群文件（upload_group_file）
-  - [ ] 获取私聊文件下载链接（get_private_file_download_url）
-  - [ ] 获取群文件下载链接（get_group_file_download_url）
-  - [ ] 获取群文件列表（get_group_files）
-  - [ ] 移动群文件（move_group_file）
-  - [ ] 重命名群文件（rename_group_file）
-  - [ ] 删除群文件（delete_group_file）
-  - [ ] 创建群文件夹（create_group_folder）
-  - [ ] 重命名群文件夹（rename_group_folder）
-  - [ ] 删除群文件夹（delete_group_folder）
+  - [x] 获取群通知列表（get_group_notifications）
+  - [x] 同意入群或邀请他人入群请求（accept_group_request）
+  - [x] 拒绝入群或邀请他人入群请求（reject_group_request）
+  - [x] 同意他人邀请自身入群（accept_group_invitation）
+  - [x] 拒绝他人邀请自身入群（reject_group_invitation）
+  - [x] 上传私聊文件（upload_private_file）
+  - [x] 上传群文件（upload_group_file）
+  - [x] 获取私聊文件下载链接（get_private_file_download_url）
+  - [x] 获取群文件下载链接（get_group_file_download_url）
+  - [x] 获取群文件列表（get_group_files）
+  - [x] 移动群文件（move_group_file）
+  - [x] 重命名群文件（rename_group_file）
+  - [x] 删除群文件（delete_group_file）
+  - [x] 创建群文件夹（create_group_folder）
+  - [x] 重命名群文件夹（rename_group_folder）
+  - [x] 删除群文件夹（delete_group_folder）
 
   ### 事件
 

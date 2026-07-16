@@ -4,6 +4,11 @@ import { getVersion } from '@tauri-apps/api/app'
 import { AdapterActionHandler } from '~/adapter/action'
 import { Behav } from '~/adapter/behav'
 
+import { fileActions } from './actions/file'
+import { friendActions } from './actions/friend'
+import { groupActions } from './actions/group'
+import { notificationActions } from './actions/notification'
+import { systemActions } from './actions/system'
 import { getFriend, getGroup, getGroupMember, getUserProfile } from './entities'
 import { EventHandler } from './event'
 import { MessageHandler } from './message'
@@ -30,7 +35,12 @@ export class ActionHandler extends AdapterActionHandler {
   }
 }
 
-const actionStrategy: ActionStrategy = {
+export const actionStrategy: ActionStrategy = {
+  ...systemActions,
+  ...friendActions,
+  ...groupActions,
+  ...notificationActions,
+  ...fileActions,
   get_login_info: () => {
     const bot = useStateStore().bot!
     return response({ uin: Number(bot.id), nickname: bot.name })
@@ -201,7 +211,6 @@ const actionStrategy: ActionStrategy = {
     await behav.removeGroupMember(group_id.toString(), behav.state.bot!.id, behav.state.bot!.id)
     return response()
   },
-  set_peer_pin: () => response(),
   send_profile_like: () => response(),
   send_group_message_reaction: () => response(),
 }

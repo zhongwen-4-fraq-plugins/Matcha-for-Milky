@@ -21,6 +21,8 @@ export interface User {
   loginDays: number
   /** 上次使用时间 */
   lastUseTime: number
+  /** 自定义头像 */
+  avatar?: string
 }
 
 export interface Friend {
@@ -51,6 +53,8 @@ export interface Group {
   wholeBanned: boolean
   /** 最后一条消息的时间 */
   lastMessageTime: number
+  /** 自定义头像 */
+  avatar?: string
 }
 
 export interface Member {
@@ -83,4 +87,44 @@ export interface CacheFile {
   size: number
   /** 文件数据的 SHA256 校验和 */
   sha256: string
+}
+
+export interface PrivateFile {
+  userId: string
+  fileId: string
+}
+
+export interface GroupFile {
+  groupId: string
+  fileId: string
+  parentFolderId: string
+  uploadedTime: number
+  uploaderId: string
+  downloadedTimes: number
+}
+
+export interface GroupFolder {
+  groupId: string
+  folderId: string
+  parentFolderId: string
+  name: string
+  createdTime: number
+  lastModifiedTime: number
+  creatorId: string
+}
+
+export interface GroupAnnouncement {
+  groupId: string
+  announcementId: string
+  userId: string
+  time: number
+  content: string
+  imageUrl?: string
+}
+
+export interface GroupEssence {
+  groupId: string
+  messageId: string
+  operatorId: string
+  operationTime: number
 }

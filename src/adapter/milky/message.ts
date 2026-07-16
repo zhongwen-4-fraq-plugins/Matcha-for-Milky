@@ -2,11 +2,14 @@
 import { createContent } from '~/adapter/content'
 import { AdapterMessageHandler } from '~/adapter/message'
 
+import { saveForwardedMessages } from './resources'
+
 import type {
   AudioContent,
   ContentMapping,
   FaceContent,
   FileContent,
+  ForwardContent,
   ImageContent,
   LinkContent,
   MentionContent,
@@ -32,19 +35,26 @@ type RecordMessage = MilkyMessage<'record', { uri?: string, resource_id?: string
 type VideoMessage = MilkyMessage<'video', { uri?: string, resource_id?: string, temp_url?: string, width?: number, height?: number, duration?: number }>
 type FileMessage = MilkyMessage<'file', { file_id: string, file_name?: string, file_size?: number }>
 type LightAppMessage = MilkyMessage<'light_app', { json_payload: string }>
-interface ForwardedMessage {
+interface OutgoingForwardedMessage {
   user_id: number
   sender_name: string
   time?: number
   segments: Messages[]
 }
-type ForwardMessage = MilkyMessage<'forward', {
-  messages: ForwardedMessage[]
+type OutgoingForwardMessage = MilkyMessage<'forward', {
+  messages: OutgoingForwardedMessage[]
   title?: string
   preview?: string[]
   summary?: string
   prompt?: string
 }>
+type IncomingForwardMessage = MilkyMessage<'forward', {
+  forward_id: string
+  title: string
+  preview: string[]
+  summary: string
+}>
+type ForwardMessage = OutgoingForwardMessage | IncomingForwardMessage
 
 interface MessageMapping {
   text: TextMessage
@@ -121,6 +131,23 @@ const messageBuildStrategy: MessageBuildStrategy<ContentMapping> = {
     })
   },
   link: (content: LinkContent) => createMessage('text', { text: content.data.url }),
+  forward: async (content: ForwardContent) => {
+    const forwardId = getUUID()
+    const messages = await Promise.all(content.data.content.map(async node => ({
+      message_seq: getMessageId(),
+      sender_name: node.data.user_name,
+      avatar_url: getAvatarUrl('user', node.data.user_id),
+      time: node.data.time,
+      segments: await new MessageHandler().build(node.data.message),
+    })))
+    saveForwardedMessages(forwardId, messages)
+    return createMessage('forward', {
+      forward_id: forwardId,
+      title: content.data.title ?? '合并转发',
+      preview: content.data.preview ?? messages.slice(0, 4).map(message => message.sender_name),
+      summary: content.data.summary ?? `共 ${messages.length} 条消息`,
+    })
+  },
 }
 
 const messageParseStrategy: MessageParseStrategy<MessageMapping> = {
@@ -159,18 +186,28 @@ const messageParseStrategy: MessageParseStrategy<MessageMapping> = {
   light_app: (message: LightAppMessage) => createContent('text', {
     text: message.data.json_payload,
   }),
-  forward: async (message: ForwardMessage) => createContent('forward', {
-    content: await Promise.all(message.data.messages.map(async node => createContent('node', {
-      user_id: node.user_id.toString(),
-      user_name: node.sender_name,
-      message: await new MessageHandler().parse(node.segments),
-      time: node.time ?? 0,
-    }))),
-    title: message.data.title,
-    preview: message.data.preview,
-    summary: message.data.summary,
-    prompt: message.data.prompt,
-  }),
+  forward: async (message: ForwardMessage) => {
+    if (!('messages' in message.data)) {
+      return createContent('forward', {
+        content: [],
+        title: message.data.title,
+        preview: message.data.preview,
+        summary: message.data.summary,
+      })
+    }
+    return createContent('forward', {
+      content: await Promise.all(message.data.messages.map(async node => createContent('node', {
+        user_id: node.user_id.toString(),
+        user_name: node.sender_name,
+        message: await new MessageHandler().parse(node.segments),
+        time: node.time ?? 0,
+      }))),
+      title: message.data.title,
+      preview: message.data.preview,
+      summary: message.data.summary,
+      prompt: message.data.prompt,
+    })
+  },
 }
 
 export class MessageHandler extends AdapterMessageHandler<Messages> {

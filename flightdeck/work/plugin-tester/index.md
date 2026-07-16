@@ -24,6 +24,7 @@ State: Matcha 0.4.8 with Milky 1.2 builds and launches as a native Windows relea
 - Milky connection status is driven by active WebSocket/SSE client count instead of local server startup.
 - Milky outgoing `forward` segments are parsed recursively and displayed as expandable forwarded messages, so plugin help responses are no longer discarded.
 - Expanded the README protocol adapter matrix against Milky 1.2.2, covering all 64 APIs and 20 event types with implementation checkboxes.
+- Implemented all 64 Milky 1.2.2 API routes, split missing handlers by system, friend, group, notification, and file responsibilities, with Dexie v5 persistence for new simulated entities.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

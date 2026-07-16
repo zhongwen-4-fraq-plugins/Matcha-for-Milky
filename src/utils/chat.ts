@@ -191,7 +191,7 @@ export async function getContact(type: Contact['type'], id: string): Promise<Con
     type,
     id,
     name: contactObj?.name ?? id,
-    avatar: getAvatarUrl(type, id),
+    avatar: contactObj?.avatar || getAvatarUrl(type, id),
   }
 }
 

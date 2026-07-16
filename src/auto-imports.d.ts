@@ -359,7 +359,7 @@ declare global {
   export type { FileSource } from './commands/index'
   import('./commands/index')
   // @ts-ignore
-  export type { User, Friend, Group, Member, CacheFile } from './database/model'
+  export type { User, Friend, Group, Member, CacheFile, PrivateFile, GroupFile, GroupFolder, GroupAnnouncement, GroupEssence } from './database/model'
   import('./database/model')
   // @ts-ignore
   export type { Message, Notice, Request, Chats } from './stores/chat'

@@ -46,13 +46,12 @@ export interface GroupMember extends StrKeyObject {
 }
 
 export function response<D>(data: D): MilkyResponse<D>
-export function response(): MilkyResponse<null>
-export function response<D>(data?: D): MilkyResponse<D | null> {
+export function response(): MilkyResponse<Record<string, never>>
+export function response<D>(data?: D): MilkyResponse<D | Record<string, never>> {
   return {
     status: 'ok',
     retcode: 0,
-    // eslint-disable-next-line unicorn/no-null
-    data: data ?? null,
+    data: data ?? {},
   }
 }
 

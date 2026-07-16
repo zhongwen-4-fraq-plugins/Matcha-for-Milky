@@ -1,5 +1,6 @@
 import { Dexie } from 'dexie'
 
+import type { GroupAnnouncement, GroupEssence, GroupFile, GroupFolder, PrivateFile } from './model'
 import type { Table } from 'dexie'
 
 class MatchaDB extends Dexie {
@@ -8,6 +9,11 @@ class MatchaDB extends Dexie {
   groups!: Table<Group, string>
   members!: Table<Member, [string, string]>
   files!: Table<CacheFile, string>
+  privateFiles!: Table<PrivateFile, [string, string]>
+  groupFiles!: Table<GroupFile, [string, string]>
+  groupFolders!: Table<GroupFolder, [string, string]>
+  groupAnnouncements!: Table<GroupAnnouncement, [string, string]>
+  groupEssences!: Table<GroupEssence, [string, string]>
 
   constructor() {
     super('matcha')
@@ -70,6 +76,13 @@ class MatchaDB extends Dexie {
       await groups.modify((group) => {
         group.lastMessageTime ??= 0
       })
+    })
+    this.version(5).stores({
+      privateFiles: '[userId+fileId], userId, fileId',
+      groupFiles: '[groupId+fileId], [groupId+parentFolderId], groupId, fileId',
+      groupFolders: '[groupId+folderId], [groupId+parentFolderId], groupId, folderId',
+      groupAnnouncements: '[groupId+announcementId], groupId, announcementId',
+      groupEssences: '[groupId+messageId], groupId, messageId',
     })
   }
 }
