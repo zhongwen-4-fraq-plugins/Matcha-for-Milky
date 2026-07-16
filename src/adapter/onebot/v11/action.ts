@@ -425,7 +425,7 @@ const actionStrategy: ActionStrategy = {
   > => {
     const appVersion = await getVersion()
     return response(0, {
-      app_name: 'matcha',
+      app_name: 'meow',
       app_version: appVersion,
       protocol_version: 'v11',
     })

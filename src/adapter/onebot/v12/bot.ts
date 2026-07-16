@@ -31,8 +31,8 @@ export class OneBotV12 extends Adapter {
     const tauriVersion = await getTauriVersion()
     const appVersion = await getVersion()
     return {
-      'User-Agent': `OneBot/12 (standard) Tauri/${tauriVersion} (${osType} ${osVersion}; ${platformName};${archName}) Matcha/${appVersion}`,
-      'Sec-WebSocket-Protocol': '12.matcha',
+      'User-Agent': `OneBot/12 (standard) Tauri/${tauriVersion} (${osType} ${osVersion}; ${platformName};${archName}) Meow/${appVersion}`,
+      'Sec-WebSocket-Protocol': '12.meow',
     }
   }
 
@@ -44,7 +44,7 @@ export class OneBotV12 extends Adapter {
       detail_type: 'connect',
       sub_type: '',
       version: {
-        impl: 'matcha',
+        impl: 'meow',
         version: await getVersion(),
         onebot_version: '12',
       },
@@ -61,7 +61,7 @@ export class OneBotV12 extends Adapter {
         bots: [
           {
             self: {
-              platform: 'matcha',
+              platform: 'meow',
               user_id: this.state.bot!.id,
             },
             online: true,

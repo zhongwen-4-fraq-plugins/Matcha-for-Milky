@@ -9,7 +9,7 @@ use tokio::sync::Mutex;
 pub fn run() {
     let mut builder = tauri::Builder::default().setup(|app| {
         let win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default(),)
-            .title("Matcha",)
+            .title("Meow",)
             .min_inner_size(620.0, 540.0,)
             .inner_size(1080.0, 720.0,)
             .center();

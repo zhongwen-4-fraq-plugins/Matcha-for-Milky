@@ -46,7 +46,7 @@ export const actionStrategy: ActionStrategy = {
     return response({ uin: Number(bot.id), nickname: bot.name })
   },
   get_impl_info: async () => response({
-    impl_name: 'matcha',
+    impl_name: 'meow',
     impl_version: await getVersion(),
     qq_protocol_version: 'mock',
     qq_protocol_type: 'windows',

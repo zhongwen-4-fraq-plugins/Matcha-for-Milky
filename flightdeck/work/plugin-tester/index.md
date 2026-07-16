@@ -1,6 +1,6 @@
-# Matcha-based Fraq plugin tester
+# Meow Fraq plugin tester
 
-State: Matcha 0.4.8 with Milky 1.2 builds and launches as a native Windows release.
+State: Meow with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
@@ -13,13 +13,13 @@ State: Matcha 0.4.8 with Milky 1.2 builds and launches as a native Windows relea
 - Imported upstream commit `ce38c344fa1a715f3a8496d9b793c4c1f75e7a78` with its AGPL-3.0 license, attribution, documentation, and assets intact.
 - Verified the imported upstream application with `bun run build:web`.
 - Added a Rust Milky server for `POST /api/:api` and WebSocket/SSE `/event`, including Bearer authentication and request timeouts.
-- Added a Tauri request bridge so Milky APIs reuse Matcha's Vue/Dexie users, groups, messages, and behavior model.
+- Added a Tauri request bridge so Milky APIs reuse Meow's Vue/Dexie users, groups, messages, and behavior model.
 - Added Milky message, entity, event, and action modules plus connection settings for `127.0.0.1:30001`.
-- Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Matcha's minimum desktop width.
+- Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Meow's minimum desktop width.
 - Implemented the second sidebar action as a runtime log viewer with Tauri log capture, search, level filtering, automatic scrolling, and clearing.
 - Frontend type checking, JavaScript linting, and the native Rust/Tauri release build pass.
 - Installed Visual Studio Build Tools 2022 with the C++ workload and Windows SDK 10.0.26100.0.
-- Copied the standalone release to `C:\Users\admin\Downloads\fraq-debug-matcha.exe` and verified that its `Matcha` window starts and remains responsive.
+- Renamed the application, package, protocol implementation identity, and standalone release from Matcha to Meow.
 - NSIS bundling reached the installer stage but its optional GitHub utility download timed out; the standalone EXE is unaffected.
 - Milky connection status is driven by active WebSocket/SSE client count instead of local server startup.
 - Milky outgoing `forward` segments are parsed recursively and displayed as expandable forwarded messages, so plugin help responses are no longer discarded.
@@ -44,7 +44,7 @@ State: Matcha 0.4.8 with Milky 1.2 builds and launches as a native Windows relea
 ## Read now
 
 - flightdeck/knowledge/milky/protocol.md
-- flightdeck/knowledge/milky/matcha-bridge.md
+- flightdeck/knowledge/milky/meow-bridge.md
 - flightdeck/knowledge/fraq/framework.md
 - flightdeck/knowledge/tooling/windows-tauri-build.md
 

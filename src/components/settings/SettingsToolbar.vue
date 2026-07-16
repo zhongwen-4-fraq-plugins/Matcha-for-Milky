@@ -18,7 +18,7 @@ async function importSettings() {
     title: '选择配置文件',
     filters: [
       {
-        name: 'matcha 配置文件',
+        name: 'Meow 配置文件',
         extensions: ['mcs'],
       },
     ],
@@ -37,10 +37,10 @@ async function importSettings() {
 async function exportSettings() {
   const path = await save({
     title: '导出配置文件',
-    defaultPath: 'matcha-settings.mcs',
+    defaultPath: 'meow-settings.mcs',
     filters: [
       {
-        name: 'matcha 配置文件',
+        name: 'Meow 配置文件',
         extensions: ['mcs'],
       },
     ],

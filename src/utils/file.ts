@@ -75,7 +75,7 @@ export async function getFile(type: GetType, fileId: string): Promise<string | U
   }
   switch (type) {
     case GetType.URL: {
-      return `http://${general.assetsServerAddress}/matcha/cache/${file.sha256}`
+      return `http://${general.assetsServerAddress}/meow/cache/${file.sha256}`
     }
     case GetType.PATH:
     case GetType.DATA: {

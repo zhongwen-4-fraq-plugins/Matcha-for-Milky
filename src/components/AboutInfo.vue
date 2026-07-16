@@ -5,13 +5,12 @@ import { github } from '~build/git'
 
 const version = getVersion()
 
-const isDark = document.documentElement.classList.contains('dark')
 </script>
 
 <template>
   <div class="relative flex flex-col items-center justify-between bg-background py-6">
     <AppLogo class="size-24" />
-    <img :src="isDark ? '/matcha-text-dark.svg' : '/matcha-text-light.svg'" alt="matcha text" class="w-42">
+    <strong class="text-3xl text-foreground font-semibold">Meow</strong>
     <div
       class="text-sm text-foreground"
       :class="{ 'cursor-pointer': version.link }"

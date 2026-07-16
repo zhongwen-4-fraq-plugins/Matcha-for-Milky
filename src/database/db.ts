@@ -3,7 +3,7 @@ import { Dexie } from 'dexie'
 import type { GroupAnnouncement, GroupEssence, GroupFile, GroupFolder, PrivateFile } from './model'
 import type { Table } from 'dexie'
 
-class MatchaDB extends Dexie {
+class MeowDB extends Dexie {
   users!: Table<User, string>
   friends!: Table<Friend, [string, string]>
   groups!: Table<Group, string>
@@ -16,6 +16,7 @@ class MatchaDB extends Dexie {
   groupEssences!: Table<GroupEssence, [string, string]>
 
   constructor() {
+    // Keep the legacy storage key so upgrading to Meow does not erase existing data.
     super('matcha')
     this.version(2)
       .stores({
@@ -87,4 +88,4 @@ class MatchaDB extends Dexie {
   }
 }
 
-export const db = new MatchaDB()
+export const db = new MeowDB()

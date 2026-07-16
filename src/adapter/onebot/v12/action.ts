@@ -59,7 +59,7 @@ const actionStrategy: ActionStrategy<ActionResponse> = {
 
   get_version: async (): Promise<ActionResponse<Version>> => {
     return response(0, {
-      impl: 'matcha',
+      impl: 'meow',
       version: await getVersion(),
       onebot_version: '12',
     })

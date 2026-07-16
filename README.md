@@ -1,76 +1,55 @@
 <p align="center">
-  <a href="https://github.com/A-kirami/matcha">
+  <a href="https://github.com/zhongwen-4-fraq-plugins/meow">
     <br />
-    <img src="./public/matcha.webp" alt="Matcha Logo" width="200" />
+    <img src="./public/meow.webp" alt="Meow Logo" width="200" />
     <br />
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="./public/matcha-text-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="./public/matcha-text-light.svg">
-      <img src="./public/matcha-text-light.svg" alt="Matcha Text" width="200" />
-    </picture>
+    <strong>Meow</strong>
   </a>
   <br />
-  模拟聊天交互的辅助开发工具
+  Fraq 插件测试工具
 </p>
 
 <p align="center">
-  <a href="https://github.com/A-kirami/matcha/actions/workflows/build.yml" target="__blank"
-    ><img src="https://github.com/A-kirami/matcha/actions/workflows/build.yml/badge.svg?branch=main&event=push" alt="Github Actions"
-  /></a>
-  <a href="https://app.codacy.com/gh/A-kirami/matcha/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade" target="__blank"
-    ><img src="https://app.codacy.com/project/badge/Grade/99e8f33bae854311a67ccf671a015d9a" alt="Codacy"
+  <a href="https://github.com/zhongwen-4-fraq-plugins/meow/actions/workflows/build.yml" target="__blank"
+    ><img src="https://github.com/zhongwen-4-fraq-plugins/meow/actions/workflows/build.yml/badge.svg?branch=main&event=push" alt="Github Actions"
   /></a>
   <br />
-  <a href="https://github.com/A-kirami/matcha/releases/latest" target="__blank"
-    ><img src="https://img.shields.io/github/v/release/A-kirami/matcha?include_prereleases&&color=70aeff&style=social" alt="Release Version"
+  <a href="https://github.com/zhongwen-4-fraq-plugins/meow/releases/latest" target="__blank"
+    ><img src="https://img.shields.io/github/v/release/zhongwen-4-fraq-plugins/meow?include_prereleases&&color=70aeff&style=social" alt="Release Version"
   /></a>
-  <a href="https://github.com/A-kirami/matcha/stargazers" target="__blank"
-    ><img alt="GitHub stars" src="https://img.shields.io/github/stars/A-kirami/matcha?style=social"
+  <a href="https://github.com/zhongwen-4-fraq-plugins/meow/stargazers" target="__blank"
+    ><img alt="GitHub stars" src="https://img.shields.io/github/stars/zhongwen-4-fraq-plugins/meow?style=social"
   /></a>
-  <a href="https://github.com/A-kirami/matcha/releases" target="__blank"
-    ><img alt="GitHub downloads" src="https://img.shields.io/github/downloads/A-kirami/matcha/total?style=social"
+  <a href="https://github.com/zhongwen-4-fraq-plugins/meow/releases" target="__blank"
+    ><img alt="GitHub downloads" src="https://img.shields.io/github/downloads/zhongwen-4-fraq-plugins/meow/total?style=social"
   /></a>
   <br />
-  <a href="#" target="__blank">
-    <strong>🌎 演示与预览</strong>
-  </a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="https://github.com/A-kirami/matcha/releases" target="__blank">
+  <a href="https://github.com/zhongwen-4-fraq-plugins/meow/releases" target="__blank">
     <strong>📦️ 下载安装包</strong>
   </a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="https://jq.qq.com/?_wv=1027&k=SBsy6Rrn" target="__blank">
-    <strong>💬 加入交流群</strong>
-  </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/A-kirami/matcha" target="__blank">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="./docs/preview-dark.webp">
-      <source media="(prefers-color-scheme: light)" srcset="./docs/preview-light.webp">
-      <img src="./docs/preview-light.webp" alt="Matcha - Preview" width="100%" />
-    </picture>
-  </a>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/preview-dark.webp">
+    <source media="(prefers-color-scheme: light)" srcset="./docs/preview-light.webp">
+    <img src="./docs/preview-light.webp" alt="Meow - Preview" width="100%" />
+  </picture>
 </p>
 
-Matcha is mock chat.
-
-Matcha 是一个专为 [KiramiBot](https://github.com/A-kirami/KiramiBot) 设计的辅助开发工具，能够与 KiramiBot 进行模拟聊天交互，同时提供一系列的开发辅助功能。
+Meow 是一个面向 Fraq 插件开发的桌面测试工具，能够模拟好友、群聊、消息、文件和通知，并通过 Milky、OneBot 11 或 OneBot 12 与插件交互。
 
 它旨在降低开发者的调试与测试的负担，从而更有效率的专注于功能开发。
 
-尽管它主要为 KiramiBot 设计，但只要是符合 Matcha 支持协议的机器人，都可接入并能够使用大部分基础功能。
-
-> [KiramiBot](https://github.com/A-kirami/KiramiBot) 是一个简明轻快的聊天机器人应用，它与 [NoneBot2](https://github.com/nonebot/nonebot2) 完全兼容，同时提供了更多的功能与特性，欢迎体验！
+> Meow 基于 [Matcha 0.4.8](https://github.com/A-kirami/matcha) 开发，并保留其 AGPL-3.0 许可证和原作者归属。
 
 ## Fraq 与 Milky
 
-本仓库基于 Matcha 0.4.8 开发，增加了 [Milky](https://milky.ntqqrev.org/) 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
+Meow 内置 [Milky](https://milky.ntqqrev.org/) 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
 
-在设置中选择 `Milky 1.2` 后，Matcha 默认监听 `127.0.0.1:30001`，提供以下接口：
+在设置中选择 `Milky 1.2` 后，Meow 默认监听 `127.0.0.1:30001`，提供以下接口：
 
-- `POST /api/{endpoint}`：调用 Matcha 中的好友、群聊与消息行为。
+- `POST /api/{endpoint}`：调用 Meow 中的好友、群聊与消息行为。
 - `GET /event`：通过 WebSocket 或 SSE 接收模拟事件。
 - `Authorization: Bearer <token>`：设置访问令牌后启用鉴权。
 
@@ -132,7 +111,7 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 - <details>
   <summary>Milky 1.2 标准</summary>
 
-  当前支持情况基于 Milky 1.2.2。勾选表示 Matcha 已提供对应的模拟行为。
+  当前支持情况基于 Milky 1.2.2。勾选表示 Meow 已提供对应的模拟行为。
 
   ### 动作
 
@@ -320,7 +299,7 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 
 ## 📋 路线图
 
-请访问本项目的 [Projects](https://github.com/users/A-kirami/projects/8)
+请访问本项目的 [Issues](https://github.com/zhongwen-4-fraq-plugins/meow/issues)
 
 ## 🤝 贡献
 
@@ -328,7 +307,7 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 
 ### 🍻 鸣谢
 
-感谢以下开发者对本项目的贡献
+Meow 基于 Matcha 开发，感谢原项目的所有贡献者：
 
 <a href="https://github.com/A-kirami/matcha/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=A-kirami/matcha" />
@@ -344,4 +323,4 @@ Code: AGPL-3.0 - 2023 - Akirami
 
 Logo: CC-BY-NC-ND, Designs by Akirami
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FA-kirami%2Fmatcha.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FA-kirami%2Fmatcha?ref=badge_large)
+Upstream: [A-kirami/matcha](https://github.com/A-kirami/matcha)

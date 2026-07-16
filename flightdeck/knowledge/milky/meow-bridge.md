@@ -1,7 +1,7 @@
-# Matcha Milky bridge
-SUMMARY: Matcha hosts Milky transport in Rust and delegates API behavior to the Vue adapter so protocol requests and simulated chat share one state model.
+# Meow Milky bridge
+SUMMARY: Meow hosts Milky transport in Rust and delegates API behavior to the Vue adapter so protocol requests and simulated chat share one state model.
 READ WHEN: when changing Milky transport, adding a Milky API, or debugging Rust-to-Vue request handling.
-RECHECK WHEN: when Tauri event semantics, Milky transport requirements, or Matcha adapter ownership changes.
+RECHECK WHEN: when Tauri event semantics, Milky transport requirements, or Meow adapter ownership changes.
 
 ---
 
@@ -9,9 +9,9 @@ RECHECK WHEN: when Tauri event semantics, Milky transport requirements, or Match
 
 1. `src/driver/milky/index.ts` starts the Rust server and listens for `milky-action` events.
 2. Rust accepts `POST /api/:api`, verifies authentication and JSON content, then emits the request with a numeric request ID.
-3. `src/adapter/milky/action.ts` aggregates domain handlers from `src/adapter/milky/actions/`, which execute APIs against Matcha's Dexie data and `Behav` operations.
+3. `src/adapter/milky/action.ts` aggregates domain handlers from `src/adapter/milky/actions/`, which execute APIs against Meow's Dexie data and `Behav` operations.
 4. Vue resolves the pending Rust request through `resolve_milky_action`.
-5. Matcha scenes become Milky events through the strategies in `src/adapter/milky/events/`; `src/adapter/milky/event.ts` combines them and the driver broadcasts the result to WebSocket and SSE clients.
+5. Meow scenes become Milky events through the strategies in `src/adapter/milky/events/`; `src/adapter/milky/event.ts` combines them and the driver broadcasts the result to WebSocket and SSE clients.
 
 Rust owns sockets and pending request channels. Vue owns users, groups, messages, API behavior, and protocol conversion. Keep this ownership split when adding APIs.
 

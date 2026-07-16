@@ -48,6 +48,6 @@ export const friendEventStrategy: EventStrategy<SceneMapping> = {
     initiator_id: Number(scene.user_id),
     initiator_uid: scene.user_id,
     comment: scene.comment,
-    via: 'matcha',
+    via: 'meow',
   }),
 }

@@ -302,7 +302,9 @@ pub async fn start_assets_server(
 
     let cors = warp::cors().allow_any_origin().allow_methods(vec!["GET"],);
 
-    let route = warp::path("matcha",)
+    let route = warp::path("meow",)
+        .or(warp::path("matcha",))
+        .unify()
         .and(warp::path("cache",),)
         .and(warp::fs::dir(cache_dir,),)
         .with(cors,);

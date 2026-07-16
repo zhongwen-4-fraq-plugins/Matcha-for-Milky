@@ -1,3 +1,3 @@
 <template>
-  <img src="/matcha.webp" alt="matcha logo">
+  <img src="/meow.webp" alt="Meow logo">
 </template>

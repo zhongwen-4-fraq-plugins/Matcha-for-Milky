@@ -2,7 +2,7 @@
 meta:
   isSettings: true
   title: 通用
-  description: 配置 Matcha 应用的通用设置
+  description: 配置 Meow 应用的通用设置
   position: 0
 </route>
 
@@ -68,7 +68,7 @@ const osType = isTauri() ? getOsType() : 'windows'
     <FormField v-slot="{ componentField }" type="radio" name="theme">
       <FormItem class="space-y-1">
         <FormLabel>主题</FormLabel>
-        <FormDescription>选择 Matcha 应用的主题</FormDescription>
+        <FormDescription>选择 Meow 应用的主题</FormDescription>
         <FormMessage />
         <RadioGroup class="flex flex-wrap gap-8 pt-2" v-bind="componentField">
           <FormItem v-for="themeOp in themeOptions" :key="themeOp.value">

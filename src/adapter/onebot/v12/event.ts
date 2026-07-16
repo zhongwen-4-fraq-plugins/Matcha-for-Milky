@@ -157,7 +157,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       detail_type,
       sub_type,
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       user_id,
@@ -187,7 +187,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       detail_type,
       sub_type,
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       user_id,
@@ -207,7 +207,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       detail_type,
       sub_type: '',
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       user_id,
@@ -223,7 +223,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       detail_type,
       sub_type: '',
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       user_id,
@@ -239,7 +239,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       detail_type,
       sub_type: '',
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       notice_type: 'friend_recall',
@@ -256,7 +256,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       type,
       detail_type,
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       notice_type: 'group_increase',
@@ -275,7 +275,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       type,
       detail_type,
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       notice_type: 'group_decrease',
@@ -295,7 +295,7 @@ const eventStrategy: EventStrategy<SceneMapping<Messages>> = {
       detail_type,
       sub_type,
       self: {
-        platform: 'matcha',
+        platform: 'meow',
         user_id: scene.self_id,
       },
       notice_type: 'group_recall',

@@ -34,7 +34,7 @@ export const friendActions: ActionStrategy = {
           target_user_uid: scene.receiver_id,
           state: request.action === 'await' ? 'pending' : (request.action === 'agree' ? 'accepted' : 'rejected'),
           comment: scene.comment,
-          via: 'matcha',
+          via: 'meow',
           is_filtered: false,
         }
       })

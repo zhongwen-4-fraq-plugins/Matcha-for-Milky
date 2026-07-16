@@ -1,16 +1,16 @@
 [package]
-name = "matcha"
+name = "meow"
 version = "0.0.0"
-description = "Matcha is mock chat"
-authors = ["akirami"]
+description = "Meow is a Fraq plugin testing tool"
+authors = ["Akirami", "zhongwen-4-fraq-plugins"]
 license = ""
-repository = "https://github.com/A-kirami/matcha"
+repository = "https://github.com/zhongwen-4-fraq-plugins/meow"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-name = "matcha_lib"
+name = "meow_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
