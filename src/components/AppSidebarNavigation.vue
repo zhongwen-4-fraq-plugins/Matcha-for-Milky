@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ScrollText } from 'lucide-vue-next'
 import InlineSvg from 'vue-inline-svg'
 
 interface NavItem {
@@ -109,7 +110,13 @@ watch(
                 class="h-full flex items-center justify-center rounded-lg text-gray-500"
                 dark="text-gray-400"
               >
+                <ScrollText
+                  v-if="navItem.title === '日志'"
+                  class="size-6 stroke-1.5 transition-colors duration-300"
+                  :class="{ 'text-[#70aeff]': isActive }"
+                />
                 <InlineSvg
+                  v-else
                   :src="isActive ? navItem.icon.active : navItem.icon.normal"
                   class="size-6 transition-colors duration-300"
                   :class="{ 'text-[#70aeff]': isActive }"
