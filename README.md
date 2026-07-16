@@ -66,15 +66,15 @@ Matcha 是一个专为 [KiramiBot](https://github.com/A-kirami/KiramiBot) 设计
 
 ## Fraq 与 Milky
 
-本仓库基于 Matcha 0.4.8 开发，增加了 Milky 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
+本仓库基于 Matcha 0.4.8 开发，增加了 [Milky](https://milky.ntqqrev.org/) 1.2 协议端，可直接连接使用 Milky 的 Fraq 应用。
 
 在设置中选择 `Milky 1.2` 后，Matcha 默认监听 `127.0.0.1:30001`，提供以下接口：
 
-- `POST /api/:api`：调用 Matcha 中的好友、群聊与消息行为。
+- `POST /api/{endpoint}`：调用 Matcha 中的好友、群聊与消息行为。
 - `GET /event`：通过 WebSocket 或 SSE 接收模拟事件。
 - `Authorization: Bearer <token>`：设置访问令牌后启用鉴权。
 
-Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端。
+Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端。完整支持情况见下方“协议适配”中的 Milky 1.2 标准清单。
 
 ## ✨ 特性
 
@@ -128,6 +128,102 @@ Fraq 可使用 `Context.fromUrl('http://127.0.0.1:30001')` 连接这个协议端
 提示连接成功后，即可开始使用。
 
 ## 🔌 协议适配
+
+- <details>
+  <summary>Milky 1.2 标准</summary>
+
+  当前支持情况基于 Milky 1.2.2。勾选表示 Matcha 已提供对应的模拟行为。
+
+  ### 动作
+
+  - [x] 获取登录信息（get_login_info）
+  - [x] 获取协议端信息（get_impl_info）
+  - [x] 获取用户个人信息（get_user_profile）
+  - [x] 获取好友列表（get_friend_list）
+  - [x] 获取好友信息（get_friend_info）
+  - [x] 获取群列表（get_group_list）
+  - [x] 获取群信息（get_group_info）
+  - [x] 获取群成员列表（get_group_member_list）
+  - [x] 获取群成员信息（get_group_member_info）
+  - [ ] 获取置顶的好友和群列表（get_peer_pins）
+  - [x] 设置好友或群的置顶状态（set_peer_pin，仅返回成功）
+  - [ ] 设置 QQ 账号头像（set_avatar）
+  - [ ] 设置 QQ 账号昵称（set_nickname）
+  - [ ] 设置 QQ 账号个性签名（set_bio）
+  - [ ] 获取自定义表情 URL 列表（get_custom_face_url_list）
+  - [ ] 获取 Cookies（get_cookies）
+  - [ ] 获取 CSRF Token（get_csrf_token）
+  - [x] 发送私聊消息（send_private_message）
+  - [x] 发送群聊消息（send_group_message）
+  - [x] 撤回私聊消息（recall_private_message）
+  - [x] 撤回群聊消息（recall_group_message）
+  - [x] 获取消息（get_message）
+  - [x] 获取历史消息列表（get_history_messages）
+  - [ ] 获取临时资源链接（get_resource_temp_url）
+  - [ ] 获取合并转发消息内容（get_forwarded_messages）
+  - [x] 标记消息为已读（mark_message_as_read，仅返回成功）
+  - [x] 发送好友戳一戳（send_friend_nudge）
+  - [x] 发送名片点赞（send_profile_like，仅返回成功）
+  - [x] 删除好友（delete_friend）
+  - [ ] 获取好友请求列表（get_friend_requests）
+  - [ ] 同意好友请求（accept_friend_request）
+  - [ ] 拒绝好友请求（reject_friend_request）
+  - [x] 设置群名称（set_group_name）
+  - [ ] 设置群头像（set_group_avatar）
+  - [x] 设置群名片（set_group_member_card）
+  - [x] 设置群成员专属头衔（set_group_member_special_title）
+  - [x] 设置群管理员（set_group_member_admin）
+  - [x] 设置群成员禁言（set_group_member_mute）
+  - [x] 设置群全员禁言（set_group_whole_mute）
+  - [x] 踢出群成员（kick_group_member）
+  - [ ] 获取群公告列表（get_group_announcements）
+  - [ ] 发送群公告（send_group_announcement）
+  - [ ] 删除群公告（delete_group_announcement）
+  - [ ] 获取群精华消息列表（get_group_essence_messages）
+  - [ ] 设置群精华消息（set_group_essence_message）
+  - [x] 退出群（quit_group）
+  - [x] 发送群消息表情回应（send_group_message_reaction，仅返回成功）
+  - [x] 发送群戳一戳（send_group_nudge）
+  - [ ] 获取群通知列表（get_group_notifications）
+  - [ ] 同意入群或邀请他人入群请求（accept_group_request）
+  - [ ] 拒绝入群或邀请他人入群请求（reject_group_request）
+  - [ ] 同意他人邀请自身入群（accept_group_invitation）
+  - [ ] 拒绝他人邀请自身入群（reject_group_invitation）
+  - [ ] 上传私聊文件（upload_private_file）
+  - [ ] 上传群文件（upload_group_file）
+  - [ ] 获取私聊文件下载链接（get_private_file_download_url）
+  - [ ] 获取群文件下载链接（get_group_file_download_url）
+  - [ ] 获取群文件列表（get_group_files）
+  - [ ] 移动群文件（move_group_file）
+  - [ ] 重命名群文件（rename_group_file）
+  - [ ] 删除群文件（delete_group_file）
+  - [ ] 创建群文件夹（create_group_folder）
+  - [ ] 重命名群文件夹（rename_group_folder）
+  - [ ] 删除群文件夹（delete_group_folder）
+
+  ### 事件
+
+  - [ ] 机器人离线事件（bot_offline）
+  - [x] 消息接收事件（message_receive）
+  - [x] 消息撤回事件（message_recall）
+  - [ ] 会话置顶变更事件（peer_pin_change）
+  - [x] 好友请求事件（friend_request）
+  - [x] 入群请求事件（group_join_request）
+  - [ ] 群成员邀请他人入群请求事件（group_invited_join_request）
+  - [x] 他人邀请自身入群事件（group_invitation）
+  - [x] 好友戳一戳事件（friend_nudge）
+  - [ ] 好友文件上传事件（friend_file_upload）
+  - [x] 群管理员变更事件（group_admin_change）
+  - [ ] 群精华消息变更事件（group_essence_message_change）
+  - [x] 群成员增加事件（group_member_increase）
+  - [x] 群成员减少事件（group_member_decrease）
+  - [x] 群名称变更事件（group_name_change）
+  - [ ] 群消息表情回应事件（group_message_reaction）
+  - [x] 群禁言事件（group_mute）
+  - [x] 群全体禁言事件（group_whole_mute）
+  - [x] 群戳一戳事件（group_nudge）
+  - [ ] 群文件上传事件（group_file_upload）
+  </details>
 
 - <details>
   <summary>OneBot v11 标准</summary>
