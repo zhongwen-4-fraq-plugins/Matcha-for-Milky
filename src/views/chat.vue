@@ -1,6 +1,8 @@
 <route lang="yaml">
 meta:
   navDisplay: true
+  title: 消息列表
+  position: 0
   icon: chat.svg
   activeIcon: chat-active.svg
 </route>

@@ -17,6 +17,7 @@ State: Matcha 0.4.8 now includes a Milky 1.2 server adapter for Fraq integration
 - Added a Tauri request bridge so Milky APIs reuse Matcha's Vue/Dexie users, groups, messages, and behavior model.
 - Added Milky message, entity, event, and action modules plus connection settings for `127.0.0.1:30001`.
 - Added a browser-preview fallback around Tauri-only window APIs and fixed the collapsed contact action at Matcha's minimum desktop width.
+- Labeled the second sidebar action as `日志` and added accessible tooltips with deterministic ordering for all primary navigation actions.
 - Frontend type checking and JavaScript linting pass; Rust dependency metadata resolves, while native compilation remains blocked before crate checking by the missing MSVC linker.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.

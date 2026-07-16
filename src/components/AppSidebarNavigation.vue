@@ -4,6 +4,7 @@ import InlineSvg from 'vue-inline-svg'
 interface NavItem {
   path: string
   position: number
+  title: string
   icon: {
     normal: string
     active: string
@@ -20,6 +21,7 @@ const navItems: NavItem[] = routes
     return {
       path: route.path,
       position: (route.meta.position as number) ?? Infinity,
+      title: route.meta.title as string,
       icon: {
         normal: getAssetsUrl(`navbar/${route.meta.icon as string}`),
         active: getAssetsUrl(`navbar/${route.meta.activeIcon as string}`),
@@ -87,31 +89,41 @@ watch(
 </script>
 
 <template>
-  <nav>
-    <ul :class="$style.navbar" class="relative flex flex-col space-y-2">
-      <li
-        v-for="navItem in navItems"
-        :key="navItem.path"
-        class="size-10 svg:hover:text-[#70aeff]"
-        @click="handleSlider"
-        @mouseenter="handleSlider"
-        @mouseleave="handleSlider"
-      >
-        <RouterLink
-          v-slot="{ isActive }"
-          :to="navItem.path"
-          class="h-full flex items-center justify-center rounded-lg text-gray-500"
-          dark="text-gray-400"
+  <TooltipProvider :delay-duration="300">
+    <nav>
+      <ul :class="$style.navbar" class="relative flex flex-col space-y-2">
+        <li
+          v-for="navItem in navItems"
+          :key="navItem.path"
+          class="size-10 svg:hover:text-[#70aeff]"
+          @click="handleSlider"
+          @mouseenter="handleSlider"
+          @mouseleave="handleSlider"
         >
-          <InlineSvg
-            :src="isActive ? navItem.icon.active : navItem.icon.normal"
-            class="size-6 transition-colors duration-300"
-            :class="{ 'text-[#70aeff]': isActive }"
-          />
-        </RouterLink>
-      </li>
-    </ul>
-  </nav>
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <RouterLink
+                v-slot="{ isActive }"
+                :to="navItem.path"
+                :aria-label="navItem.title"
+                class="h-full flex items-center justify-center rounded-lg text-gray-500"
+                dark="text-gray-400"
+              >
+                <InlineSvg
+                  :src="isActive ? navItem.icon.active : navItem.icon.normal"
+                  class="size-6 transition-colors duration-300"
+                  :class="{ 'text-[#70aeff]': isActive }"
+                />
+              </RouterLink>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              {{ navItem.title }}
+            </TooltipContent>
+          </Tooltip>
+        </li>
+      </ul>
+    </nav>
+  </TooltipProvider>
 </template>
 
 <style module>
