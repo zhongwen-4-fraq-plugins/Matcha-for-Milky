@@ -49,6 +49,7 @@ declare module 'vue' {
     ChatMessageElementAudio: typeof import('./components/chat/ChatMessageElementAudio.vue')['default']
     ChatMessageElementFallback: typeof import('./components/chat/ChatMessageElementFallback.vue')['default']
     ChatMessageElementFile: typeof import('./components/chat/ChatMessageElementFile.vue')['default']
+    ChatMessageElementForward: typeof import('./components/chat/ChatMessageElementForward.vue')['default']
     ChatMessageElementImage: typeof import('./components/chat/ChatMessageElementImage.vue')['default']
     ChatMessageElementLink: typeof import('./components/chat/ChatMessageElementLink.vue')['default']
     ChatMessageElementMention: typeof import('./components/chat/ChatMessageElementMention.vue')['default']

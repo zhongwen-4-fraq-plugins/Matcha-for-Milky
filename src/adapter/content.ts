@@ -167,6 +167,10 @@ export type ForwardContent = Content<
   'forward',
   {
     content: ForwardContentNode[]
+    title?: string
+    preview?: string[]
+    summary?: string
+    prompt?: string
   }
 >
 

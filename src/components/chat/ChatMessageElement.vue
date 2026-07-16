@@ -2,6 +2,7 @@
 import ChatMessageAudio from './ChatMessageElementAudio.vue'
 import ChatMessageFallback from './ChatMessageElementFallback.vue'
 import ChatMessageFile from './ChatMessageElementFile.vue'
+import ChatMessageForward from './ChatMessageElementForward.vue'
 import ChatMessageImage from './ChatMessageElementImage.vue'
 import ChatMessageLink from './ChatMessageElementLink.vue'
 import ChatMessageMention from './ChatMessageElementMention.vue'
@@ -26,6 +27,7 @@ const messageElements: Partial<Record<Contents['type'], Component>> = {
   audio: ChatMessageAudio,
   file: ChatMessageFile,
   reply: ChatMessageReply,
+  forward: ChatMessageForward,
 }
 </script>
 
