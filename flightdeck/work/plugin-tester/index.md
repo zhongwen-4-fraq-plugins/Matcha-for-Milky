@@ -47,6 +47,8 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Rotated the updater signing key before any successful public release, backed up the old local key, and configured both signing secrets in GitHub Actions.
 - Verified the signing fix with a complete local Windows release build that produced the NSIS installer and its updater signature.
 - Confirmed the `v20260718.2` GitHub Release workflow passed on Linux, Windows, macOS Intel, and macOS ARM64, then published all 17 signed release artifacts.
+- Diagnosed intermittent updater failures as transient GitHub request errors after confirming the same application could parse the valid manifest; automatic and manual checks now retry through one shared helper.
+- Bumped the application to `0.4.9` so the updater retry fix can be delivered as a newer release.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -72,6 +74,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 ## Read if
 
 - Read `flightdeck/knowledge/tooling/github-release-tags.md` before creating or changing a release tag.
+- Read `flightdeck/knowledge/tooling/tauri-updater-network.md` when an update check fails while the public manifest remains available.
 - Read `flightdeck/knowledge/fraq/timer-argument-order.md` when adding Fraq Context timers to fixtures or examples.
 - Read `flightdeck/knowledge/rust/axum-shared-event-route.md` when changing the `/event` transport handler.
 

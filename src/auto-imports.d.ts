@@ -15,6 +15,7 @@ declare global {
   const asyncWrapper: typeof import('./utils/utils')['asyncWrapper']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const buildParameterRecord: typeof import('./utils/parameters')['buildParameterRecord']
+  const checkForUpdate: typeof import('./utils/updater')['checkForUpdate']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -405,6 +406,7 @@ declare module 'vue' {
     readonly asyncWrapper: UnwrapRef<typeof import('./utils/utils')['asyncWrapper']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly buildParameterRecord: UnwrapRef<typeof import('./utils/parameters')['buildParameterRecord']>
+    readonly checkForUpdate: UnwrapRef<typeof import('./utils/updater')['checkForUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>

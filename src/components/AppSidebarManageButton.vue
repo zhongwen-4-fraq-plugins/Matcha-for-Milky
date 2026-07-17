@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { open } from '@tauri-apps/plugin-shell'
-import { check } from '@tauri-apps/plugin-updater'
 import { SlidersHorizontal, Info, Bolt, RefreshCw } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
+
+import { checkForUpdate } from '~/utils/updater'
 
 import { github } from '~build/git'
 import { isRelease } from '~build/meta'
@@ -37,7 +38,7 @@ const modal = useModalStore()
 
 async function manualCheckUpdate() {
   try {
-    const update = await check()
+    const update = await checkForUpdate()
     if (update?.available) {
       modal.open('checkUpdate', { updateInfo: update })
     } else {

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { isTauri } from '@tauri-apps/api/core'
 import { relaunch } from '@tauri-apps/plugin-process'
-import { check } from '@tauri-apps/plugin-updater'
 import { configure } from 'vee-validate'
+
+import { checkForUpdate } from '~/utils/updater'
 
 import { isRelease } from '~build/meta'
 
@@ -19,7 +20,7 @@ onMounted(async () => {
 
   if (isTauri() && isRelease && general.autoUpdate) {
     try {
-      const update = await check()
+      const update = await checkForUpdate()
       if (update) {
         await update.downloadAndInstall()
         await relaunch()
