@@ -31,6 +31,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Added categorized runtime logs for Milky service and client connections, debug-level API calls and responses, and received event delivery.
 - Formatted runtime log rows as `time | LOG LEVEL | message` with aligned fields and standard uppercase level names.
 - Formatted API log messages as `[API: action] content` so each operation can be identified and searched directly.
+- Formatted event log messages as `[Event: event_type] content` for consistent event identification and search.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

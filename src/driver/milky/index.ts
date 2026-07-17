@@ -103,13 +103,13 @@ export class MilkyDriver extends Driver {
     if (!isTauri()) {
       return false
     }
-    void logger.info(`[事件] 接收 ${String(event.event_type)}: ${JSON.stringify(event)}`)
+    void logger.info(`[Event: ${String(event.event_type)}] 接收事件: ${JSON.stringify(event)}`)
     try {
       await invoke('emit_milky_event', { event })
-      void logger.info(`[事件] 已推送 ${String(event.event_type)}`)
+      void logger.info(`[Event: ${String(event.event_type)}] 推送成功`)
       return true
     } catch (error) {
-      void logger.error(`[事件] 推送 ${String(event.event_type)} 失败: ${String(error)}`)
+      void logger.error(`[Event: ${String(event.event_type)}] 推送失败: ${String(error)}`)
       return false
     }
   }
