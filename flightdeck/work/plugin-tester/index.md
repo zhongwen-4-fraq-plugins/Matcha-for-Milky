@@ -49,6 +49,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Confirmed the `v20260718.2` GitHub Release workflow passed on Linux, Windows, macOS Intel, and macOS ARM64, then published all 17 signed release artifacts.
 - Diagnosed intermittent updater failures as transient GitHub request errors after confirming the same application could parse the valid manifest; automatic and manual checks now retry through one shared helper.
 - Bumped the application to `0.4.9` so the updater retry fix can be delivered as a newer release.
+- Verified the retry against the real Windows transport with two failed requests followed by a successful third request, then published all 17 `v20260718.3` release artifacts.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
