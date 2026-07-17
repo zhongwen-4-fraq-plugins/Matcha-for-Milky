@@ -37,46 +37,50 @@ function formatValue() {
 
 <template>
   <div class="min-h-36 flex flex-col overflow-hidden border rounded-md">
-    <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_2.25rem] border-b bg-muted/30 text-xs text-muted-foreground">
+    <div class="grid grid-cols-2 border-b bg-muted/30 text-xs text-muted-foreground">
       <span class="border-r px-3 py-2">参数名</span>
       <span class="px-3 py-2">参数值</span>
-      <span class="sr-only">操作</span>
     </div>
     <div class="min-h-0 flex-1 overflow-auto">
       <div
         v-for="(parameter, index) in parameters"
         :key="index"
-        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_2.25rem] border-b"
+        class="group grid grid-cols-2 border-b"
       >
         <input
           v-model="parameter.name"
           class="h-9 min-w-0 border-r bg-transparent px-3 text-xs outline-none focus:bg-muted/20"
           placeholder="参数名"
         >
-        <div class="grid grid-cols-[minmax(0,1fr)_2.25rem] min-w-0">
+        <div class="relative min-w-0">
           <input
             v-model="parameter.value"
-            class="h-9 min-w-0 bg-transparent px-3 text-xs outline-none focus:bg-muted/20"
+            class="h-9 min-w-0 w-full bg-transparent px-3 pr-20 text-xs outline-none focus:bg-muted/20"
             placeholder="参数值"
           >
-          <button
-            type="button"
-            class="h-9 flex items-center justify-center border-l text-muted-foreground hover:bg-muted hover:text-foreground"
-            aria-label="放大编辑参数值"
-            title="放大编辑"
-            @click="openEditor(index)"
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-9 flex bg-background opacity-0 transition-opacity group-focus-within:pointer-events-auto group-hover:pointer-events-auto group-focus-within:opacity-100 group-hover:opacity-100"
           >
-            <Maximize2 class="size-4" />
-          </button>
+            <button
+              type="button"
+              class="h-9 w-9 flex items-center justify-center border-l text-muted-foreground hover:bg-muted hover:text-foreground"
+              aria-label="放大编辑参数值"
+              title="放大编辑"
+              @click="openEditor(index)"
+            >
+              <Maximize2 class="size-4" />
+            </button>
+            <button
+              type="button"
+              class="h-9 w-9 flex items-center justify-center border-l text-muted-foreground hover:bg-muted hover:text-destructive"
+              aria-label="删除参数"
+              title="删除参数"
+              @click="removeParameter(index)"
+            >
+              <Trash2 class="size-4" />
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          class="h-9 flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-destructive"
-          aria-label="删除参数"
-          @click="removeParameter(index)"
-        >
-          <Trash2 class="size-4" />
-        </button>
       </div>
       <button
         type="button"
