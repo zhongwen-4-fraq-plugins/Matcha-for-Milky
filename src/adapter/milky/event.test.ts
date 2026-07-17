@@ -2,6 +2,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { eventStrategy } from './event'
+import { milkyEventTypes } from './event-types'
 import { createBotOfflineEvent } from './events/system'
 
 import type { MilkyEvent } from './events/typed'
@@ -23,6 +24,31 @@ async function buildEvent(key: string, value: Scenes): Promise<MilkyEvent> {
 }
 
 describe('Milky event adapter', () => {
+  it('lists every Milky 1.2.2 event for custom sending', () => {
+    expect(milkyEventTypes.map(event => event.name).sort()).toEqual([
+      'bot_offline',
+      'friend_file_upload',
+      'friend_nudge',
+      'friend_request',
+      'group_admin_change',
+      'group_essence_message_change',
+      'group_file_upload',
+      'group_invitation',
+      'group_invited_join_request',
+      'group_join_request',
+      'group_member_decrease',
+      'group_member_increase',
+      'group_message_reaction',
+      'group_mute',
+      'group_name_change',
+      'group_nudge',
+      'group_whole_mute',
+      'message_recall',
+      'message_receive',
+      'peer_pin_change',
+    ].sort())
+  })
+
   it('implements every scene used by Milky events', () => {
     expect(Object.keys(eventStrategy).sort()).toEqual([
       'message.group',

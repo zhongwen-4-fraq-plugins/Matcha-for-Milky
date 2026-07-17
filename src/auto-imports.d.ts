@@ -14,6 +14,7 @@ declare global {
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const asyncWrapper: typeof import('./utils/utils')['asyncWrapper']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const buildParameterRecord: typeof import('./utils/parameters')['buildParameterRecord']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -385,6 +386,9 @@ declare global {
   // @ts-ignore
   export type { isBuild, isRelease, prNum, buildSha } from './types/info-build-meta.d'
   import('./types/info-build-meta.d')
+  // @ts-ignore
+  export type { ParameterEntry } from './types/parameter'
+  import('./types/parameter')
 }
 
 // for vue template auto import
@@ -400,6 +404,7 @@ declare module 'vue' {
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly asyncWrapper: UnwrapRef<typeof import('./utils/utils')['asyncWrapper']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly buildParameterRecord: UnwrapRef<typeof import('./utils/parameters')['buildParameterRecord']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
