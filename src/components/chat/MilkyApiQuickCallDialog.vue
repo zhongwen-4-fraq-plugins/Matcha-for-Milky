@@ -1,18 +1,25 @@
 <script setup lang="ts">
-import { Bot, Braces, ChevronRight, LoaderCircle, Play, Search } from 'lucide-vue-next'
+import { Bot, Braces, ChevronRight, LoaderCircle, Play, Plus, Search, Trash2 } from 'lucide-vue-next'
 
 import { milkyApis } from '~/adapter/milky/apis'
 
 import type { ActionResponse } from '~/adapter/action'
 
+interface ApiParameter {
+  id: number
+  name: string
+  value: string
+}
+
 const adapter = useAdapterStore()
 
 const search = $ref('')
 let selectedName = $ref(milkyApis[0].name as string)
-let params = $ref('{}')
+let parameters = $ref<ApiParameter[]>([])
 let result = $ref('')
 let failed = $ref(false)
 let calling = $ref(false)
+let nextParameterId = 1
 
 const filteredApis = $computed(() => {
   const keyword = search.trim().toLowerCase()
@@ -26,21 +33,47 @@ const selectedApi = $computed(() => milkyApis.find(api => api.name === selectedN
 
 function selectApi(name: string) {
   selectedName = name
-  params = '{}'
+  parameters = []
   result = ''
   failed = false
+}
+
+function addParameter() {
+  parameters.push({ id: nextParameterId++, name: '', value: '' })
+}
+
+function removeParameter(id: number) {
+  parameters = parameters.filter(parameter => parameter.id !== id)
+}
+
+function getParameterValue(value: string): unknown {
+  if (!value.trim()) {
+    return ''
+  }
+  try {
+    return JSON.parse(value) as unknown
+  } catch {
+    return value
+  }
 }
 
 async function callApi() {
   calling = true
   try {
-    const parsed = JSON.parse(params) as unknown
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-      throw new TypeError('参数必须是 JSON 对象')
+    const params: Record<string, unknown> = {}
+    for (const parameter of parameters) {
+      const name = parameter.name.trim()
+      if (!name) {
+        continue
+      }
+      if (Object.hasOwn(params, name)) {
+        throw new TypeError(`参数 ${name} 重复`)
+      }
+      params[name] = getParameterValue(parameter.value)
     }
     const response: ActionResponse = await adapter.bot.actionHandle({
       action: selectedApi.name,
-      params: parsed,
+      params,
     })
     failed = response.status === 'failed'
     result = JSON.stringify(response, undefined, 2)
@@ -108,13 +141,47 @@ async function callApi() {
           </header>
 
           <div class="min-h-0 flex flex-1 flex-col gap-3 p-4">
-            <label for="milky-api-params" class="text-xs font-medium">请求参数</label>
-            <textarea
-              id="milky-api-params"
-              v-model="params"
-              class="min-h-36 flex-1 resize-none border rounded-md bg-background p-3 text-xs font-mono outline-none focus:ring-2 focus:ring-ring"
-              spellcheck="false"
-            />
+            <div class="min-h-36 flex flex-1 flex-col overflow-hidden border rounded-md">
+              <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_2.25rem] border-b bg-muted/30 text-xs text-muted-foreground">
+                <span class="border-r px-3 py-2">参数名</span>
+                <span class="px-3 py-2">参数值</span>
+                <span class="sr-only">操作</span>
+              </div>
+              <div class="min-h-0 flex-1 overflow-auto">
+                <div
+                  v-for="parameter in parameters"
+                  :key="parameter.id"
+                  class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_2.25rem] border-b"
+                >
+                  <input
+                    v-model="parameter.name"
+                    class="h-9 min-w-0 border-r bg-transparent px-3 text-xs outline-none focus:bg-muted/20"
+                    placeholder="参数名"
+                  >
+                  <input
+                    v-model="parameter.value"
+                    class="h-9 min-w-0 bg-transparent px-3 text-xs outline-none focus:bg-muted/20"
+                    placeholder="参数值"
+                  >
+                  <button
+                    type="button"
+                    class="h-9 flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-destructive"
+                    aria-label="删除参数"
+                    @click="removeParameter(parameter.id)"
+                  >
+                    <Trash2 class="size-4" />
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="h-9 w-full flex items-center gap-2 px-3 text-xs text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                  @click="addParameter"
+                >
+                  <Plus class="size-4" />
+                  添加参数
+                </button>
+              </div>
+            </div>
 
             <div class="flex items-center justify-between">
               <span class="text-xs font-medium">响应结果</span>
