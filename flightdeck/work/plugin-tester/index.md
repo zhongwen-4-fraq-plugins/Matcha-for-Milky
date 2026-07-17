@@ -5,7 +5,6 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 ## Next
 
 - Exercise a real Fraq `Context.fromUrl()` connection against the desktop build.
-- Retry the optional NSIS installer when GitHub binary downloads are stable.
 
 ## Progress
 
@@ -41,6 +40,8 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Added JSON formatting in the expanded parameter editor with non-destructive invalid-input feedback.
 - Hid parameter expand and delete actions until row hover or keyboard focus, without shifting the two-column layout.
 - Set the default Windows installer directory name to `Matcha-for-Milky` while preserving the displayed application name `Matcha for Milky`.
+- Built both NSIS and WiX installers successfully after their required tooling downloads completed.
+- Updated the release workflow to publish under pushed date-sequence tags with the required GitHub token permissions.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -65,6 +66,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Read if
 
+- Read `flightdeck/knowledge/tooling/github-release-tags.md` before creating or changing a release tag.
 - Read `flightdeck/knowledge/fraq/timer-argument-order.md` when adding Fraq Context timers to fixtures or examples.
 - Read `flightdeck/knowledge/rust/axum-shared-event-route.md` when changing the `/event` transport handler.
 
