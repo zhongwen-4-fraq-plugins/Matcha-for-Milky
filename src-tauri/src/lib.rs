@@ -51,7 +51,7 @@ pub fn run() {
                 .target(tauri_plugin_log::Target::new(
                     tauri_plugin_log::TargetKind::Webview,
                 ),)
-                .timezone_strategy(tauri_plugin_log::TimezoneStrategy::UseLocal,)
+                .format(|out, message, _| out.finish(format_args!("{message}"),),)
                 .level(log::LevelFilter::Debug,)
                 .filter(|metadata| {
                     !metadata

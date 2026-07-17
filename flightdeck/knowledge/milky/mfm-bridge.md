@@ -18,3 +18,5 @@ Rust owns sockets and pending request channels. Vue owns users, groups, messages
 Milky 1.2.2 API state that is not part of upstream Matcha uses Dexie v5 tables for announcements, essence messages, private files, group files, and group folders. Forwarded-message contents remain process-local because their `forward_id` only needs to live for the active simulated session.
 
 Actions that have a matching Milky event must create a scene through `Behav` after their state change. This keeps the chat timeline, event preview, and WebSocket/SSE payload consistent. `bot_offline` is emitted directly before the Milky driver stops because the transport must still be available for delivery.
+
+The Tauri Webview log target uses a message-only formatter. The Vue log store owns display timestamps and levels, so the Rust formatter must not duplicate them or include the JavaScript call location encoded in the log target.
