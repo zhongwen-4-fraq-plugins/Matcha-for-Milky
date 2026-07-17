@@ -54,22 +54,22 @@ export abstract class Adapter {
 
   async actionHandle(request: ActionRequest): Promise<ActionResponse> {
     void logger.debug(
-      `[API] 调用 ${this.protocolName} ${request.action}: ${JSON.stringify(request.params)}`,
+      `[API: ${request.action}] 请求参数: ${JSON.stringify(request.params)}`,
     )
     try {
       const response = await this.actionHandler.handle(request)
       void logger.debug(
-        `[API] 完成 ${this.protocolName} ${request.action}: ${JSON.stringify(response)}`,
+        `[API: ${request.action}] 响应结果: ${JSON.stringify(response)}`,
       )
       return response
     } catch (error) {
       if (error instanceof ProtocolError) {
         void logger.warn(
-          `[API] 失败 ${this.protocolName} ${request.action}: ${JSON.stringify(error.response)}`,
+          `[API: ${request.action}] 调用失败: ${JSON.stringify(error.response)}`,
         )
         return error.response
       }
-      void logger.error(`[API] 异常 ${this.protocolName} ${request.action}: ${String(error)}`)
+      void logger.error(`[API: ${request.action}] 调用异常: ${String(error)}`)
       throw error
     }
   }
