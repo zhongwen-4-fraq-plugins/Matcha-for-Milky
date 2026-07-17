@@ -34,6 +34,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Formatted event log messages as `[Event: event_type] content` for consistent event identification and search.
 - Collapsed log messages after two lines with click-to-expand and click-to-collapse behavior.
 - Configured the Tauri Webview logger to send message text only, excluding duplicate timestamps, levels, targets, and call locations.
+- Implemented the quick-call dialog with a searchable list of all 64 Milky APIs, editable JSON parameters, execution, and response output.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

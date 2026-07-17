@@ -1,5 +1,5 @@
 import { createPinia, setActivePinia } from 'pinia'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 describe('Milky action adapter', () => {
   it('returns an empty object for APIs without output data', async () => {
@@ -9,7 +9,9 @@ describe('Milky action adapter', () => {
 
   it('implements every Milky 1.2.2 API endpoint', async () => {
     setActivePinia(createPinia())
+    vi.stubGlobal('useGeneralSettingsStore', () => ({ assetsServerAddress: '127.0.0.1:30002' }))
     const { actionStrategy } = await import('./action')
+    const { milkyApis } = await import('./apis')
 
     expect(Object.keys(actionStrategy).sort()).toEqual([
       'accept_friend_request',
@@ -77,5 +79,6 @@ describe('Milky action adapter', () => {
       'upload_group_file',
       'upload_private_file',
     ].sort())
+    expect(milkyApis.map(api => api.name).sort()).toEqual(Object.keys(actionStrategy).sort())
   })
 })
