@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Maximize2, Plus, Trash2 } from 'lucide-vue-next'
+import { Braces, Maximize2, Plus, Trash2 } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 
 import type { ParameterEntry } from '~/types/parameter'
 
@@ -20,6 +21,17 @@ function removeParameter(index: number) {
 function openEditor(index: number) {
   editingIndex = index
   editorOpen = true
+}
+
+function formatValue() {
+  if (!editingParameter) {
+    return
+  }
+  try {
+    editingParameter.value = JSON.stringify(JSON.parse(editingParameter.value), undefined, 2)
+  } catch {
+    toast.error('', { description: '参数值不是有效的 JSON' })
+  }
 }
 </script>
 
@@ -91,13 +103,17 @@ function openEditor(index: number) {
         class="min-h-72 w-full resize-y border rounded-md bg-background p-3 text-sm font-mono outline-none focus:ring-2 focus:ring-ring"
         spellcheck="false"
       />
-      <DialogFooter>
+      <div class="flex items-center justify-between">
+        <Button type="button" size="sm" variant="outline" class="gap-2" @click="formatValue">
+          <Braces class="size-4" />
+          格式化
+        </Button>
         <DialogClose as-child>
           <Button type="button" size="sm">
             完成
           </Button>
         </DialogClose>
-      </DialogFooter>
+      </div>
     </DialogContent>
   </Dialog>
 </template>
