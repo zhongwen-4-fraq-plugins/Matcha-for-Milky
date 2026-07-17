@@ -4,7 +4,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
-- Confirm that the `v20260718.1` GitHub Release workflow completes and publishes all platform artifacts.
+- Confirm that the corrected `v20260718.2` GitHub Release workflow completes and publishes all platform artifacts.
 - Exercise a real Fraq `Context.fromUrl()` connection against the desktop build.
 
 ## Progress
@@ -44,6 +44,9 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Built both NSIS and WiX installers successfully after their required tooling downloads completed.
 - Updated the release workflow to publish under pushed date-sequence tags with the required GitHub token permissions.
 - Published the first annotated release tag, `v20260718.1`, and confirmed that its GitHub Release workflow started.
+- Diagnosed the failed first release: all platforms completed compilation and bundling, then failed because the encrypted updater key password was not passed to Tauri.
+- Rotated the updater signing key before any successful public release, backed up the old local key, and configured both signing secrets in GitHub Actions.
+- Verified the signing fix with a complete local Windows release build that produced the NSIS installer and its updater signature.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

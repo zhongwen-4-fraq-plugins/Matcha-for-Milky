@@ -11,3 +11,14 @@ The release workflow is triggered by `v*` tags. Its Tauri Action `tagName` and `
 For a manual `workflow_dispatch`, supply the same tag format through the required `tag` input; the workflow uses that input before falling back to the pushed tag name.
 
 GitHub supplies `secrets.GITHUB_TOKEN` automatically. The workflow must grant it `contents: write` to create the release and upload artifacts; no manually created `GITHUB_TOKEN` secret is needed.
+
+## Updater signing
+
+Updater artifact generation requires both repository secrets to be passed to the Tauri build:
+
+- `TAURI_SIGNING_PRIVATE_KEY`
+- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`
+
+Providing an encrypted private key without its password lets every platform finish compilation and bundling, then makes all jobs fail together with `incorrect updater private key password`. When rotating the key before the first successful release, update `bundle.plugins.updater.pubkey` in `src-tauri/tauri.conf.json` at the same time.
+
+The updater endpoint must also use the repository's current GitHub name so clients do not depend on repository-rename redirects.

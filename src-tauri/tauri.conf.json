@@ -45,8 +45,8 @@
   },
   "plugins": {
     "updater": {
-      "endpoints": ["https://github.com/zhongwen-4-fraq-plugins/meow/releases/latest/download/latest.json"],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEFFMkYxODgzQzRGOTY0MTAKUldRUVpQbkVneGd2cm10SzFYYm8wV01CNjgwTmV5UXhDYzQ0eXJUeVFFNUJORTZWZ3dTd1lDU3IK"
+      "endpoints": ["https://github.com/zhongwen-4-fraq-plugins/Matcha-for-Milky/releases/latest/download/latest.json"],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDgwMUREREM1QUNEMzU3OTgKUldTWVY5T3N4ZDBkZ0xnY0xoY0ZtRzMvWGNkb0d4bmRXUGpGMUJPektUUDc1Rjl0MURzVUJqQ20K"
     }
   }
 }
