@@ -4,6 +4,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
+- Confirm that the `v20260718.1` GitHub Release workflow completes and publishes all platform artifacts.
 - Exercise a real Fraq `Context.fromUrl()` connection against the desktop build.
 
 ## Progress
@@ -42,6 +43,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Set the default Windows installer directory name to `Matcha-for-Milky` while preserving the displayed application name `Matcha for Milky`.
 - Built both NSIS and WiX installers successfully after their required tooling downloads completed.
 - Updated the release workflow to publish under pushed date-sequence tags with the required GitHub token permissions.
+- Published the first annotated release tag, `v20260718.1`, and confirmed that its GitHub Release workflow started.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

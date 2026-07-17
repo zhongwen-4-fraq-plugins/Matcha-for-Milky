@@ -8,6 +8,7 @@ Focus: 构建 Matcha for Milky Fraq 插件测试器。
 
 ## Next
 
+- 确认 `v20260718.1` 的 GitHub Release 工作流完成并发布全部平台产物。
 - 使用真实 Fraq `Context.fromUrl()` 验证 Matcha for Milky 的 Milky 协议适配和运行日志。
 
 ## Open questions
