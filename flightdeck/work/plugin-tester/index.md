@@ -40,6 +40,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Added an expanded multiline editor for nested API and event parameter values.
 - Added JSON formatting in the expanded parameter editor with non-destructive invalid-input feedback.
 - Hid parameter expand and delete actions until row hover or keyboard focus, without shifting the two-column layout.
+- Set the default Windows installer directory name to `Matcha-for-Milky` while preserving the displayed application name `Matcha for Milky`.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.

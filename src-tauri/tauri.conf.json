@@ -28,11 +28,13 @@
     "licenseFile": "../LICENSE",
     "windows": {
       "wix": {
+        "template": "installer/wix.wxs",
         "language": "zh-CN",
         "bannerPath": "images/wix_banner.png",
         "dialogImagePath": "images/wix_dialog.png"
       },
       "nsis": {
+        "template": "installer/nsis.nsi",
         "headerImage": "images/nsis_header.bmp",
         "sidebarImage": "images/nsis_sidebar.bmp",
         "installerIcon": "icons/icon.ico",
