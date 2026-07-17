@@ -20,6 +20,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Frontend type checking, JavaScript linting, and the native Rust/Tauri release build pass.
 - Installed Visual Studio Build Tools 2022 with the C++ workload and Windows SDK 10.0.26100.0.
 - Renamed the application to Matcha for Milky and standardized internal shorthand as `mfm`.
+- Named the standalone Windows release `Matcha for Milky.exe` while keeping the internal Rust binary name `mfm`.
 - NSIS bundling reached the installer stage but its optional GitHub utility download timed out; the standalone EXE is unaffected.
 - Milky connection status is driven by active WebSocket/SSE client count instead of local server startup.
 - Milky outgoing `forward` segments are parsed recursively and displayed as expandable forwarded messages, so plugin help responses are no longer discarded.
