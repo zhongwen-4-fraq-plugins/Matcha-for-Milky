@@ -20,6 +20,7 @@ const search = $ref('')
 const level = $ref<'all' | LogEntry['level']>('all')
 const autoScroll = $ref(true)
 const scrollArea = $ref<HTMLElement>()
+const expandedEntries = $ref(new Set<number>())
 
 const filteredEntries = $computed(() => {
   const keyword = search.trim().toLowerCase()
@@ -47,6 +48,14 @@ function formatTime(time: number) {
 
 function getLevelLabel(logLevel: LogEntry['level']) {
   return logLevel.toUpperCase()
+}
+
+function toggleMessage(id: number) {
+  if (expandedEntries.has(id)) {
+    expandedEntries.delete(id)
+    return
+  }
+  expandedEntries.add(id)
 }
 </script>
 
@@ -139,7 +148,15 @@ function getLevelLabel(logLevel: LogEntry['level']) {
             {{ getLevelLabel(entry.level) }}
           </span>
           <span class="text-muted-foreground">|</span>
-          <span class="min-w-0 whitespace-pre-wrap break-words text-foreground/85">{{ entry.message }}</span>
+          <button
+            type="button"
+            class="min-w-0 w-full whitespace-pre-wrap break-words text-left text-foreground/85"
+            :class="{ 'line-clamp-2': !expandedEntries.has(entry.id) }"
+            :aria-expanded="expandedEntries.has(entry.id)"
+            @click="toggleMessage(entry.id)"
+          >
+            {{ entry.message }}
+          </button>
         </li>
       </ul>
     </div>
