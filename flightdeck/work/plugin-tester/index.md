@@ -56,6 +56,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Fixed Issue #1 by validating every Milky event identifier as a positive integer and restricting new account and group IDs to numbers, preventing JavaScript `NaN` values from becoming JSON `null`.
 - Added complete log export, a right-click selectable log detail dialog, and a persisted user-configurable log retention limit that trims the oldest entries immediately.
 - Formatted JSON objects matched by their outermost braces and JSON array suffixes in log details with two-space indentation, preserving surrounding text, one-line exports, and non-JSON messages.
+- Added structural formatting for Tauri Rust Debug objects in log details, including nested `Object` and `String` wrappers that are not valid JSON.
 - Established a standing delivery rule to build and copy a release-mode Windows EXE with update checking enabled to the user's Downloads folder after every verified feature.
 - Verified the local release EXE path by building with `GITHUB_WORKFLOW=Release`, confirming the generated release flag is true, and matching the copied download EXE against the release binary by SHA-256.
 - Closed Issue #2 from the default branch with `Fixes #2` after confirming the report described broken Linux log copy/export behavior rather than a new feature request.

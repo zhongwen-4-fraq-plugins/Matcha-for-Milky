@@ -63,6 +63,23 @@ describe('log utilities', () => {
 delivered`)
   })
 
+  it('formats a Tauri debug object that is not valid JSON', () => {
+    const time = new Date(2026, 6, 19, 1, 2, 3).getTime()
+    expect(formatDetailedLogEntry({
+      level: 'debug',
+      message: 'update response: Object {"notes": String("* No changes"), "platforms": Object {"windows": Object {"url": String("https://example.com/update.json")}}, "version": String("0.4.10")}',
+      time,
+    })).toBe(`01:02:03 | DEBUG | update response: Object {
+  "notes": String("* No changes"),
+  "platforms": Object {
+    "windows": Object {
+      "url": String("https://example.com/update.json")
+    }
+  },
+  "version": String("0.4.10")
+}`)
+  })
+
   it('keeps non-JSON details unchanged', () => {
     const time = new Date(2026, 6, 19, 1, 2, 3).getTime()
     expect(formatDetailedLogEntry({ level: 'warn', message: 'connection closed', time }))
