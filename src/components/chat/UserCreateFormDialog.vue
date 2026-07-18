@@ -12,7 +12,7 @@ const userFormSchema = toTypedSchema(
       .string({ required_error: '角色 ID 不能为空', invalid_type_error: '角色 ID 必须是字符串' })
       .min(6, { message: '角色 ID 长度不能小于6' })
       .max(12, { message: '角色 ID 长度不能大于12' })
-      .regex(/^[a-zA-Z0-9]+$/, { message: '角色 ID 只能包含字母和数字' })
+      .regex(/^[1-9]\d*$/, { message: '角色 ID 必须是正整数' })
       .refine(async id => !(await db.users.get(id)), { message: '角色 ID 已存在' }),
     name: z
       .string({ required_error: '角色名称不能为空', invalid_type_error: '角色名称必须是字符串' })

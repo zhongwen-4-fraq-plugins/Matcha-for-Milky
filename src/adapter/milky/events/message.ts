@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { getFriend, getGroup, getGroupMember } from '../entities'
+import { toMilkyId } from '../id'
 import { MessageHandler } from '../message'
 import { createEvent } from './typed'
 
@@ -13,9 +14,9 @@ export const messageEventStrategy: EventStrategy<SceneMapping<Messages>> = {
     const peerId = scene.user_id === scene.self_id ? scene.receiver_id : scene.user_id
     const data: Record<string, unknown> = {
       message_scene: scene.sub_type === 'friend' ? 'friend' : 'temp',
-      peer_id: Number(peerId),
+      peer_id: toMilkyId(peerId),
       message_seq: Number(scene.message_id),
-      sender_id: Number(scene.user_id),
+      sender_id: toMilkyId(scene.user_id),
       time: scene.time,
       segments: await new MessageHandler().build(scene.message),
     }
@@ -26,9 +27,9 @@ export const messageEventStrategy: EventStrategy<SceneMapping<Messages>> = {
   },
   'message.group': async (scene: GroupMessageScene<Messages>): Promise<MilkyEvent> => createEvent(scene, 'message_receive', {
     message_scene: 'group',
-    peer_id: Number(scene.group_id),
+    peer_id: toMilkyId(scene.group_id),
     message_seq: Number(scene.message_id),
-    sender_id: Number(scene.user_id),
+    sender_id: toMilkyId(scene.user_id),
     time: scene.time,
     segments: await new MessageHandler().build(scene.message),
     group: await getGroup(scene.group_id),

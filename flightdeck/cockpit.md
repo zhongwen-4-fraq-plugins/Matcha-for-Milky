@@ -1,6 +1,6 @@
 # Cockpit — Matcha for Milky
 
-Focus: 构建 Matcha for Milky Fraq 插件测试器。
+Focus: 维护并验证 Matcha for Milky Fraq 插件测试器。
 
 ## In flight
 

@@ -14,7 +14,7 @@ const groupFormSchema = toTypedSchema(
       .string({ required_error: '群组 ID 不能为空', invalid_type_error: '群组 ID 必须是字符串' })
       .min(6, { message: '群组 ID 长度不能小于6' })
       .max(12, { message: '群组 ID 长度不能大于12' })
-      .regex(/^[a-zA-Z0-9]+$/, { message: '群组 ID 只能包含字母和数字' })
+      .regex(/^[1-9]\d*$/, { message: '群组 ID 必须是正整数' })
       .refine(async id => !(await db.groups.get(id)), { message: '群组 ID 已存在' }),
     name: z
       .string({ required_error: '群组名称不能为空', invalid_type_error: '群组名称必须是字符串' })

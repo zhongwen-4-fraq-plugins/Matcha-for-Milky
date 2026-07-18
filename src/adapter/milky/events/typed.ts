@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+import { toMilkyId } from '../id'
+
 import type { Event as BaseEvent } from '~/adapter/event'
 
 export interface MilkyEvent extends BaseEvent {
@@ -16,7 +18,7 @@ export function createEvent(
   return {
     event_type: eventType,
     time: scene.time,
-    self_id: Number(scene.self_id),
+    self_id: toMilkyId(scene.self_id),
     data,
   }
 }

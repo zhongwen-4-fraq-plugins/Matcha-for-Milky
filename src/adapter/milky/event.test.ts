@@ -157,4 +157,22 @@ describe('Milky event adapter', () => {
     expect(event.data.peer_id).toBe(3_0000)
     expect(event.data.sender_id).toBe(1_0000)
   })
+
+  it('rejects non-numeric IDs instead of serializing them as null', async () => {
+    await expect(buildEvent('message.private', {
+      ...scene,
+      self_id: 'test-bot',
+      type: 'message',
+      chat_type: 'private',
+      detail_type: 'private',
+      sub_type: 'temp',
+      message_id: '10',
+      message: [],
+      plain_message: '',
+      user_id: 'test-user',
+      user_name: '测试用户',
+      sender_id: 'test-user',
+      receiver_id: 'test-bot',
+    } as Scenes)).rejects.toThrow('Milky ID 必须是正整数')
+  })
 })

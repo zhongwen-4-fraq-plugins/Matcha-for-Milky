@@ -3,6 +3,7 @@
 import { Braces, ChevronRight, LoaderCircle, MessageCircleCode, Search, Send } from 'lucide-vue-next'
 
 import { milkyEventTypes } from '~/adapter/milky/event-types'
+import { toMilkyId } from '~/adapter/milky/id'
 import { buildParameterRecord } from '~/utils/parameters'
 
 import type { MilkyEvent } from '~/adapter/milky/events/typed'
@@ -43,7 +44,7 @@ async function sendEvent() {
     }
     const event: MilkyEvent = {
       time: getTimestamp(),
-      self_id: Number(state.bot.id),
+      self_id: toMilkyId(state.bot.id),
       event_type: selectedEvent.name,
       data: buildParameterRecord(parameters),
     }

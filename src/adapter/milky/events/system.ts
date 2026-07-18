@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { toMilkyId } from '../id'
 import { createEvent } from './typed'
 
 import type { MilkyEvent } from './typed'
@@ -11,7 +12,7 @@ export const systemEventStrategy: EventStrategy<SceneMapping> = {
   }),
   'notice.peer_pin_change': (scene: PeerPinChangeNoticeScene): MilkyEvent => createEvent(scene, 'peer_pin_change', {
     message_scene: scene.message_scene,
-    peer_id: Number(scene.peer_id),
+    peer_id: toMilkyId(scene.peer_id),
     is_pinned: scene.is_pinned,
   }),
 }

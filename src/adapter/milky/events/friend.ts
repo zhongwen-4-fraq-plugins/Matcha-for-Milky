@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { toMilkyId } from '../id'
 import { createEvent } from './typed'
 
 import type { MilkyEvent } from './typed'
@@ -16,10 +17,10 @@ export const friendEventStrategy: EventStrategy<SceneMapping> = {
     const peerId = scene.user_id === scene.self_id ? scene.receiver_id : scene.user_id
     return createEvent(scene, 'message_recall', {
       message_scene: 'friend',
-      peer_id: Number(peerId),
+      peer_id: toMilkyId(peerId),
       message_seq: Number(scene.message_id),
-      sender_id: Number(scene.user_id),
-      operator_id: Number(scene.sender_id),
+      sender_id: toMilkyId(scene.user_id),
+      operator_id: toMilkyId(scene.sender_id),
       display_suffix: '',
     })
   },
@@ -28,7 +29,7 @@ export const friendEventStrategy: EventStrategy<SceneMapping> = {
       ? (scene.target_id === scene.self_id ? scene.receiver_id : scene.target_id)
       : scene.user_id
     return createEvent(scene, 'friend_nudge', {
-      user_id: Number(friendId),
+      user_id: toMilkyId(friendId),
       is_self_send: scene.user_id === scene.self_id,
       is_self_receive: scene.target_id === scene.self_id,
       display_action: '戳了戳',
@@ -37,7 +38,7 @@ export const friendEventStrategy: EventStrategy<SceneMapping> = {
     })
   },
   'notice.offline_file': (scene: OfflineFileNoticeScene): MilkyEvent => createEvent(scene, 'friend_file_upload', {
-    user_id: Number(scene.user_id),
+    user_id: toMilkyId(scene.user_id),
     file_id: scene.file.id,
     file_name: scene.file.name,
     file_size: scene.file.size,
@@ -45,7 +46,7 @@ export const friendEventStrategy: EventStrategy<SceneMapping> = {
     is_self: scene.sender_id === scene.self_id,
   }),
   'request.add_friend': (scene: AddFriendRequestScene): MilkyEvent => createEvent(scene, 'friend_request', {
-    initiator_id: Number(scene.user_id),
+    initiator_id: toMilkyId(scene.user_id),
     initiator_uid: scene.user_id,
     comment: scene.comment,
     via: 'mfm',
