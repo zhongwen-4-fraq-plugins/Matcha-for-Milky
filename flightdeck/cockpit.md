@@ -8,7 +8,7 @@ Focus: 维护并验证 Matcha for Milky Fraq 插件测试器。
 
 ## Next
 
-- 使用真实 Fraq `Context.fromUrl()` 验证 Matcha for Milky 的 Milky 协议适配和运行日志。
+- 修复 Release 工作流：从直接提交生成更新日志，并让所有平台产物上传到同一个 Release。
 
 ## Open questions
 

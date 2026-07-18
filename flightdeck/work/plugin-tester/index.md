@@ -4,7 +4,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
-- Exercise a real Fraq `Context.fromUrl()` connection against the desktop build.
+- Fix the Release workflow so direct commits generate changelog entries and all platform jobs upload to one Release.
 
 ## Progress
 
@@ -61,6 +61,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Established a standing delivery rule to build and copy a release-mode Windows EXE with update checking enabled to the user's Downloads folder after every verified feature.
 - Verified the local release EXE path by building with `GITHUB_WORKFLOW=Release`, confirming the generated release flag is true, and matching the copied download EXE against the release binary by SHA-256.
 - Closed Issue #2 from the default branch with `Fixes #2` after confirming the report described broken Linux log copy/export behavior rather than a new feature request.
+- Diagnosed the missing `v20260719.1` release notes: Release Drafter found no merged pull requests because all 11 changes since `v20260718.4` were direct commits, while multiple workflow jobs also competed to manage release drafts.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -91,6 +92,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Read `flightdeck/knowledge/tooling/github-issue-closing-keywords.md` before linking or closing any GitHub issue from a commit or pull request.
 - Read `flightdeck/knowledge/tooling/log-json-boundaries.md` when JSON in log details remains on one line or has trailing text after its closing brace.
 - Read `flightdeck/knowledge/tooling/github-release-tags.md` before creating or changing a release tag.
+- Read `flightdeck/knowledge/tooling/release-drafter-direct-commits.md` when release notes are empty despite commits existing between tags.
 - Read `flightdeck/knowledge/tooling/date-versioning.md` before changing the application version or creating a release tag.
 - Read `flightdeck/knowledge/tooling/tauri-updater-network.md` when an update check fails while the public manifest remains available.
 - Read `flightdeck/knowledge/fraq/timer-argument-order.md` when adding Fraq Context timers to fixtures or examples.
