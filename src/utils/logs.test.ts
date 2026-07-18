@@ -43,6 +43,26 @@ describe('log utilities', () => {
     })).toContain('[\n  {\n    "id": 1\n  }\n]')
   })
 
+  it('formats the outermost JSON object and preserves trailing text', () => {
+    const time = new Date(2026, 6, 19, 1, 2, 3).getTime()
+    expect(formatDetailedLogEntry({
+      level: 'info',
+      message: '[Event: message_receive] 接收事件: {"data":{"segments":[{"type":"text"}]},"self_id":10000} delivered',
+      time,
+    })).toBe(`01:02:03 | INFO | [Event: message_receive] 接收事件:
+{
+  "data": {
+    "segments": [
+      {
+        "type": "text"
+      }
+    ]
+  },
+  "self_id": 10000
+}
+delivered`)
+  })
+
   it('keeps non-JSON details unchanged', () => {
     const time = new Date(2026, 6, 19, 1, 2, 3).getTime()
     expect(formatDetailedLogEntry({ level: 'warn', message: 'connection closed', time }))

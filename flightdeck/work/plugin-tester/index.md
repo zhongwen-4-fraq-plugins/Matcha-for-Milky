@@ -55,7 +55,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Replaced `0.x` version names with an MSI-compatible date sequence: internal `YY.M.DDNN`, development display `YYYYMMDDNN-dev`, and release display `YYYYMMDDNN-build`.
 - Fixed Issue #1 by validating every Milky event identifier as a positive integer and restricting new account and group IDs to numbers, preventing JavaScript `NaN` values from becoming JSON `null`.
 - Added complete log export, a right-click selectable log detail dialog, and a persisted user-configurable log retention limit that trims the oldest entries immediately.
-- Formatted valid JSON object or array suffixes in log details with two-space indentation while preserving one-line exports and non-JSON messages.
+- Formatted JSON objects matched by their outermost braces and JSON array suffixes in log details with two-space indentation, preserving surrounding text, one-line exports, and non-JSON messages.
 - Established a standing delivery rule to build and copy a release-mode Windows EXE with update checking enabled to the user's Downloads folder after every verified feature.
 - Verified the local release EXE path by building with `GITHUB_WORKFLOW=Release`, confirming the generated release flag is true, and matching the copied download EXE against the release binary by SHA-256.
 - Closed Issue #2 from the default branch with `Fixes #2` after confirming the report described broken Linux log copy/export behavior rather than a new feature request.
@@ -87,6 +87,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Read `flightdeck/knowledge/tooling/root-log-ignore.md` when adding a source directory named `logs` or debugging ignored log-related source files.
 - Read `flightdeck/knowledge/tooling/local-release-exe.md` before building any local Windows EXE for user delivery.
 - Read `flightdeck/knowledge/tooling/github-issue-closing-keywords.md` before linking or closing any GitHub issue from a commit or pull request.
+- Read `flightdeck/knowledge/tooling/log-json-boundaries.md` when JSON in log details remains on one line or has trailing text after its closing brace.
 - Read `flightdeck/knowledge/tooling/github-release-tags.md` before creating or changing a release tag.
 - Read `flightdeck/knowledge/tooling/date-versioning.md` before changing the application version or creating a release tag.
 - Read `flightdeck/knowledge/tooling/tauri-updater-network.md` when an update check fails while the public manifest remains available.
