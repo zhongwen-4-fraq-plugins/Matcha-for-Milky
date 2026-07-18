@@ -2,6 +2,8 @@ import { isTauri } from '@tauri-apps/api/core'
 import { attachLogger, LogLevel } from '@tauri-apps/plugin-log'
 import { defineStore } from 'pinia'
 
+import { trimLogEntries } from '~/utils/logs'
+
 import type { UnlistenFn } from '@tauri-apps/api/event'
 
 export interface LogEntry {
@@ -32,6 +34,7 @@ function getLevel(level: LogLevel): LogEntry['level'] {
 }
 
 export const useLogsStore = defineStore('logs', () => {
+  const general = useGeneralSettingsStore()
   const entries = $ref<LogEntry[]>([])
   let nextId = 1
   let unlisten: UnlistenFn | undefined
@@ -43,9 +46,7 @@ export const useLogsStore = defineStore('logs', () => {
       message,
       time: Date.now(),
     })
-    if (entries.length > 1000) {
-      entries.splice(0, entries.length - 1000)
-    }
+    trimLogEntries(entries, general.logLimit)
   }
 
   async function start() {
@@ -65,6 +66,11 @@ export const useLogsStore = defineStore('logs', () => {
   function clear() {
     entries.splice(0)
   }
+
+  watch(
+    () => general.logLimit,
+    limit => trimLogEntries(entries, limit),
+  )
 
   return $$({
     entries,

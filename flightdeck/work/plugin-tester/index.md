@@ -54,6 +54,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Published all 17 `v20260718.4` artifacts after the update-dialog release passed on Linux, Windows, macOS Intel, and macOS ARM64.
 - Replaced `0.x` version names with an MSI-compatible date sequence: internal `YY.M.DDNN`, development display `YYYYMMDDNN-dev`, and release display `YYYYMMDDNN-build`.
 - Fixed Issue #1 by validating every Milky event identifier as a positive integer and restricting new account and group IDs to numbers, preventing JavaScript `NaN` values from becoming JSON `null`.
+- Added complete log export, a right-click selectable log detail dialog, and a persisted user-configurable log retention limit that trims the oldest entries immediately.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -79,6 +80,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 ## Read if
 
 - Read `flightdeck/knowledge/milky/numeric-identifiers.md` when converting account or group IDs for Milky or debugging a `null` event identifier.
+- Read `flightdeck/knowledge/tooling/root-log-ignore.md` when adding a source directory named `logs` or debugging ignored log-related source files.
 - Read `flightdeck/knowledge/tooling/github-release-tags.md` before creating or changing a release tag.
 - Read `flightdeck/knowledge/tooling/date-versioning.md` before changing the application version or creating a release tag.
 - Read `flightdeck/knowledge/tooling/tauri-updater-network.md` when an update check fails while the public manifest remains available.

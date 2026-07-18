@@ -30,6 +30,8 @@ const generalSettingsSchema = toTypedSchema(
     applyAcrylicWindowEffects: z.boolean(),
     enableLinkPreview: z.boolean(),
     assetsServerAddress: z.string().regex(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}:[0-9]{1,5}$/, '服务器地址格式不正确'),
+    logLimit: z.coerce.number().int().min(100)
+      .max(10_0000),
   }),
 )
 
@@ -132,6 +134,16 @@ const osType = isTauri() ? getOsType() : 'windows'
         <FormControl>
           <Switch :checked="value" aria-readonly @update:checked="handleChange" />
         </FormControl>
+      </FormItem>
+    </FormField>
+    <FormField v-slot="{ componentField }" name="logLimit">
+      <FormItem>
+        <FormLabel>日志保留上限</FormLabel>
+        <FormControl>
+          <Input type="number" min="100" max="100000" step="100" v-bind="componentField" class="h-9 max-w-80" />
+        </FormControl>
+        <FormDescription>超过上限后自动删除最早的日志，允许设置 100 到 100000 条</FormDescription>
+        <FormMessage />
       </FormItem>
     </FormField>
     <FormField v-slot="{ value, handleChange }" name="enbaleSuperUser">

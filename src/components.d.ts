@@ -121,6 +121,7 @@ declare module 'vue' {
     HoverCardTrigger: typeof import('./components/ui/hover-card/HoverCardTrigger.vue')['default']
     Input: typeof import('./components/ui/input/Input.vue')['default']
     Label: typeof import('./components/ui/label/Label.vue')['default']
+    LogDetailsDialog: typeof import('./components/logs/LogDetailsDialog.vue')['default']
     MemberEditFormDialog: typeof import('./components/chat/MemberEditFormDialog.vue')['default']
     MilkyApiQuickCallDialog: typeof import('./components/chat/MilkyApiQuickCallDialog.vue')['default']
     MilkyCustomEventDialog: typeof import('./components/chat/MilkyCustomEventDialog.vue')['default']

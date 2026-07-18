@@ -10,6 +10,7 @@ export interface GeneralSettings {
   applyAcrylicWindowEffects: boolean
   enableLinkPreview: boolean
   assetsServerAddress: string
+  logLimit: number
 }
 
 export const useGeneralSettingsStore = defineStore(
@@ -24,6 +25,7 @@ export const useGeneralSettingsStore = defineStore(
     const applyAcrylicWindowEffects = $ref<GeneralSettings['applyAcrylicWindowEffects']>(false)
     const enableLinkPreview = $ref<GeneralSettings['enableLinkPreview']>(true)
     const assetsServerAddress = $ref<GeneralSettings['assetsServerAddress']>('127.0.0.1:8720')
+    const logLimit = $ref<GeneralSettings['logLimit']>(1000)
 
     async function startAssetsServer(address: string): Promise<void> {
       const [host, port] = address.split(':')
@@ -52,6 +54,7 @@ export const useGeneralSettingsStore = defineStore(
       applyAcrylicWindowEffects,
       enableLinkPreview,
       assetsServerAddress,
+      logLimit,
       startAssetsServer,
     })
   },

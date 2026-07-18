@@ -49,6 +49,8 @@ declare global {
   const focused: typeof import('./composables/window-focus')['focused']
   const formatBytes: typeof import('./utils/utils')['formatBytes']
   const formatDateVersion: typeof import('./utils/version')['formatDateVersion']
+  const formatLogEntry: typeof import('./utils/logs')['formatLogEntry']
+  const formatLogTime: typeof import('./utils/logs')['formatLogTime']
   const formatReleaseVersion: typeof import('./utils/version')['formatReleaseVersion']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getAssetsUrl: typeof import('./utils/utils')['getAssetsUrl']
@@ -152,6 +154,7 @@ declare global {
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
+  const trimLogEntries: typeof import('./utils/logs')['trimLogEntries']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
   const tryOnBeforeUnmount: typeof import('@vueuse/core')['tryOnBeforeUnmount']
   const tryOnMounted: typeof import('@vueuse/core')['tryOnMounted']
@@ -442,6 +445,8 @@ declare module 'vue' {
     readonly focused: UnwrapRef<typeof import('./composables/window-focus')['focused']>
     readonly formatBytes: UnwrapRef<typeof import('./utils/utils')['formatBytes']>
     readonly formatDateVersion: UnwrapRef<typeof import('./utils/version')['formatDateVersion']>
+    readonly formatLogEntry: UnwrapRef<typeof import('./utils/logs')['formatLogEntry']>
+    readonly formatLogTime: UnwrapRef<typeof import('./utils/logs')['formatLogTime']>
     readonly formatReleaseVersion: UnwrapRef<typeof import('./utils/version')['formatReleaseVersion']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getAssetsUrl: UnwrapRef<typeof import('./utils/utils')['getAssetsUrl']>
@@ -545,6 +550,7 @@ declare module 'vue' {
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
+    readonly trimLogEntries: UnwrapRef<typeof import('./utils/logs')['trimLogEntries']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>
     readonly tryOnMounted: UnwrapRef<typeof import('@vueuse/core')['tryOnMounted']>
