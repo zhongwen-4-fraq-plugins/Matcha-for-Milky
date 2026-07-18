@@ -57,6 +57,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Added complete log export, a right-click selectable log detail dialog, and a persisted user-configurable log retention limit that trims the oldest entries immediately.
 - Established a standing delivery rule to build and copy a release-mode Windows EXE with update checking enabled to the user's Downloads folder after every verified feature.
 - Verified the local release EXE path by building with `GITHUB_WORKFLOW=Release`, confirming the generated release flag is true, and matching the copied download EXE against the release binary by SHA-256.
+- Closed Issue #2 from the default branch with `Fixes #2` after confirming the report described broken Linux log copy/export behavior rather than a new feature request.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -84,6 +85,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Read `flightdeck/knowledge/milky/numeric-identifiers.md` when converting account or group IDs for Milky or debugging a `null` event identifier.
 - Read `flightdeck/knowledge/tooling/root-log-ignore.md` when adding a source directory named `logs` or debugging ignored log-related source files.
 - Read `flightdeck/knowledge/tooling/local-release-exe.md` before building any local Windows EXE for user delivery.
+- Read `flightdeck/knowledge/tooling/github-issue-closing-keywords.md` before linking or closing any GitHub issue from a commit or pull request.
 - Read `flightdeck/knowledge/tooling/github-release-tags.md` before creating or changing a release tag.
 - Read `flightdeck/knowledge/tooling/date-versioning.md` before changing the application version or creating a release tag.
 - Read `flightdeck/knowledge/tooling/tauri-updater-network.md` when an update check fails while the public manifest remains available.
