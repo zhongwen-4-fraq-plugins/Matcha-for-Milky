@@ -5,6 +5,8 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import VueMarkdown from 'vue-markdown-render'
 import { toast } from 'vue-sonner'
 
+import { formatReleaseVersion } from '~/utils/version'
+
 import type { DownloadEvent, Update } from '@tauri-apps/plugin-updater'
 
 const { updateInfo } = $defineProps<{
@@ -70,9 +72,9 @@ onUnmounted(() => void updateInfo.close())
           </div>
         </div>
         <div class="flex items-center justify-center gap-3 border rounded-lg bg-muted/40 px-4 py-3 text-sm">
-          <span class="text-muted-foreground">v{{ updateInfo.currentVersion }}</span>
+          <span class="text-muted-foreground">v{{ formatReleaseVersion(updateInfo.currentVersion) }}</span>
           <ArrowRight class="size-4 text-muted-foreground" />
-          <span class="text-primary font-medium">v{{ updateInfo.version }}</span>
+          <span class="text-primary font-medium">v{{ formatReleaseVersion(updateInfo.version) }}</span>
         </div>
       </DialogHeader>
 

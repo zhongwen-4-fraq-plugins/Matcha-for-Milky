@@ -48,6 +48,8 @@ declare global {
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const focused: typeof import('./composables/window-focus')['focused']
   const formatBytes: typeof import('./utils/utils')['formatBytes']
+  const formatDateVersion: typeof import('./utils/version')['formatDateVersion']
+  const formatReleaseVersion: typeof import('./utils/version')['formatReleaseVersion']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getAssetsUrl: typeof import('./utils/utils')['getAssetsUrl']
   const getAvatarUrl: typeof import('./utils/chat')['getAvatarUrl']
@@ -439,6 +441,8 @@ declare module 'vue' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly focused: UnwrapRef<typeof import('./composables/window-focus')['focused']>
     readonly formatBytes: UnwrapRef<typeof import('./utils/utils')['formatBytes']>
+    readonly formatDateVersion: UnwrapRef<typeof import('./utils/version')['formatDateVersion']>
+    readonly formatReleaseVersion: UnwrapRef<typeof import('./utils/version')['formatReleaseVersion']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getAssetsUrl: UnwrapRef<typeof import('./utils/utils')['getAssetsUrl']>
     readonly getAvatarUrl: UnwrapRef<typeof import('./utils/chat')['getAvatarUrl']>

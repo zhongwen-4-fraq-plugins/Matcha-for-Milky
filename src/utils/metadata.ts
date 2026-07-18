@@ -1,3 +1,5 @@
+import { formatDateVersion, formatReleaseVersion } from '~/utils/version'
+
 import { isCI, isPR } from '~build/ci'
 import { github, tag } from '~build/git'
 import { isBuild, isRelease, prNum, buildSha } from '~build/meta'
@@ -9,9 +11,11 @@ interface Version {
 }
 
 export function getVersion(): Version {
+  const displayVersion = formatDateVersion(version)
+
   if (import.meta.env.DEV) {
     return {
-      name: `${version}-dev`,
+      name: `${displayVersion}-dev`,
       link: '',
     }
   }
@@ -20,23 +24,23 @@ export function getVersion(): Version {
       const shortSha = buildSha.slice(0, 7)
       return isPR
         ? {
-            name: `${version}-build.${shortSha} (pr#${prNum})`,
+            name: `${displayVersion}-build.${shortSha} (pr#${prNum})`,
             link: `${github}/pull/${prNum}`,
           }
         : {
-            name: `${version}-build.${shortSha}`,
+            name: `${displayVersion}-build.${shortSha}`,
             link: `${github}/commit/${buildSha}`,
           }
     }
     if (isRelease && tag) {
       return {
-        name: version,
+        name: formatReleaseVersion(version),
         link: `${github}/releases/tag/${tag}`,
       }
     }
   }
   return {
-    name: `${version}-unknown`,
+    name: `${displayVersion}-unknown`,
     link: '',
   }
 }
