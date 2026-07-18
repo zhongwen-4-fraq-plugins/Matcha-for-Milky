@@ -2,7 +2,7 @@
 import { Copy } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
-import { formatLogEntry } from '~/utils/logs'
+import { formatDetailedLogEntry } from '~/utils/logs'
 
 import type { LogEntry } from '~/stores/logs'
 
@@ -11,9 +11,10 @@ const { entry } = $defineProps<{
 }>()
 
 let open = $(defineModel('open', { default: false }))
+const details = $computed(() => formatDetailedLogEntry(entry))
 
 async function copyLog() {
-  await navigator.clipboard.writeText(formatLogEntry(entry))
+  await navigator.clipboard.writeText(details)
   toast.success('', { description: '日志已复制' })
 }
 </script>
@@ -26,7 +27,7 @@ async function copyLog() {
         <DialogDescription>可以选择并复制完整日志内容</DialogDescription>
       </DialogHeader>
       <textarea
-        :value="formatLogEntry(entry)"
+        :value="details"
         class="min-h-64 w-full select-text resize-y overflow-auto whitespace-pre-wrap break-words border rounded-md bg-muted/30 p-3 text-xs font-mono outline-none focus:ring-2 focus:ring-ring"
         readonly
         spellcheck="false"

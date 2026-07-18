@@ -49,6 +49,7 @@ declare global {
   const focused: typeof import('./composables/window-focus')['focused']
   const formatBytes: typeof import('./utils/utils')['formatBytes']
   const formatDateVersion: typeof import('./utils/version')['formatDateVersion']
+  const formatDetailedLogEntry: typeof import('./utils/logs')['formatDetailedLogEntry']
   const formatLogEntry: typeof import('./utils/logs')['formatLogEntry']
   const formatLogTime: typeof import('./utils/logs')['formatLogTime']
   const formatReleaseVersion: typeof import('./utils/version')['formatReleaseVersion']
@@ -445,6 +446,7 @@ declare module 'vue' {
     readonly focused: UnwrapRef<typeof import('./composables/window-focus')['focused']>
     readonly formatBytes: UnwrapRef<typeof import('./utils/utils')['formatBytes']>
     readonly formatDateVersion: UnwrapRef<typeof import('./utils/version')['formatDateVersion']>
+    readonly formatDetailedLogEntry: UnwrapRef<typeof import('./utils/logs')['formatDetailedLogEntry']>
     readonly formatLogEntry: UnwrapRef<typeof import('./utils/logs')['formatLogEntry']>
     readonly formatLogTime: UnwrapRef<typeof import('./utils/logs')['formatLogTime']>
     readonly formatReleaseVersion: UnwrapRef<typeof import('./utils/version')['formatReleaseVersion']>
