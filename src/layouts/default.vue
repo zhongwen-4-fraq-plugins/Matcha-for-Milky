@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { isTauri } from '@tauri-apps/api/core'
-import { relaunch } from '@tauri-apps/plugin-process'
 import { configure } from 'vee-validate'
 
 import { checkForUpdate } from '~/utils/updater'
@@ -13,6 +12,7 @@ configure({
 
 onMounted(async () => {
   const general = useGeneralSettingsStore()
+  const modal = useModalStore()
 
   if (isTauri()) {
     await general.startAssetsServer(general.assetsServerAddress)
@@ -22,8 +22,7 @@ onMounted(async () => {
     try {
       const update = await checkForUpdate()
       if (update) {
-        await update.downloadAndInstall()
-        await relaunch()
+        modal.open('checkUpdate', { updateInfo: update })
       }
     } catch (error) {
       void logger.error(`检查更新失败: ${error as string}`)
