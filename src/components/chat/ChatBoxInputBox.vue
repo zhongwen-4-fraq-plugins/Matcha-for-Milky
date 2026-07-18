@@ -228,6 +228,7 @@ defineExpose($$({ inputRef, clearInput, insertFile }))
     />
     <div
       ref="inputRef"
+      data-chat-input
       class="w-full whitespace-pre-wrap break-all bg-transparent px-2 py-1 align-middle text-sm text-gray-500 caret-gray-500/50 outline-none"
       dark="text-gray-300 caret-gray-300/50"
       contenteditable

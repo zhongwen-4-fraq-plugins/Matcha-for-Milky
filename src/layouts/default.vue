@@ -2,6 +2,7 @@
 import { isTauri } from '@tauri-apps/api/core'
 import { configure } from 'vee-validate'
 
+import { useAppShortcuts } from '~/composables/useAppShortcuts'
 import { checkForUpdate } from '~/utils/updater'
 
 import { isRelease } from '~build/meta'
@@ -9,6 +10,8 @@ import { isRelease } from '~build/meta'
 configure({
   validateOnBlur: false,
 })
+
+useAppShortcuts()
 
 onMounted(async () => {
   const general = useGeneralSettingsStore()

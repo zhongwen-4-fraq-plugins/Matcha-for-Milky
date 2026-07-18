@@ -4,7 +4,7 @@ Focus: 维护并验证 Matcha for Milky Fraq 插件测试器。
 
 ## In flight
 
-- `work/plugin-tester/`：Matcha for Milky Vue/Tauri 模拟聊天工具、Milky 协议适配、日志诊断与 Windows 发布态交付。
+- `work/plugin-tester/`：Matcha for Milky Vue/Tauri 模拟聊天工具、Milky 协议适配、快捷键、日志诊断与 Windows 发布态交付。
 
 ## Next
 

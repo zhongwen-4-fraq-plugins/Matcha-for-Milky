@@ -66,6 +66,8 @@ declare global {
   const getPlainMessage: typeof import('./utils/chat')['getPlainMessage']
   const getPlainScene: typeof import('./utils/chat')['getPlainScene']
   const getPreviewMessage: typeof import('./utils/chat')['getPreviewMessage']
+  const getShortcutFromEvent: typeof import('./utils/shortcut')['getShortcutFromEvent']
+  const getShortcutLabel: typeof import('./utils/shortcut')['getShortcutLabel']
   const getSubmitFn: typeof import('./utils/form')['getSubmitFn']
   const getTimestamp: typeof import('./utils/utils')['getTimestamp']
   const getUUID: typeof import('./utils/utils')['getUUID']
@@ -167,6 +169,7 @@ declare global {
   const useActiveElement: typeof import('@vueuse/core')['useActiveElement']
   const useAdapterStore: typeof import('./stores/adapter')['useAdapterStore']
   const useAnimate: typeof import('@vueuse/core')['useAnimate']
+  const useAppShortcuts: typeof import('./composables/useAppShortcuts')['useAppShortcuts']
   const useArrayDifference: typeof import('@vueuse/core')['useArrayDifference']
   const useArrayEvery: typeof import('@vueuse/core')['useArrayEvery']
   const useArrayFilter: typeof import('@vueuse/core')['useArrayFilter']
@@ -295,6 +298,7 @@ declare global {
   const useSessionStorage: typeof import('@vueuse/core')['useSessionStorage']
   const useSessionStore: typeof import('./stores/session')['useSessionStore']
   const useShare: typeof import('@vueuse/core')['useShare']
+  const useShortcutSettingsStore: typeof import('./stores/shortcut-settings')['useShortcutSettingsStore']
   const useSlots: typeof import('vue')['useSlots']
   const useSorted: typeof import('@vueuse/core')['useSorted']
   const useSpeechRecognition: typeof import('@vueuse/core')['useSpeechRecognition']
@@ -382,6 +386,9 @@ declare global {
   export type { LogEntry } from './stores/logs'
   import('./stores/logs')
   // @ts-ignore
+  export type { ShortcutSettings } from './stores/shortcut-settings'
+  import('./stores/shortcut-settings')
+  // @ts-ignore
   export type { FileInfo } from './utils/file'
   import('./utils/file')
   // @ts-ignore
@@ -463,6 +470,8 @@ declare module 'vue' {
     readonly getPlainMessage: UnwrapRef<typeof import('./utils/chat')['getPlainMessage']>
     readonly getPlainScene: UnwrapRef<typeof import('./utils/chat')['getPlainScene']>
     readonly getPreviewMessage: UnwrapRef<typeof import('./utils/chat')['getPreviewMessage']>
+    readonly getShortcutFromEvent: UnwrapRef<typeof import('./utils/shortcut')['getShortcutFromEvent']>
+    readonly getShortcutLabel: UnwrapRef<typeof import('./utils/shortcut')['getShortcutLabel']>
     readonly getSubmitFn: UnwrapRef<typeof import('./utils/form')['getSubmitFn']>
     readonly getTimestamp: UnwrapRef<typeof import('./utils/utils')['getTimestamp']>
     readonly getUUID: UnwrapRef<typeof import('./utils/utils')['getUUID']>
@@ -564,6 +573,7 @@ declare module 'vue' {
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAdapterStore: UnwrapRef<typeof import('./stores/adapter')['useAdapterStore']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
+    readonly useAppShortcuts: UnwrapRef<typeof import('./composables/useAppShortcuts')['useAppShortcuts']>
     readonly useArrayDifference: UnwrapRef<typeof import('@vueuse/core')['useArrayDifference']>
     readonly useArrayEvery: UnwrapRef<typeof import('@vueuse/core')['useArrayEvery']>
     readonly useArrayFilter: UnwrapRef<typeof import('@vueuse/core')['useArrayFilter']>
@@ -692,6 +702,7 @@ declare module 'vue' {
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
     readonly useSessionStore: UnwrapRef<typeof import('./stores/session')['useSessionStore']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>
+    readonly useShortcutSettingsStore: UnwrapRef<typeof import('./stores/shortcut-settings')['useShortcutSettingsStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSorted: UnwrapRef<typeof import('@vueuse/core')['useSorted']>
     readonly useSpeechRecognition: UnwrapRef<typeof import('@vueuse/core')['useSpeechRecognition']>

@@ -31,6 +31,7 @@ declare module 'vue-router/auto-routes' {
     '/settings': RouteRecordInfo<'/settings', '/settings', Record<never, never>, Record<never, never>>,
     '/settings/connect': RouteRecordInfo<'/settings/connect', '/settings/connect', Record<never, never>, Record<never, never>>,
     '/settings/general': RouteRecordInfo<'/settings/general', '/settings/general', Record<never, never>, Record<never, never>>,
+    '/settings/shortcuts': RouteRecordInfo<'/settings/shortcuts', '/settings/shortcuts', Record<never, never>, Record<never, never>>,
     '/test': RouteRecordInfo<'/test', '/test', Record<never, never>, Record<never, never>>,
     '/tool': RouteRecordInfo<'/tool', '/tool', Record<never, never>, Record<never, never>>,
   }

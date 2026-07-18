@@ -3,7 +3,7 @@ meta:
   isSettings: true
   title: 连接
   description: 配置 Milky 服务连接信息
-  position: 1
+  position: 2
 </route>
 
 <script setup lang="ts">

@@ -147,6 +147,7 @@ declare module 'vue' {
     SettingsArea: typeof import('./components/settings/SettingsArea.vue')['default']
     SettingsTOC: typeof import('./components/settings/SettingsTOC.vue')['default']
     SettingsToolbar: typeof import('./components/settings/SettingsToolbar.vue')['default']
+    ShortcutInput: typeof import('./components/settings/ShortcutInput.vue')['default']
     Switch: typeof import('./components/ui/switch/Switch.vue')['default']
     ThemeStyleMap: typeof import('./components/ThemeStyleMap.vue')['default']
     Toaster: typeof import('./components/Toaster.vue')['default']

@@ -3,8 +3,11 @@ import { open, save } from '@tauri-apps/plugin-dialog'
 import { FileUp, FileDown } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
+import { useShortcutSettingsStore } from '~/stores/shortcut-settings'
+
 import type { ConnectSettings } from '~/stores/connect-settings'
 import type { GeneralSettings } from '~/stores/general-settings'
+import type { ShortcutSettings } from '~/stores/shortcut-settings'
 
 const emits = defineEmits<{
   importSettings: []
@@ -12,6 +15,7 @@ const emits = defineEmits<{
 
 const general = useGeneralSettingsStore()
 const connect = useConnectSettingsStore()
+const shortcuts = useShortcutSettingsStore()
 
 async function importSettings() {
   const filePath = await open({
@@ -26,9 +30,16 @@ async function importSettings() {
   if (filePath) {
     const contents = await Commands.readFile(filePath)
     const setting = new TextDecoder().decode(new Uint8Array(contents))
-    const config = JSON.parse(setting) as { general: GeneralSettings, connect: ConnectSettings }
+    const config = JSON.parse(setting) as {
+      general: GeneralSettings
+      connect: ConnectSettings
+      shortcuts?: ShortcutSettings
+    }
     general.$patch(config.general)
     connect.$patch(config.connect)
+    if (config.shortcuts) {
+      shortcuts.$patch(config.shortcuts)
+    }
     emits('importSettings')
     toast.success('', { description: '导入配置成功' })
   }
@@ -49,6 +60,7 @@ async function exportSettings() {
     const setting = JSON.stringify({
       general: general.$state,
       connect: connect.$state,
+      shortcuts: shortcuts.$state,
     })
     const contents = [...new TextEncoder().encode(setting)]
     await Commands.writeFile(contents, path, true)

@@ -64,6 +64,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Diagnosed the missing `v20260719.1` release notes: Release Drafter found no merged pull requests because all 11 changes since `v20260718.4` were direct commits, while multiple workflow jobs also competed to manage release drafts.
 - Replaced Release Drafter with a Git commit changelog generator that categorizes entries as 新增、修改、文档、重构、破坏性更新 and creates one draft before parallel Tauri uploads begin.
 - Verified categorized output against `v20260719.1` and the first release tag, then built a release-mode Windows EXE with update checking enabled and copied the hash-matched artifact to Downloads.
+- Implemented Issue #248 with persisted application-wide shortcut settings, configurable master and per-action switches, user-role cycling, chat-input focus, duplicate-binding validation, and settings import/export support.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
