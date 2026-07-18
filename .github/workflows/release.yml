@@ -13,22 +13,31 @@ on:
 
 permissions:
   contents: write
-  pull-requests: read
 
 jobs:
   changelog:
     runs-on: ubuntu-latest
-    outputs:
-      changelog: ${{ steps.release-drafter.outputs.body }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Release changelog
-        id: release-drafter
-        uses: release-drafter/release-drafter@v6
+      - name: Generate categorized changelog
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: node scripts/generateReleaseNotes.js "$RELEASE_TAG" > release-notes.md
+
+      - name: Create release draft
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" --title "Matcha for Milky $RELEASE_TAG" --notes-file release-notes.md
+          else
+            gh release create "$RELEASE_TAG" --draft --title "Matcha for Milky $RELEASE_TAG" --notes-file release-notes.md
+          fi
 
   release:
     needs: changelog
@@ -88,6 +97,5 @@ jobs:
         with:
           tagName: ${{ inputs.tag || github.ref_name }}
           releaseName: Matcha for Milky ${{ inputs.tag || github.ref_name }}
-          releaseBody: ${{ needs.changelog.outputs.changelog }}
           releaseDraft: true
           args: -t ${{ matrix.target }}

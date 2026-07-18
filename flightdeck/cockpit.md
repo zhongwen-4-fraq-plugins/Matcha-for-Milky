@@ -8,7 +8,7 @@ Focus: 维护并验证 Matcha for Milky Fraq 插件测试器。
 
 ## Next
 
-- 修复 Release 工作流：从直接提交生成更新日志，并让所有平台产物上传到同一个 Release。
+- 推送 Release 工作流修复，并使用下一个发布标签验证分类更新日志和全平台产物。
 
 ## Open questions
 
