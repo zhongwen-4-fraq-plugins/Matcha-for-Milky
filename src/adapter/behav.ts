@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import { toast } from 'vue-sonner'
 
+import { registerGroupFiles } from './group-file'
+
 import type { Contents } from './content'
 import type {
   GroupMessageScene,
@@ -195,6 +197,11 @@ export class Behav {
       toast.error('发送错误', { description: '只有群成员才能发送消息，你还不是本群成员' })
       throw new Error(`${sender.id} 不是本群成员`)
     }
+    await registerGroupFiles(
+      receiver.id,
+      sender.id,
+      contents.filter(content => content.type === 'file').map(content => content.data.id),
+    )
     const lastContent = contents.at(-1)
     if (lastContent?.type === 'text') {
       lastContent.data.text = lastContent.data.text.trimEnd()

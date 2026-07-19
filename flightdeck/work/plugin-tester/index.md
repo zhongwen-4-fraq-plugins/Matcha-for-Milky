@@ -71,6 +71,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Added a leading digits-only check to role creation so non-numeric IDs show `角色 ID 必须为数字` before length validation; JavaScript lint, the web build, and the Windows native release build pass, with the release-enabled EXE copied to Downloads and verified by SHA-256.
 - Added Milky `file_hash` to private incoming file segments using the protocol-defined TriSHA1 algorithm while keeping it absent from group segments; all 32 tests, type checking, JavaScript lint, the web build, and the Windows native release build pass. The new EXE is built but cannot replace the Downloads copy while that application is running.
 - Kept Milky WebSocket/SSE clients connected when exchanging user and bot accounts by replacing the unconditional bot-change reboot with availability-based startup and shutdown; all 34 tests, type checking, JavaScript lint, the web build, and the Windows native release build pass. The Downloads EXE remains locked by the running application.
+- Registered files attached to group-chat messages in the same `groupFiles` table and compound-key path used by `upload_group_file`, so their emitted `file_id` works with list and download APIs; all 35 tests, type checking, JavaScript lint, the web build, and the Windows native release build pass. The Downloads EXE remains locked by the running application.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -95,6 +96,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Read if
 
+- Read `flightdeck/knowledge/milky/group-file-registration.md` before changing group file messages or file APIs.
 - Read `flightdeck/knowledge/milky/bot-identity-connection.md` before changing bot assignment, account exchange, or Milky driver lifecycle behavior.
 - Read `flightdeck/knowledge/milky/private-file-tri-sha1.md` before changing Milky file message segments or private `message_receive` events.
 - Read `flightdeck/knowledge/milky/private-message-scene.md` before changing private message creation or Milky `message_receive` conversion.

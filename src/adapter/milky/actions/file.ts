@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { Behav } from '~/adapter/behav'
+import { registerGroupFiles } from '~/adapter/group-file'
 import { createFileCache, getFile, GetType } from '~/utils/file'
 
 import { failure, response } from '../typed'
@@ -56,14 +57,7 @@ export const fileActions: ActionStrategy = {
       return failure(-404, `群文件夹 ${parent_folder_id} 不存在`)
     }
     const file = await createFileCache(file_uri, undefined, file_name)
-    await db.groupFiles.put({
-      groupId,
-      fileId: file.id,
-      parentFolderId: parent_folder_id,
-      uploadedTime: getTimestamp(),
-      uploaderId: useStateStore().bot!.id,
-      downloadedTimes: 0,
-    })
+    await registerGroupFiles(groupId, useStateStore().bot!.id, [file.id], parent_folder_id)
     const cachedFile = await db.files.get(file.id)
     await new Behav().uploadGroupFile(groupId, {
       id: file.id,
