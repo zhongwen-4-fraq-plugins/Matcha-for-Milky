@@ -4,7 +4,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
-- Push the release workflow fix and validate its categorized notes and assets with the next tagged release.
+- Monitor the `v20260719.2` Release workflow and verify its categorized notes and all-platform signed assets.
 
 ## Progress
 
@@ -66,6 +66,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Verified categorized output against `v20260719.1` and the first release tag, then built a release-mode Windows EXE with update checking enabled and copied the hash-matched artifact to Downloads.
 - Implemented Issue #248 with persisted application-wide shortcut settings, configurable master and per-action switches, user-role cycling, chat-input focus, duplicate-binding validation, and settings import/export support.
 - Fixed private-message event scenes so Milky derives `message_scene` from the bot and the actual message peer instead of the user selected in the UI; the regression test, Milky event tests, JavaScript lint, web build, and native release build pass, and the hash-matched release EXE was copied to Downloads.
+- Prepared the `26.7.1902` application version for `v20260719.2`; version and Milky regression tests, the web build, and the Windows native release build pass, with the release-enabled EXE copied to Downloads and verified by SHA-256.
 - The full Vitest run still has an unrelated existing failure in `src/adapter/milky/message.test.ts` because `asyncWrapper` is unavailable at runtime.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
