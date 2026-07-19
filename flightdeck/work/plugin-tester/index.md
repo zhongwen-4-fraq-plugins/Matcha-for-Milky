@@ -65,6 +65,8 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Replaced Release Drafter with a Git commit changelog generator that categorizes entries as 新增、修改、文档、重构、破坏性更新 and creates one draft before parallel Tauri uploads begin.
 - Verified categorized output against `v20260719.1` and the first release tag, then built a release-mode Windows EXE with update checking enabled and copied the hash-matched artifact to Downloads.
 - Implemented Issue #248 with persisted application-wide shortcut settings, configurable master and per-action switches, user-role cycling, chat-input focus, duplicate-binding validation, and settings import/export support.
+- Fixed private-message event scenes so Milky derives `message_scene` from the bot and the actual message peer instead of the user selected in the UI; the regression test, Milky event tests, JavaScript lint, web build, and native release build pass, and the hash-matched release EXE was copied to Downloads.
+- The full Vitest run still has an unrelated existing failure in `src/adapter/milky/message.test.ts` because `asyncWrapper` is unavailable at runtime.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -89,6 +91,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Read if
 
+- Read `flightdeck/knowledge/milky/private-message-scene.md` before changing private message creation or Milky `message_receive` conversion.
 - Read `flightdeck/knowledge/milky/numeric-identifiers.md` when converting account or group IDs for Milky or debugging a `null` event identifier.
 - Read `flightdeck/knowledge/tooling/root-log-ignore.md` when adding a source directory named `logs` or debugging ignored log-related source files.
 - Read `flightdeck/knowledge/tooling/local-release-exe.md` before building any local Windows EXE for user delivery.

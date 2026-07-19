@@ -158,7 +158,9 @@ export class Behav {
     }
     const message_id = getMessageId().toString()
     let sub_type: 'temp' | 'friend' | 'group' = 'temp'
-    const isFriend = !!(await db.friends.get({ userId: this.state.user!.id, friendId: this.state.bot!.id }))
+    const selfId = this.state.bot!.id
+    const peerId = sender.id === selfId ? receiver.id : sender.id
+    const isFriend = !!(await db.friends.get([selfId, peerId]))
     if (isFriend) {
       sub_type = 'friend'
     } else {
