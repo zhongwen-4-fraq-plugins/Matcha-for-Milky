@@ -10,6 +10,7 @@ const userFormSchema = toTypedSchema(
   z.object({
     id: z
       .string({ required_error: '角色 ID 不能为空', invalid_type_error: '角色 ID 必须是字符串' })
+      .regex(/^\d+$/, { message: '角色 ID 必须为数字' })
       .min(6, { message: '角色 ID 长度不能小于6' })
       .max(12, { message: '角色 ID 长度不能大于12' })
       .regex(/^[1-9]\d*$/, { message: '角色 ID 必须是正整数' })
