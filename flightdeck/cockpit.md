@@ -8,7 +8,7 @@ Focus: 维护 Matcha for Milky Fraq 插件测试器，并持续验证 Milky 1.2 
 
 ## Next
 
-- 监控 `v20260719.2` Release 工作流，并验证分类更新日志与全平台签名产物。
+- 在 GitHub 检查 `v20260719.2` 草稿 Release 的分类说明与 17 个全平台签名产物，然后发布。
 
 ## Open questions
 

@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import { createContent } from '~/adapter/content'
 import { AdapterMessageHandler } from '~/adapter/message'
+import { getFile, GetType } from '~/utils/file'
+import { calculateTriSha1 } from '~/utils/tri-sha1'
 
 import { saveForwardedMessages } from './resources'
 
@@ -33,7 +35,7 @@ type ReplyMessage = MilkyMessage<'reply', { message_seq: number, sender_id?: num
 type ImageMessage = MilkyMessage<'image', { uri?: string, resource_id?: string, temp_url?: string, width?: number, height?: number, summary?: string, sub_type?: string }>
 type RecordMessage = MilkyMessage<'record', { uri?: string, resource_id?: string, temp_url?: string, duration?: number }>
 type VideoMessage = MilkyMessage<'video', { uri?: string, resource_id?: string, temp_url?: string, width?: number, height?: number, duration?: number }>
-type FileMessage = MilkyMessage<'file', { file_id: string, file_name?: string, file_size?: number }>
+type FileMessage = MilkyMessage<'file', { file_id: string, file_name?: string, file_size?: number, file_hash?: string }>
 type LightAppMessage = MilkyMessage<'light_app', { json_payload: string }>
 interface OutgoingForwardedMessage {
   user_id: number
@@ -122,14 +124,7 @@ const messageBuildStrategy: MessageBuildStrategy<ContentMapping> = {
     height: 0,
     duration: 0,
   }),
-  file: async (content: FileContent) => {
-    const file = await db.files.get(content.data.id)
-    return createMessage('file', {
-      file_id: content.data.id,
-      file_name: file?.name ?? content.data.id,
-      file_size: file?.size ?? 0,
-    })
-  },
+  file: (content: FileContent) => buildFileMessage(content, false),
   link: (content: LinkContent) => createMessage('text', { text: content.data.url }),
   forward: async (content: ForwardContent) => {
     const forwardId = getUUID()
@@ -148,6 +143,18 @@ const messageBuildStrategy: MessageBuildStrategy<ContentMapping> = {
       summary: content.data.summary ?? `共 ${messages.length} 条消息`,
     })
   },
+}
+
+async function buildFileMessage(content: FileContent, includeFileHash: boolean): Promise<FileMessage> {
+  const file = await db.files.get(content.data.id)
+  return createMessage('file', {
+    file_id: content.data.id,
+    file_name: file?.name ?? content.data.id,
+    file_size: file?.size ?? 0,
+    ...(includeFileHash && file
+      ? { file_hash: await calculateTriSha1(await getFile(GetType.DATA, content.data.id)) }
+      : {}),
+  })
 }
 
 const messageParseStrategy: MessageParseStrategy<MessageMapping> = {
@@ -211,6 +218,13 @@ const messageParseStrategy: MessageParseStrategy<MessageMapping> = {
 }
 
 export class MessageHandler extends AdapterMessageHandler<Messages> {
-  readonly buildStrategy = messageBuildStrategy
+  readonly buildStrategy: MessageBuildStrategy<ContentMapping>
   readonly parseStrategy = messageParseStrategy
+
+  constructor(includeFileHash = false) {
+    super()
+    this.buildStrategy = includeFileHash
+      ? { ...messageBuildStrategy, file: content => buildFileMessage(content, true) }
+      : messageBuildStrategy
+  }
 }

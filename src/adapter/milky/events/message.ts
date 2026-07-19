@@ -18,7 +18,7 @@ export const messageEventStrategy: EventStrategy<SceneMapping<Messages>> = {
       message_seq: Number(scene.message_id),
       sender_id: toMilkyId(scene.user_id),
       time: scene.time,
-      segments: await new MessageHandler().build(scene.message),
+      segments: await new MessageHandler(true).build(scene.message),
     }
     if (scene.sub_type === 'friend') {
       data.friend = await getFriend(scene.self_id, peerId)

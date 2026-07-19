@@ -15,6 +15,7 @@ declare global {
   const asyncWrapper: typeof import('./utils/utils')['asyncWrapper']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const buildParameterRecord: typeof import('./utils/parameters')['buildParameterRecord']
+  const calculateTriSha1: typeof import('./utils/tri-sha1')['calculateTriSha1']
   const checkForUpdate: typeof import('./utils/updater')['checkForUpdate']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
@@ -419,6 +420,7 @@ declare module 'vue' {
     readonly asyncWrapper: UnwrapRef<typeof import('./utils/utils')['asyncWrapper']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly buildParameterRecord: UnwrapRef<typeof import('./utils/parameters')['buildParameterRecord']>
+    readonly calculateTriSha1: UnwrapRef<typeof import('./utils/tri-sha1')['calculateTriSha1']>
     readonly checkForUpdate: UnwrapRef<typeof import('./utils/updater')['checkForUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>

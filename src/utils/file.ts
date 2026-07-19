@@ -1,8 +1,6 @@
 import { appCacheDir, join } from '@tauri-apps/api/path'
 import { exists, BaseDirectory } from '@tauri-apps/plugin-fs'
 
-const general = useGeneralSettingsStore()
-
 async function getSHA256(buffer: ArrayBuffer): Promise<string> {
   const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
   const hashArray = [...new Uint8Array(hashBuffer)]
@@ -75,6 +73,7 @@ export async function getFile(type: GetType, fileId: string): Promise<string | U
   }
   switch (type) {
     case GetType.URL: {
+      const general = useGeneralSettingsStore()
       return `http://${general.assetsServerAddress}/mfm/cache/${file.sha256}`
     }
     case GetType.PATH:

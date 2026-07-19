@@ -4,7 +4,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Next
 
-- Monitor the `v20260719.2` Release workflow and verify its categorized notes and all-platform signed assets.
+- Inspect the completed `v20260719.2` draft Release on GitHub, verify its categorized notes and 17 all-platform signed assets, then publish it.
 
 ## Progress
 
@@ -67,8 +67,9 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 - Implemented Issue #248 with persisted application-wide shortcut settings, configurable master and per-action switches, user-role cycling, chat-input focus, duplicate-binding validation, and settings import/export support.
 - Fixed private-message event scenes so Milky derives `message_scene` from the bot and the actual message peer instead of the user selected in the UI; the regression test, Milky event tests, JavaScript lint, web build, and native release build pass, and the hash-matched release EXE was copied to Downloads.
 - Prepared the `26.7.1902` application version for `v20260719.2`; version and Milky regression tests, the web build, and the Windows native release build pass, with the release-enabled EXE copied to Downloads and verified by SHA-256.
+- Confirmed the `v20260719.2` Release workflow completed successfully; its draft remains private to authenticated GitHub users until the categorized notes and 17 assets are checked and published.
 - Added a leading digits-only check to role creation so non-numeric IDs show `角色 ID 必须为数字` before length validation; JavaScript lint, the web build, and the Windows native release build pass, with the release-enabled EXE copied to Downloads and verified by SHA-256.
-- The full Vitest run still has an unrelated existing failure in `src/adapter/milky/message.test.ts` because `asyncWrapper` is unavailable at runtime.
+- Added Milky `file_hash` to private incoming file segments using the protocol-defined TriSHA1 algorithm while keeping it absent from group segments; all 32 tests, type checking, JavaScript lint, the web build, and the Windows native release build pass. The new EXE is built but cannot replace the Downloads copy while that application is running.
 - Chose Tauri 2 with Vue 3 and TypeScript for the desktop application.
 - Implemented a Rust Milky mock with API capture, Bearer authentication, WebSocket/SSE events, and message injection.
 - Implemented the Vue workbench with server controls, event composition, runtime metrics, API history, and logs.
@@ -93,6 +94,7 @@ State: Matcha for Milky with Milky 1.2 builds as a native Windows release.
 
 ## Read if
 
+- Read `flightdeck/knowledge/milky/private-file-tri-sha1.md` before changing Milky file message segments or private `message_receive` events.
 - Read `flightdeck/knowledge/milky/private-message-scene.md` before changing private message creation or Milky `message_receive` conversion.
 - Read `flightdeck/knowledge/milky/numeric-identifiers.md` when converting account or group IDs for Milky or debugging a `null` event identifier.
 - Read `flightdeck/knowledge/tooling/root-log-ignore.md` when adding a source directory named `logs` or debugging ignored log-related source files.
