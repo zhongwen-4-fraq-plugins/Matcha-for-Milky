@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+import { getBotLifecycleAction } from '~/utils/bot-lifecycle'
+
 /** 全局共享状态 */
 export const useStateStore = defineStore(
   'state',
@@ -64,8 +66,13 @@ export const useStateStore = defineStore(
 
     const adapter = useAdapterStore()
 
-    watch($$(bot), async () => {
-      await adapter.bot.reboot()
+    watch($$(bot), async (currentBot, previousBot) => {
+      const action = getBotLifecycleAction(previousBot?.id, currentBot?.id)
+      if (action === 'startup') {
+        await adapter.bot.startup()
+      } else if (action === 'shutdown') {
+        await adapter.bot.shutdown()
+      }
     })
 
     return $$({

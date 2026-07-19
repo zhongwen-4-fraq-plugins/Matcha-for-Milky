@@ -57,6 +57,7 @@ declare global {
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getAssetsUrl: typeof import('./utils/utils')['getAssetsUrl']
   const getAvatarUrl: typeof import('./utils/chat')['getAvatarUrl']
+  const getBotLifecycleAction: typeof import('./utils/bot-lifecycle')['getBotLifecycleAction']
   const getContact: typeof import('./utils/chat')['getContact']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -390,6 +391,9 @@ declare global {
   export type { ShortcutSettings } from './stores/shortcut-settings'
   import('./stores/shortcut-settings')
   // @ts-ignore
+  export type { BotLifecycleAction } from './utils/bot-lifecycle'
+  import('./utils/bot-lifecycle')
+  // @ts-ignore
   export type { FileInfo } from './utils/file'
   import('./utils/file')
   // @ts-ignore
@@ -462,6 +466,7 @@ declare module 'vue' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getAssetsUrl: UnwrapRef<typeof import('./utils/utils')['getAssetsUrl']>
     readonly getAvatarUrl: UnwrapRef<typeof import('./utils/chat')['getAvatarUrl']>
+    readonly getBotLifecycleAction: UnwrapRef<typeof import('./utils/bot-lifecycle')['getBotLifecycleAction']>
     readonly getContact: UnwrapRef<typeof import('./utils/chat')['getContact']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
